@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — MorseGrid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .blog-hero {
+      padding: 160px 0 80px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .blog-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+    .blog-hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .blog-list {
+      padding: 80px 0;
+    }
+    .blog-list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 32px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light">
+        <img src="Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#results">Results</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
+        </button>
+        <a href="index.html#book" class="nav-cta">Book a call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-panel">
+      <button class="mobile-close" id="mobileClose">&times;</button>
+      <a href="index.html#services" onclick="closeMobile()">Services</a>
+      <a href="index.html#about" onclick="closeMobile()">About</a>
+      <a href="index.html#results" onclick="closeMobile()">Results</a>
+      <a href="blog.html" onclick="closeMobile()">Blog</a>
+      <a href="index.html#book" onclick="closeMobile()" class="btn-primary">Book a call</a>
+    </div>
+  </div>
+
+  <section class="blog-hero">
+    <div class="container">
+      <h1>Insights & <em>Playbooks</em></h1>
+      <p>Deep dives into automation, AI agents, and operational efficiency for B2B companies.</p>
+    </div>
+  </section>
+
+  <section class="blog-list">
+    <div class="container">
+      <div class="blog-list-grid">
+        <a href="blog-post.html" class="blog-card reveal">
+          <div class="blog-card-img"><div class="blog-card-img-inner">⚡</div></div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">Automation</div>
+            <h3>Why your CRM is leaking revenue (and how to fix it in a weekend)</h3>
+            <p>Most B2B teams lose 15-20% of leads to manual data entry errors. Here's the automation playbook.</p>
+          </div>
+        </a>
+        <a href="#" class="blog-card reveal">
+          <div class="blog-card-img"><div class="blog-card-img-inner">🤖</div></div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">AI Agents</div>
+            <h3>The anatomy of an AI sales concierge: from booking to proposal in 2 minutes</h3>
+            <p>A technical deep-dive into building end-to-end sales automation with Make.com and OpenAI.</p>
+          </div>
+        </a>
+        <a href="#" class="blog-card reveal">
+          <div class="blog-card-img"><div class="blog-card-img-inner">📊</div></div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">Workflow Design</div>
+            <h3>n8n vs Make.com: which automation platform is right for your business?</h3>
+            <p>We've built 50+ production workflows on both. Here's when to use each one.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <img src="Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light">
+            <img src="Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark">
+          </div>
+          <p>AI-powered operations for B2B companies. We build the systems, you build the business.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="index.html#services">Services</a></li><li><a href="index.html#about">About</a></li><li><a href="index.html#results">Results</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+          <div class="footer-col"><h4>Services</h4><ul><li><a href="index.html#services">Lead Generation</a></li><li><a href="index.html#services">CRM Automation</a></li><li><a href="index.html#services">Client Onboarding</a></li><li><a href="index.html#services">AI Agents</a></li></ul></div>
+          <div class="footer-col"><h4>Connect</h4><ul><li><a href="index.html#book">Book a call</a></li><li><a href="mailto:hello@morsegrid.com">hello@morsegrid.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 MorseGrid. All rights reserved.</span>
+        <span>Built with AI. Obviously.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

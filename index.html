@@ -6,186 +6,21 @@
   <title>MorseGrid — AI Operations for B2B Companies</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --accent: #2563EB;
-      --accent-hover: #1D4ED8;
-      --accent-dim: rgba(37, 99, 235, 0.06);
-      --accent-glow: rgba(37, 99, 235, 0.12);
-      --accent-text: #ffffff;
-      --serif: 'Instrument Serif', Georgia, serif;
-      --sans: 'DM Sans', -apple-system, sans-serif;
-      --radius: 12px;
-      --radius-lg: 20px;
-      --max-width: 1200px;
-      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    [data-theme="light"] {
-      --bg: #FFFFFF; --bg-elevated: #F8F8F8; --bg-card: #FFFFFF;
-      --border: #E8E8E8; --border-light: #D4D4D4;
-      --text-primary: #111111; --text-secondary: #555555; --text-muted: #888888;
-      --nav-bg: rgba(255,255,255,0.88);
-      --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
-      --card-shadow-hover: 0 4px 24px rgba(0,0,0,0.08);
-    }
-    [data-theme="dark"] {
-      --bg: #0A0A0A; --bg-elevated: #111111; --bg-card: #161616;
-      --border: #222222; --border-light: #2a2a2a;
-      --text-primary: #F5F5F3; --text-secondary: #999999; --text-muted: #666666;
-      --nav-bg: rgba(10,10,10,0.88);
-      --card-shadow: 0 1px 3px rgba(0,0,0,0.2);
-      --card-shadow-hover: 0 4px 24px rgba(0,0,0,0.3);
-      --accent-dim: rgba(37,99,235,0.1);
-      --accent-glow: rgba(37,99,235,0.18);
-    }
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-    body{font-family:var(--sans);background:var(--bg);color:var(--text-primary);line-height:1.6;overflow-x:hidden;transition:background var(--transition),color var(--transition)}
-    a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{cursor:pointer;border:none;background:none;font-family:inherit}
-    [data-theme="dark"] body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
-    .container{max-width:var(--max-width);margin:0 auto;padding:0 24px}
-    .section-label{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:12px}
-    .section-label::before{content:'';width:32px;height:2px;background:var(--accent);border-radius:2px}
-    .section-title{font-family:var(--serif);font-size:clamp(2rem,5vw,3.4rem);font-weight:400;line-height:1.15;color:var(--text-primary);letter-spacing:-0.01em}
-    .section-title em{font-style:italic;color:var(--accent)}
-    .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;transition:all var(--transition)}
-    .nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 0}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between}
-    .nav-logo{font-family:var(--sans);font-size:22px;font-weight:700;letter-spacing:-0.03em;color:var(--text-primary)}
-    .nav-logo span{color:var(--accent)}
-    .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
-    .nav-links a{font-size:14px;font-weight:500;color:var(--text-secondary);transition:color var(--transition)}
-    .nav-links a:hover{color:var(--text-primary)}
-    .nav-right{display:flex;align-items:center;gap:12px}
-    .theme-toggle{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--border);background:var(--bg-elevated);color:var(--text-secondary);transition:all var(--transition);cursor:pointer}
-    .theme-toggle:hover{border-color:var(--border-light);color:var(--text-primary)}
-    .theme-toggle svg{width:18px;height:18px}
-    .theme-toggle .icon-moon,[data-theme="dark"] .theme-toggle .icon-sun{display:none}
-    [data-theme="dark"] .theme-toggle .icon-moon{display:block}
-    .nav-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:var(--accent);color:var(--accent-text);font-size:14px;font-weight:600;border-radius:100px;transition:all var(--transition)}
-    .nav-cta:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 8px 30px var(--accent-glow)}
-    .nav-cta svg{width:14px;height:14px;transition:transform var(--transition)}
-    .nav-cta:hover svg{transform:translateX(3px)}
-    .nav-toggle{display:none;width:24px;height:24px;flex-direction:column;justify-content:center;gap:5px}
-    .nav-toggle span{display:block;width:100%;height:1.5px;background:var(--text-primary);transition:var(--transition)}
-    .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:32px}
-    .mobile-menu.open{display:flex}
-    .mobile-menu a{font-family:var(--serif);font-size:2rem;color:var(--text-primary);transition:color var(--transition)}
-    .mobile-menu a:hover{color:var(--accent)}
-    .mobile-close{position:absolute;top:24px;right:24px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--text-secondary)}
-    .hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:140px 0 100px;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:-30%;right:-15%;width:700px;height:700px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none;animation:heroPulse 8s ease-in-out infinite}
-    @keyframes heroPulse{0%,100%{opacity:0.4;transform:scale(1)}50%{opacity:0.7;transform:scale(1.1)}}
-    .hero-content{position:relative;z-index:1;max-width:820px}
-    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:var(--accent-dim);border:1px solid rgba(37,99,235,0.15);border-radius:100px;font-size:13px;font-weight:600;color:var(--accent);margin-bottom:32px;animation:fadeInUp 0.8s ease-out}
-    .hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 2s ease-in-out infinite}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-    .hero h1{font-family:var(--serif);font-size:clamp(2.8rem,7vw,5rem);font-weight:400;line-height:1.08;letter-spacing:-0.025em;margin-bottom:28px;animation:fadeInUp 0.8s ease-out 0.1s both}
-    .hero h1 em{font-style:italic;color:var(--accent)}
-    .hero-subtitle{font-size:18px;line-height:1.7;color:var(--text-secondary);max-width:560px;margin-bottom:44px;animation:fadeInUp 0.8s ease-out 0.2s both}
-    .hero-actions{display:flex;align-items:center;gap:20px;animation:fadeInUp 0.8s ease-out 0.3s both}
-    .btn-primary{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--accent);color:var(--accent-text);font-size:15px;font-weight:600;border-radius:100px;transition:all var(--transition)}
-    .btn-primary:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 12px 40px var(--accent-glow)}
-    .btn-primary svg{width:16px;height:16px;transition:transform var(--transition)}
-    .btn-primary:hover svg{transform:translateX(4px)}
-    .btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:16px 28px;border:1px solid var(--border);color:var(--text-secondary);font-size:15px;font-weight:500;border-radius:100px;transition:all var(--transition)}
-    .btn-secondary:hover{border-color:var(--border-light);color:var(--text-primary)}
-    .hero-stats{display:flex;gap:48px;margin-top:80px;padding-top:40px;border-top:1px solid var(--border);animation:fadeInUp 0.8s ease-out 0.4s both}
-    .hero-stat-value{font-family:var(--serif);font-size:2.4rem;font-weight:400;color:var(--accent);line-height:1}
-    .hero-stat-label{font-size:13px;color:var(--text-muted);margin-top:6px}
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-    .services{padding:120px 0;border-top:1px solid var(--border)}
-    .services-header{margin-bottom:64px}
-    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .service-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px 32px;transition:all var(--transition);position:relative;overflow:hidden;box-shadow:var(--card-shadow)}
-    .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity var(--transition)}
-    .service-card:hover{border-color:var(--border-light);transform:translateY(-4px);box-shadow:var(--card-shadow-hover)}
-    .service-card:hover::before{opacity:1}
-    .service-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:var(--accent-dim);border-radius:12px;margin-bottom:24px;color:var(--accent)}
-    .service-card h3{font-family:var(--serif);font-size:1.5rem;font-weight:400;margin-bottom:12px}
-    .service-card p{font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:20px}
-    .service-tags{display:flex;flex-wrap:wrap;gap:8px}
-    .service-tag{display:inline-block;padding:4px 12px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:100px;font-size:12px;color:var(--text-muted)}
-    .custom-cta{padding:80px 0;border-top:1px solid var(--border)}
-    .custom-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:40px;padding:48px 56px;background:var(--accent-dim);border:1px solid rgba(37,99,235,0.15);border-radius:var(--radius-lg);position:relative;overflow:hidden}
-    .custom-cta-inner::before{content:'';position:absolute;right:-60px;top:-60px;width:260px;height:260px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none}
-    .custom-cta-content{position:relative;z-index:1}
-    .custom-cta-content h3{font-family:var(--serif);font-size:clamp(1.4rem,3vw,1.8rem);font-weight:400;margin-bottom:8px}
-    .custom-cta-content h3 em{font-style:italic;color:var(--accent)}
-    .custom-cta-content p{font-size:15px;color:var(--text-secondary);max-width:480px}
-    .custom-cta-inner .btn-primary{position:relative;z-index:1;white-space:nowrap}
-    .about{padding:120px 0;border-top:1px solid var(--border)}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:56px}
-    .about-text p{font-size:17px;color:var(--text-secondary);line-height:1.8;margin-bottom:20px}
-    .about-text p:first-of-type{font-size:19px;color:var(--text-primary)}
-    .about-values{display:grid;gap:24px}
-    .about-value{padding:28px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);transition:all var(--transition);box-shadow:var(--card-shadow)}
-    .about-value:hover{border-color:var(--border-light);box-shadow:var(--card-shadow-hover)}
-    .about-value h4{font-family:var(--serif);font-size:1.2rem;font-weight:400;margin-bottom:8px}
-    .about-value p{font-size:14px;color:var(--text-muted);line-height:1.6}
-    .proof{padding:120px 0;border-top:1px solid var(--border)}
-    .proof-header{margin-bottom:64px}
-    .proof-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-    .proof-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px;transition:all var(--transition);box-shadow:var(--card-shadow)}
-    .proof-card:hover{border-color:var(--border-light);transform:translateY(-2px);box-shadow:var(--card-shadow-hover)}
-    .proof-card-metric{font-family:var(--serif);font-size:2rem;color:var(--accent);margin-bottom:4px}
-    .proof-card-label{font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
-    .proof-card h3{font-family:var(--serif);font-size:1.3rem;font-weight:400;margin-bottom:12px}
-    .proof-card p{font-size:14px;color:var(--text-secondary);line-height:1.7}
-    .proof-card-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
-    .proof-card-tag{padding:4px 12px;background:var(--accent-dim);border-radius:100px;font-size:11px;font-weight:600;color:var(--accent)}
-    .tools{padding:80px 0;border-top:1px solid var(--border);overflow:hidden}
-    .tools-label{text-align:center;font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:40px}
-    .marquee-wrapper{overflow:hidden}
-    .marquee{display:flex;gap:48px;animation:marquee 30s linear infinite;width:max-content}
-    .marquee-item{flex-shrink:0;font-family:var(--sans);font-size:16px;font-weight:500;color:var(--text-muted);white-space:nowrap;display:flex;align-items:center;gap:10px}
-    .marquee-item .sep{width:4px;height:4px;border-radius:50%;background:var(--border-light)}
-    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-    .blog-teaser{padding:120px 0;border-top:1px solid var(--border)}
-    .blog-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px}
-    .blog-link{font-size:14px;font-weight:600;color:var(--accent);display:flex;align-items:center;gap:6px;transition:gap var(--transition)}
-    .blog-link:hover{gap:10px}
-    .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .blog-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all var(--transition);box-shadow:var(--card-shadow)}
-    .blog-card:hover{border-color:var(--border-light);transform:translateY(-4px);box-shadow:var(--card-shadow-hover)}
-    .blog-card-img{width:100%;height:200px;background:var(--bg-elevated);position:relative;overflow:hidden}
-    .blog-card-img-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:40px;opacity:0.3}
-    .blog-card-body{padding:28px}
-    .blog-card-cat{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);margin-bottom:12px}
-    .blog-card h3{font-family:var(--serif);font-size:1.2rem;font-weight:400;line-height:1.35;margin-bottom:10px}
-    .blog-card p{font-size:13px;color:var(--text-muted);line-height:1.6}
-    .cta-section{padding:120px 0;border-top:1px solid var(--border)}
-    .cta-box{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:80px;text-align:center;position:relative;overflow:hidden;box-shadow:var(--card-shadow)}
-    .cta-box::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none;opacity:0.6}
-    .cta-box>*{position:relative;z-index:1}
-    .cta-box h2{font-family:var(--serif);font-size:clamp(2rem,4.5vw,3rem);font-weight:400;margin-bottom:16px}
-    .cta-box h2 em{font-style:italic;color:var(--accent)}
-    .cta-box p{font-size:16px;color:var(--text-secondary);max-width:480px;margin:0 auto 36px;line-height:1.7}
-    .footer{padding:60px 0 40px;border-top:1px solid var(--border)}
-    .footer-inner{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:48px}
-    .footer-brand p{font-size:14px;color:var(--text-muted);margin-top:8px;max-width:300px;line-height:1.6}
-    .footer-cols{display:flex;gap:80px}
-    .footer-col h4{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:16px}
-    .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
-    .footer-col a{font-size:14px;color:var(--text-secondary);transition:color var(--transition)}
-    .footer-col a:hover{color:var(--text-primary)}
-    .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border);font-size:13px;color:var(--text-muted)}
-    @media(max-width:1024px){.services-grid{grid-template-columns:repeat(2,1fr)}.proof-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:768px){.nav-links{display:none}.nav-toggle{display:flex}.hero h1{font-size:2.4rem}.hero-stats{flex-direction:column;gap:24px}.services-grid{grid-template-columns:1fr}.about-grid{grid-template-columns:1fr;gap:48px}.proof-grid{grid-template-columns:1fr}.blog-grid{grid-template-columns:1fr}.hero-actions{flex-direction:column;align-items:flex-start}.cta-box{padding:48px 24px}.custom-cta-inner{flex-direction:column;text-align:center;padding:36px 28px}.custom-cta-content p{max-width:100%}.footer-inner{flex-direction:column;gap:40px}.footer-cols{gap:40px;flex-wrap:wrap}.footer-bottom{flex-direction:column;gap:12px;text-align:center}.blog-header{flex-direction:column;align-items:flex-start;gap:16px}}
-    .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease-out,transform 0.7s ease-out}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <nav class="nav" id="nav">
     <div class="container nav-inner">
-      <a href="#" class="nav-logo">morse<span>grid</span></a>
+      <a href="index.html" class="nav-logo">
+        <img src="Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light">
+        <img src="Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark">
+      </a>
       <ul class="nav-links">
         <li><a href="#services">Services</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#results">Results</a></li>
-        <li><a href="#blog">Blog</a></li>
+        <li><a href="blog.html">Blog</a></li>
       </ul>
       <div class="nav-right">
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -199,12 +34,14 @@
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-close" id="mobileClose">&times;</button>
-    <a href="#services" onclick="closeMobile()">Services</a>
-    <a href="#about" onclick="closeMobile()">About</a>
-    <a href="#results" onclick="closeMobile()">Results</a>
-    <a href="#blog" onclick="closeMobile()">Blog</a>
-    <a href="#book" onclick="closeMobile()" class="btn-primary" style="margin-top:12px;">Book a call</a>
+    <div class="mobile-panel">
+      <button class="mobile-close" id="mobileClose">&times;</button>
+      <a href="#services" onclick="closeMobile()">Services</a>
+      <a href="#about" onclick="closeMobile()">About</a>
+      <a href="#results" onclick="closeMobile()">Results</a>
+      <a href="blog.html" onclick="closeMobile()">Blog</a>
+      <a href="#book" onclick="closeMobile()" class="btn-primary">Book a call</a>
+    </div>
   </div>
 
   <section class="hero" id="hero">
@@ -382,10 +219,10 @@
           <div class="section-label">From the blog</div>
           <h2 class="section-title">Insights & <em>playbooks</em></h2>
         </div>
-        <a href="/blog" class="blog-link">View all posts <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+        <a href="blog.html" class="blog-link">View all posts <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
       </div>
       <div class="blog-grid">
-        <a href="/blog" class="blog-card reveal">
+        <a href="blog-post.html" class="blog-card reveal">
           <div class="blog-card-img"><div class="blog-card-img-inner">⚡</div></div>
           <div class="blog-card-body">
             <div class="blog-card-cat">Automation</div>
@@ -393,7 +230,7 @@
             <p>Most B2B teams lose 15-20% of leads to manual data entry errors. Here's the automation playbook.</p>
           </div>
         </a>
-        <a href="/blog" class="blog-card reveal">
+        <a href="blog.html" class="blog-card reveal">
           <div class="blog-card-img"><div class="blog-card-img-inner">🤖</div></div>
           <div class="blog-card-body">
             <div class="blog-card-cat">AI Agents</div>
@@ -401,7 +238,7 @@
             <p>A technical deep-dive into building end-to-end sales automation with Make.com and OpenAI.</p>
           </div>
         </a>
-        <a href="/blog" class="blog-card reveal">
+        <a href="blog.html" class="blog-card reveal">
           <div class="blog-card-img"><div class="blog-card-img-inner">📊</div></div>
           <div class="blog-card-body">
             <div class="blog-card-cat">Workflow Design</div>
@@ -428,11 +265,14 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
-          <div class="nav-logo">morse<span>grid</span></div>
+          <div class="nav-logo">
+            <img src="Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light">
+            <img src="Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark">
+          </div>
           <p>AI-powered operations for B2B companies. We build the systems, you build the business.</p>
         </div>
         <div class="footer-cols">
-          <div class="footer-col"><h4>Company</h4><ul><li><a href="#services">Services</a></li><li><a href="#about">About</a></li><li><a href="#results">Results</a></li><li><a href="#blog">Blog</a></li></ul></div>
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="#services">Services</a></li><li><a href="#about">About</a></li><li><a href="#results">Results</a></li><li><a href="blog.html">Blog</a></li></ul></div>
           <div class="footer-col"><h4>Services</h4><ul><li><a href="#services">Lead Generation</a></li><li><a href="#services">CRM Automation</a></li><li><a href="#services">Client Onboarding</a></li><li><a href="#services">AI Agents</a></li></ul></div>
           <div class="footer-col"><h4>Connect</h4><ul><li><a href="#book">Book a call</a></li><li><a href="mailto:hello@morsegrid.com">hello@morsegrid.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
         </div>
@@ -444,17 +284,6 @@
     </div>
   </footer>
 
-  <script>
-    const html=document.documentElement,toggle=document.getElementById('themeToggle');
-    const stored=localStorage.getItem('mg-theme');if(stored)html.setAttribute('data-theme',stored);
-    toggle.addEventListener('click',()=>{const c=html.getAttribute('data-theme'),n=c==='light'?'dark':'light';html.setAttribute('data-theme',n);localStorage.setItem('mg-theme',n)});
-    const nav=document.getElementById('nav');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)});
-    const navToggle=document.getElementById('navToggle'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');
-    navToggle.addEventListener('click',()=>mobileMenu.classList.add('open'));mobileClose.addEventListener('click',()=>mobileMenu.classList.remove('open'));
-    function closeMobile(){mobileMenu.classList.remove('open')}
-    const reveals=document.querySelectorAll('.reveal'),observer=new IntersectionObserver((entries)=>{entries.forEach((entry,i)=>{if(entry.isIntersecting){setTimeout(()=>entry.target.classList.add('visible'),i*80);observer.unobserve(entry.target)}})},{threshold:0.15});
-    reveals.forEach(el=>observer.observe(el));
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
