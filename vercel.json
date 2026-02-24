@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/create-web-call.js": {
+      "runtime": "nodejs20.x"
+    }
+  }
+}
