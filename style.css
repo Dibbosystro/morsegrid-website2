@@ -1751,19 +1751,26 @@ body::after {
   50%       { transform: translateY(-7px); }
 }
 
-/* Wrapper — sits directly below the nav Talk to AI button */
+/* Wrapper for Talk to AI button — anchors the banner */
+.nav-talk-ai-wrap {
+  position: relative;
+}
+
+/* Banner — absolutely positioned below the button */
 .float-voice-tease {
-  position: fixed;
-  top: 62px;
-  right: 12px;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 9990;
   display: flex;
   flex-direction: column;
   align-items: center;
   animation: float-bob 2.6s ease-in-out infinite;
+  white-space: nowrap;
 }
 
-/* Upward pointer triangle */
+/* Upward pointer triangle — centered above the card */
 .float-voice-tease::before {
   content: '';
   width: 0;
