@@ -167,6 +167,7 @@ body::after {
   border-radius: 100px;
   background: transparent;
   border: 1px solid transparent;
+  overflow: visible;
 }
 
 .nav.scrolled {
@@ -1745,10 +1746,10 @@ body::after {
 .mg-voice-float,
 #mgVoiceToast { display: none !important; }
 
-/* Gentle bob animation */
+/* Gentle bob animation — must include translateX(-50%) to preserve centering */
 @keyframes float-bob {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-7px); }
+  0%, 100% { transform: translateX(-50%) translateY(0px); }
+  50%       { transform: translateX(-50%) translateY(-7px); }
 }
 
 /* Wrapper for Talk to AI button — anchors the banner */
@@ -1768,6 +1769,7 @@ body::after {
   align-items: center;
   animation: float-bob 2.6s ease-in-out infinite;
   white-space: nowrap;
+  overflow: visible;
 }
 
 /* Upward pointer triangle — centered above the card */
