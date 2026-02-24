@@ -250,6 +250,55 @@
     </div>
   </section>
 
+  <!-- ── Retell AI Voice Agent ──────────────────────────────────────────── -->
+  <section class="voice-agent-section" id="talk">
+    <div class="container">
+      <div class="voice-agent-inner">
+        <div class="voice-agent-content reveal">
+          <div class="section-label">AI Assistant</div>
+          <h2>Have a question? <em>Just ask.</em></h2>
+          <p>Our AI assistant knows everything about MorseGrid — our services, process, results, and how we work. Click the button below to start a live voice conversation right here in your browser. No phone number needed.</p>
+        </div>
+        <div class="reveal">
+          <div class="voice-widget-card">
+            <div class="voice-widget-avatar">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="8"  y1="23" x2="16" y2="23"/>
+              </svg>
+            </div>
+            <div class="voice-waves" id="mgEmbedWaves">
+              <div class="voice-wave-bar"></div>
+              <div class="voice-wave-bar"></div>
+              <div class="voice-wave-bar"></div>
+              <div class="voice-wave-bar"></div>
+              <div class="voice-wave-bar"></div>
+            </div>
+            <div>
+              <div class="voice-widget-name">MorseGrid AI</div>
+              <div class="voice-widget-status" id="mgVoiceStatusEmbed">Ready to talk</div>
+            </div>
+            <button class="voice-widget-btn" id="mgVoiceBtnEmbed">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="8"  y1="23" x2="16" y2="23"/>
+              </svg>
+              Start conversation
+            </button>
+            <p class="voice-privacy-note">Conversation may be recorded for quality purposes.
+              Powered by <a href="https://www.retellai.com" target="_blank" rel="noopener" style="color:var(--accent)">Retell AI</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="cta-section" id="book">
     <div class="container">
       <div class="cta-box reveal">
@@ -285,5 +334,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script type="module" src="retell-voice.js"></script>
 </body>
 </html>

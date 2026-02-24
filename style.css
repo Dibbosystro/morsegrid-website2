@@ -162,7 +162,7 @@ body::after {
   width: calc(100% - 48px);
   max-width: var(--max-width);
   z-index: 1000;
-  padding: 16px 24px;
+  padding: 10px 20px;
   transition: all var(--transition);
   border-radius: 100px;
   background: transparent;
@@ -175,7 +175,7 @@ body::after {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border);
   box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
-  padding: 12px 24px;
+  padding: 8px 20px;
   top: 16px;
 }
 
@@ -213,7 +213,7 @@ body::after {
   gap: 36px;
   list-style: none;
   background: var(--bg-elevated);
-  padding: 10px 32px;
+  padding: 7px 24px;
   border-radius: 100px;
   border: 1px solid var(--border);
   box-shadow: var(--card-shadow);
@@ -1442,5 +1442,297 @@ body::after {
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RETELL AI VOICE WIDGET
+   Floating button + homepage embedded card
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Utility ────────────────────────────────────────────────────────────── */
+.mg-hidden { display: none !important; }
+
+/* ── Floating button wrapper ─────────────────────────────────────────────── */
+.mg-voice-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  /* expose label on hover */
+}
+
+/* Pulse ring (shown when call is active) */
+.mg-voice-pulse-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.mg-voice-float.is-active .mg-voice-pulse-ring {
+  opacity: 1;
+  animation: mg-pulse 1.6s ease-out infinite;
+}
+
+@keyframes mg-pulse {
+  0%   { transform: scale(1);    opacity: 0.7; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+/* The FAB button itself */
+.mg-voice-fab {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.45);
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  position: relative;
+  z-index: 1;
+}
+
+.mg-voice-fab:hover {
+  background: var(--accent-hover);
+  transform: scale(1.08);
+  box-shadow: 0 6px 28px rgba(79, 70, 229, 0.55);
+}
+
+.mg-voice-fab:active { transform: scale(0.96); }
+
+/* Active state: red */
+.mg-voice-float.is-active .mg-voice-fab {
+  background: #ef4444;
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.45);
+}
+
+.mg-voice-float.is-active .mg-voice-fab:hover {
+  background: #dc2626;
+  box-shadow: 0 6px 28px rgba(239, 68, 68, 0.55);
+}
+
+/* Loading spinner animation */
+.mg-voice-float.is-loading .mg-voice-fab {
+  opacity: 0.85;
+  cursor: wait;
+}
+
+.mg-spin-path {
+  animation: mg-spin 0.9s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes mg-spin {
+  to { transform: rotate(360deg); }
+}
+
+.mg-fab-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tooltip label */
+.mg-voice-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Homepage embedded voice card ─────────────────────────────────────────── */
+.voice-agent-section {
+  padding: 80px 0;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.voice-agent-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.voice-agent-content h2 {
+  font-family: var(--heading);
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.voice-agent-content h2 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.voice-agent-content p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* The card */
+.voice-widget-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px 36px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  transition: box-shadow var(--transition);
+}
+
+.voice-widget-card:hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Avatar / icon circle */
+.voice-widget-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  position: relative;
+}
+
+[data-theme="dark"] .voice-widget-avatar {
+  color: #818cf8;
+}
+
+/* Animated waves (shown during live call) */
+.voice-waves {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  height: 32px;
+}
+
+.voice-wave-bar {
+  width: 4px;
+  border-radius: 2px;
+  background: var(--accent);
+  height: 12px;
+  transition: height 0.2s ease;
+}
+
+.voice-waves.is-live .voice-wave-bar:nth-child(1) { animation: mg-wave 1.1s 0.0s ease-in-out infinite alternate; }
+.voice-waves.is-live .voice-wave-bar:nth-child(2) { animation: mg-wave 1.1s 0.2s ease-in-out infinite alternate; }
+.voice-waves.is-live .voice-wave-bar:nth-child(3) { animation: mg-wave 1.1s 0.1s ease-in-out infinite alternate; }
+.voice-waves.is-live .voice-wave-bar:nth-child(4) { animation: mg-wave 1.1s 0.3s ease-in-out infinite alternate; }
+.voice-waves.is-live .voice-wave-bar:nth-child(5) { animation: mg-wave 1.1s 0.15s ease-in-out infinite alternate; }
+
+@keyframes mg-wave {
+  from { height: 6px;  opacity: 0.5; }
+  to   { height: 28px; opacity: 1;   }
+}
+
+/* Info text */
+.voice-widget-name {
+  font-family: var(--heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.voice-widget-status {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* CTA button inside card */
+.voice-widget-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: var(--accent);
+  color: #fff;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.35);
+  width: 100%;
+  justify-content: center;
+}
+
+.voice-widget-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(79, 70, 229, 0.45);
+}
+
+.voice-widget-btn:active:not(:disabled) { transform: translateY(0); }
+
+.voice-widget-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.voice-widget-btn.is-active {
+  background: #ef4444;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.35);
+}
+
+.voice-widget-btn.is-active:hover {
+  background: #dc2626;
+  box-shadow: 0 6px 22px rgba(239, 68, 68, 0.45);
+}
+
+/* Privacy note */
+.voice-privacy-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .voice-agent-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .mg-voice-float {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .mg-voice-fab {
+    width: 52px;
+    height: 52px;
   }
 }
