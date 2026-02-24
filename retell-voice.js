@@ -15,7 +15,7 @@
 
 import { RetellWebClient } from 'https://esm.sh/retell-client-js-sdk@latest';
 
-const AGENT_ID     = 'agent_2301b693666ba3bb18c32423ab';
+const AGENT_ID     = 'agent_058504bce8784462547b533058';
 const CALL_TIMEOUT = 20000; // ms
 
 // ── Inject floating button ────────────────────────────────────────────────────
