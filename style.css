@@ -1741,88 +1741,97 @@ body::after {
    Floating Voice Agent Teaser
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* Keyframes: gentle floating up-and-down */
+/* Hide the FAB injected by retell-voice.js — we use the nav button instead */
+.mg-voice-float,
+#mgVoiceToast { display: none !important; }
+
+/* Gentle bob animation */
 @keyframes float-bob {
-  0%   { transform: translateY(0px); }
-  50%  { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-7px); }
 }
 
+/* Wrapper — sits directly below the nav Talk to AI button */
 .float-voice-tease {
   position: fixed;
-  top: 72px;               /* just below the nav bar */
-  right: 20px;
+  top: 62px;
+  right: 12px;
   z-index: 9990;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-  pointer-events: none;    /* let clicks pass through to nav button */
-  animation: float-bob 2.8s ease-in-out infinite;
+  align-items: center;
+  animation: float-bob 2.6s ease-in-out infinite;
 }
 
+/* Upward pointer triangle */
+.float-voice-tease::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 9px solid var(--accent);
+  flex-shrink: 0;
+}
+
+/* The card */
 .float-voice-tease__label {
   font-family: var(--sans);
   font-size: 12px;
-  font-weight: 700;
-  line-height: 1.3;
-  text-align: right;
-  color: var(--accent);
-  background: var(--bg-elevated);
-  border: 1.5px solid var(--accent);
-  border-radius: 10px;
-  padding: 6px 10px;
-  box-shadow: 0 4px 18px var(--accent-glow);
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent) 0%, #6366f1 100%);
+  border-radius: 12px;
+  padding: 9px 14px 9px 12px;
+  box-shadow: 0 8px 28px rgba(79, 70, 229, 0.45), 0 2px 8px rgba(0,0,0,0.12);
   white-space: nowrap;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.float-voice-tease__icon {
+  font-size: 15px;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 [data-theme="dark"] .float-voice-tease__label {
-  background: rgba(79, 70, 229, 0.12);
-  border-color: #818cf8;
-  color: #a5b4fc;
+  background: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
+  box-shadow: 0 8px 28px rgba(79, 70, 229, 0.55), 0 2px 8px rgba(0,0,0,0.25);
 }
 
-/* The curved arrow SVG */
-.float-voice-tease__arrow {
-  color: var(--accent);
-  /* align arrow so its tip (top-right) points at the Talk to AI button */
-  margin-right: 22px;      /* nudge left so arrow tip aligns with button */
-  line-height: 0;
-}
-
-[data-theme="dark"] .float-voice-tease__arrow {
-  color: #818cf8;
-}
-
-/* Dismiss ×  button */
+/* Dismiss button */
 .float-voice-tease__close {
+  pointer-events: all;
   position: absolute;
-  top: -8px;
-  left: -8px;
-  width: 20px;
-  height: 20px;
+  top: 7px;
+  right: -7px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  font-size: 13px;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  font-size: 11px;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  pointer-events: all;
-  transition: background var(--transition), color var(--transition);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background var(--transition);
 }
 
 .float-voice-tease__close:hover {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.45);
 }
 
-/* Nav "Talk to AI" pulse effect */
+/* Nav "Talk to AI" subtle glow pulse */
 .nav-talk-ai {
   animation: nav-pulse-glow 3s ease-in-out infinite;
 }
@@ -1832,7 +1841,7 @@ body::after {
   50%       { box-shadow: 0 4px 28px rgba(79, 70, 229, 0.55); }
 }
 
-/* Hide the floating tease on very small screens */
+/* Hide on small screens */
 @media (max-width: 600px) {
   .float-voice-tease { display: none; }
 }
