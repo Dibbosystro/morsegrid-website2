@@ -12,16 +12,17 @@
  * For internal or low-risk demos, keeping it here is fine.
  *
  * HOW TO ACTIVATE
- * 1. Paste your Retell API key into RETELL_API_KEY below (Dashboard → API Keys).
- * 2. The agent ID is already pre-filled.
- * 3. Save.  The widget will appear on every page automatically.
+ * 1. In your Vercel dashboard → Project → Settings → Environment Variables, add:
+ *      Name:  RETELL_API_KEY
+ *      Value: <your Retell API key from the Retell dashboard>
+ * 2. Redeploy once (or push any commit) to pick up the new env var.
+ * 3. The widget appears on every page automatically — no key needed here.
  */
 
 import { RetellWebClient } from 'https://esm.sh/retell-client-js-sdk';
 
 // ── Configuration ────────────────────────────────────────────────────────────
-const RETELL_API_KEY = 'YOUR_RETELL_API_KEY'; // ← Paste your key here
-const AGENT_ID       = 'agent_2301b693666ba3bb18c32423ab';
+const AGENT_ID = 'agent_2301b693666ba3bb18c32423ab';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const retellClient = new RetellWebClient();
@@ -97,12 +98,9 @@ async function startCall() {
   if (callActive) return;
   setState('loading');
   try {
-    const res = await fetch('https://api.retellai.com/v2/create-web-call', {
+    const res = await fetch('/api/create-web-call', {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${RETELL_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ agent_id: AGENT_ID }),
     });
     if (!res.ok) {
