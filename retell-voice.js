@@ -4,10 +4,19 @@
  *
  * The Retell API key lives server-side in the Vercel env var RETELL_API_KEY.
  * Nothing sensitive is exposed here.
+ *
+ * How it connects to your agent:
+ *  1. User clicks button → browser calls /api/create-web-call (our Vercel function)
+ *  2. Vercel function calls Retell API with your AGENT_ID + API key
+ *  3. Retell returns an access token
+ *  4. Browser uses that token + the Retell WebRTC SDK to open a live voice call
+ *     directly with your published agent (agent_2301b693666ba3bb18c32423ab)
  */
 
+import { RetellWebClient } from 'https://esm.sh/retell-client-js-sdk@latest';
+
 const AGENT_ID     = 'agent_2301b693666ba3bb18c32423ab';
-const CALL_TIMEOUT = 15000; // ms — reset to idle if nothing happens
+const CALL_TIMEOUT = 20000; // ms
 
 // ── Inject floating button ────────────────────────────────────────────────────
 document.body.insertAdjacentHTML('beforeend', `
@@ -34,7 +43,13 @@ document.body.insertAdjacentHTML('beforeend', `
     </span>
   </button>
   <div class="mg-voice-label" id="mgVoiceLabel">Talk to our AI</div>
-</div>`);
+</div>
+<div id="mgVoiceToast" style="
+  display:none;position:fixed;bottom:100px;right:28px;
+  background:#1e293b;color:#f8fafc;font-family:var(--sans,sans-serif);
+  font-size:13px;padding:10px 16px;border-radius:10px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.3);z-index:10000;max-width:260px;
+  border-left:3px solid #ef4444;"></div>`);
 
 const fab        = document.getElementById('mgVoiceFab');
 const floatWrap  = document.getElementById('mgVoiceFloat');
@@ -42,9 +57,28 @@ const label      = document.getElementById('mgVoiceLabel');
 const iconIdle   = document.getElementById('mgIconIdle');
 const iconLoad   = document.getElementById('mgIconLoad');
 const iconActive = document.getElementById('mgIconActive');
+const toast      = document.getElementById('mgVoiceToast');
 
 let callActive   = false;
-let retellClient = null;
+const retellClient = new RetellWebClient();
+
+// ── Wire up SDK events immediately ────────────────────────────────────────────
+retellClient.on('call_started', () => { callActive = true;  setState('active'); });
+retellClient.on('call_ended',   () => { callActive = false; setState('idle');   });
+retellClient.on('error', (err) => {
+  console.error('[Retell SDK error]', err);
+  callActive = false;
+  showToast('Call error — please try again.');
+  setState('idle');
+});
+
+// ── Toast helper ──────────────────────────────────────────────────────────────
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(() => { toast.style.display = 'none'; }, 4000);
+}
 
 // ── UI state ──────────────────────────────────────────────────────────────────
 function setState(state) {
@@ -53,9 +87,9 @@ function setState(state) {
   iconActive.classList.add('mg-hidden');
   floatWrap.classList.remove('is-loading', 'is-active');
 
-  if (state === 'idle' || state === 'error') {
+  if (state === 'idle') {
     iconIdle.classList.remove('mg-hidden');
-    label.textContent = state === 'error' ? 'Try again' : 'Talk to our AI';
+    label.textContent = 'Talk to our AI';
   } else if (state === 'loading') {
     iconLoad.classList.remove('mg-hidden');
     floatWrap.classList.add('is-loading');
@@ -69,87 +103,55 @@ function setState(state) {
   syncEmbedCard(state);
 }
 
-// ── Load the Retell SDK from CDN (no build step needed) ───────────────────────
-async function loadSDK() {
-  // Try two CDNs in order — jsdelivr first, esm.sh as fallback
-  const urls = [
-    'https://cdn.jsdelivr.net/npm/retell-client-js-sdk/+esm',
-    'https://esm.sh/retell-client-js-sdk',
-  ];
-  for (const url of urls) {
-    try {
-      const mod    = await import(url);
-      const Client = mod.RetellWebClient ?? mod.default?.RetellWebClient ?? mod.default;
-      if (typeof Client === 'function') return Client;
-    } catch (e) {
-      console.warn('[MorseGrid Voice] SDK CDN failed:', url, e);
-    }
-  }
-  throw new Error('Could not load Retell SDK from CDN. Check your internet connection.');
-}
-
-// ── Start call ────────────────────────────────────────────────────────────────
+// ── Start / stop ──────────────────────────────────────────────────────────────
 async function startCall() {
   if (callActive) return;
   setState('loading');
 
+  const timer = setTimeout(() => {
+    if (!callActive) {
+      showToast('Connection timed out. Check your internet and try again.');
+      setState('idle');
+    }
+  }, CALL_TIMEOUT);
+
   try {
-    await Promise.race([
-      doStartCall(),
-      new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Timed out — please try again.')), CALL_TIMEOUT)
-      ),
-    ]);
+    console.log('[MorseGrid Voice] Requesting access token…');
+    const res = await fetch('/api/create-web-call', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ agent_id: AGENT_ID }),
+    });
+
+    if (!res.ok) {
+      const body = await res.text().catch(() => String(res.status));
+      throw new Error(`Server error ${res.status}: ${body}`);
+    }
+
+    const data = await res.json();
+    console.log('[MorseGrid Voice] Got access token, starting call…');
+
+    if (!data.access_token) throw new Error('No access token in server response.');
+
+    await retellClient.startCall({ accessToken: data.access_token });
+    // call_started event will fire and setState('active')
   } catch (err) {
-    console.error('[MorseGrid Voice]', err.message);
-    callActive = false;
-    setState('error');
-    setTimeout(() => { if (!callActive) setState('idle'); }, 3000);
-  }
-}
-
-async function doStartCall() {
-  // 1. Load SDK dynamically
-  const RetellWebClient = await loadSDK();
-  retellClient = new RetellWebClient();
-
-  retellClient.on('call_started', () => { callActive = true; setState('active'); });
-  retellClient.on('call_ended',   () => { callActive = false; setState('idle'); });
-  retellClient.on('error', (err) => {
-    console.error('[Retell SDK]', err);
-    callActive = false;
-    try { retellClient.stopCall(); } catch (_) {}
-    setState('error');
-    setTimeout(() => setState('idle'), 3000);
-  });
-
-  // 2. Get access token via our server-side Vercel function
-  const res = await fetch('/api/create-web-call', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ agent_id: AGENT_ID }),
-  });
-
-  if (!res.ok) {
-    const body = await res.text().catch(() => String(res.status));
-    throw new Error(`Server error ${res.status}: ${body}`);
+    console.error('[MorseGrid Voice] startCall failed:', err);
+    clearTimeout(timer);
+    showToast(err.message || 'Could not start call. Please try again.');
+    setState('idle');
+    return;
   }
 
-  const { access_token } = await res.json();
-  if (!access_token) throw new Error('No access token returned.');
-
-  // 3. Start the call — the browser will request mic permission at this point
-  await retellClient.startCall({ accessToken: access_token });
+  clearTimeout(timer);
 }
 
-// ── Stop call ─────────────────────────────────────────────────────────────────
 function stopCall() {
-  try { if (retellClient) retellClient.stopCall(); } catch (_) {}
+  try { retellClient.stopCall(); } catch (_) {}
   callActive = false;
   setState('idle');
 }
 
-// ── Button click ──────────────────────────────────────────────────────────────
 fab.addEventListener('click', () => {
   callActive ? stopCall() : startCall();
 });
@@ -164,9 +166,9 @@ function syncEmbedCard(state) {
   embedBtn.disabled = false;
   embedBtn.classList.remove('is-active');
 
-  if (state === 'idle' || state === 'error') {
-    embedBtn.textContent = state === 'error' ? 'Try again' : 'Start conversation';
-    if (embedStatus) embedStatus.textContent = state === 'error' ? 'Something went wrong' : 'Ready to talk';
+  if (state === 'idle') {
+    embedBtn.textContent = 'Start conversation';
+    if (embedStatus) embedStatus.textContent = 'Ready to talk';
     if (embedWaves)  embedWaves.classList.remove('is-live');
   } else if (state === 'loading') {
     embedBtn.textContent = 'Connecting…';
