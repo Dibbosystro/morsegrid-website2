@@ -55,7 +55,7 @@
         <h1>We build the <em>systems</em> that run your business on autopilot.</h1>
         <p class="hero-subtitle">MorseGrid deploys AI-powered workflows, automations, and agents so B2B teams can stop doing busywork and start scaling. From lead gen to client onboarding — we wire it all together.</p>
         <div class="hero-actions">
-          <a href="#book" class="btn-primary">Book a discovery call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+          <a href="https://cal.com/morsegrid" class="btn-primary" target="_blank">Book a discovery call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
           <a href="#results" class="btn-secondary">See our work</a>
         </div>
         <div class="hero-stats">
@@ -121,7 +121,7 @@
           <h3>Need a <em>custom workflow?</em></h3>
           <p>Don't see your exact use case listed? We build bespoke automation systems tailored to your operations. Let's discuss what you need.</p>
         </div>
-        <a href="#book" class="btn-primary">Book a call to discuss <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+        <a href="https://cal.com/morsegrid" class="btn-primary" target="_blank">Book a call to discuss <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
       </div>
     </div>
   </section>
@@ -309,7 +309,7 @@
         <div class="section-label" style="justify-content:center;">Let's talk</div>
         <h2>Ready to put your operations <em>on autopilot?</em></h2>
         <p>Book a free 30-minute discovery call. We'll audit one workflow in your business and show you exactly what we'd automate — no pitch decks, just a working plan.</p>
-        <a href="https://cal.com" class="btn-primary" target="_blank">Book your free call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+        <a href="https://cal.com/morsegrid" class="btn-primary" target="_blank">Book your free call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
       </div>
     </div>
   </section>
@@ -327,16 +327,16 @@
         <div class="footer-cols">
           <div class="footer-col"><h4>Company</h4><ul><li><a href="#services">Services</a></li><li><a href="#about">About</a></li><li><a href="#results">Results</a></li><li><a href="blog.html">Blog</a></li></ul></div>
           <div class="footer-col"><h4>Services</h4><ul><li><a href="#services">Lead Generation</a></li><li><a href="#services">CRM Automation</a></li><li><a href="#services">Client Onboarding</a></li><li><a href="#services">AI Agents</a></li></ul></div>
-          <div class="footer-col"><h4>Connect</h4><ul><li><a href="#book">Book a call</a></li><li><a href="mailto:hello@morsegrid.com">hello@morsegrid.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
+          <div class="footer-col"><h4>Connect</h4><ul><li><a href="https://cal.com/morsegrid" target="_blank">Book a call</a></li><li><a href="mailto:info@morsegrid.com">info@morsegrid.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2025 MorseGrid. All rights reserved.</span>
-        <span>Built with AI. Obviously.</span>
+        <span>&copy; <span id="footerYear"></span> MorseGrid. All rights reserved.</span>
       </div>
     </div>
   </footer>
 
+  <script>document.getElementById('footerYear').textContent = new Date().getFullYear();</script>
   <script src="script.js"></script>
   <script type="module" src="retell-voice.js"></script>
 </body>
