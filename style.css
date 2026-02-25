@@ -804,6 +804,24 @@ body::after {
   font-weight: 700;
   color: var(--accent);
   margin-bottom: 10px;
+  transition: color var(--transition);
+}
+
+[data-theme="dark"] .proof-card-metric {
+  color: #818cf8;
+}
+
+[data-theme="dark"] .proof-card:hover .proof-card-metric,
+[data-theme="dark"] .proof-card:hover h3,
+[data-theme="dark"] .proof-card:hover p,
+[data-theme="dark"] .proof-card:hover .proof-card-label,
+[data-theme="dark"] .proof-card:hover .proof-card-tag {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .proof-card:hover .proof-card-tag {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .proof-card-label {
@@ -821,6 +839,35 @@ body::after {
   background: var(--accent-dim);
   color: var(--accent);
   border: 1px solid rgba(79, 70, 229, 0.2);
+}
+
+/* Dark mode: make proof card text white and readable */
+[data-theme="dark"] .proof-card h3 {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .proof-card p {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .proof-card-label {
+  color: #94a3b8;
+}
+
+/* Hover in dark mode: all text goes white including tags */
+.proof-card h3,
+.proof-card p,
+.proof-card-label,
+.proof-card-tag {
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.proof-card:hover h3 {
+  color: var(--accent);
+}
+
+.proof-card:hover p {
+  color: var(--text-primary);
 }
 
 .custom-cta {
