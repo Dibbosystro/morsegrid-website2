@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How We Built an AI Content Factory That Publishes 30 Posts Per Month — MorseGrid</title>
+  <meta name="description" content="A step-by-step look at the AI content engine we built that produces 30 high-quality blog posts per month with minimal human effort." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light">
+        <img src="../Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark">
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#services">Services</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#results">Results</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
+        </button>
+        <a href="https://cal.com/morsegrid" class="nav-cta" target="_blank">Book a call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-panel">
+      <button class="mobile-close" id="mobileClose">&times;</button>
+      <a href="../index.html#services" onclick="closeMobile()">Services</a>
+      <a href="../index.html#about" onclick="closeMobile()">About</a>
+      <a href="../index.html#results" onclick="closeMobile()">Results</a>
+      <a href="../blog.html" onclick="closeMobile()">Blog</a>
+      <a href="https://cal.com/morsegrid" onclick="closeMobile()" class="btn-primary" target="_blank">Book a call</a>
+    </div>
+  </div>
+
+  <article>
+    <header class="blog-post-hero">
+      <div class="container">
+        <div class="blog-post-meta reveal">
+          <span class="blog-post-cat">AI Operations</span><span>•</span>
+          <span>Jan 28, 2026</span><span>•</span><span>8 min read</span>
+        </div>
+        <h1 class="reveal">How We Built an AI Content Factory That Publishes 30 Posts Per Month</h1>
+        <div class="blog-post-author reveal">
+          <div class="blog-post-author-img">🏭</div>
+          <div class="blog-post-author-info">
+            <div class="blog-post-author-name">MorseGrid Team</div>
+            <div class="blog-post-author-role">Automation Specialists</div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <div class="blog-post-content reveal">
+        <p>Content marketing works — but it's brutally labour-intensive at scale. A single high-quality blog post traditionally takes a skilled writer 4–8 hours to research, write, edit, and publish. At 30 posts per month, that's 120–240 hours of writing time, or roughly 1.5–3 full-time employees just for content.</p>
+        <p>We built a content factory system for a client that produces 30 polished, SEO-optimised blog posts per month for under £800/month in total costs, including tooling. Here's exactly how it works.</p>
+
+        <h2>The System Architecture</h2>
+        <p>The content factory has five stages, all automated and orchestrated in n8n:</p>
+
+        <h3>Stage 1: Keyword & Topic Harvesting</h3>
+        <p>A scheduled workflow runs weekly, pulling keyword data from Ahrefs (via API) for the client's target topics. GPT-4o processes the keyword clusters and generates 40 potential post titles ranked by search volume, difficulty, and business relevance. A human editor reviews this list monthly and approves 30–35 titles, which populate a content calendar Airtable base.</p>
+
+        <h3>Stage 2: Research Compilation</h3>
+        <p>For each approved title, an n8n workflow automatically performs a Bing Search to gather the top 5 ranking articles on that topic, extracts their key points using a web scraper + GPT summary, and stores structured research notes in Airtable alongside the title.</p>
+
+        <h3>Stage 3: AI Drafting</h3>
+        <p>When a post's scheduled publish date is 7 days out, the workflow triggers GPT-4o with a carefully engineered prompt that includes: the target keyword, the approved title, the research notes, the brand voice guide, the desired word count (1,200–1,800 words), and instructions to include headers, a strong opening, and a clear CTA section. The draft is written into a Google Doc automatically.</p>
+
+        <h3>Stage 4: Human Edit Pass</h3>
+        <p>A notification is sent to the editor's Slack with a link to the Google Doc draft. The editor spends 20–30 minutes reviewing, adjusting tone, adding any proprietary insights, and approving. This is the only manual step in the whole pipeline — and it's intentional. Human editorial oversight is what keeps the content from being generic.</p>
+
+        <h3>Stage 5: Publishing</h3>
+        <p>Once the Google Doc is marked as "Approved" in Airtable, the workflow automatically formats the post for HTML, generates a meta description and Open Graph tags using GPT, uploads a featured image sourced from Unsplash (with the appropriate license), and publishes to WordPress via its REST API — with the correct category, tags, and scheduled publish time.</p>
+
+        <h2>The Results</h2>
+        <p>Within 6 months of running this system, the client's organic traffic grew from 1,200 to 9,400 monthly visitors. Their domain authority increased from 18 to 31. They ranked on page 1 for 47 new keywords.</p>
+        <p>Total monthly cost of the system: £780 (tooling + editor time). The equivalent output from a traditional content agency would cost £4,500–£6,000/month.</p>
+
+        <blockquote>"We went from publishing 2 posts a month to 30, without adding headcount. The quality is actually higher because we have more time to focus on the editorial review." — Head of Marketing, B2B SaaS</blockquote>
+
+        <h2>Can This Work for Your Business?</h2>
+        <p>This architecture works best for companies with a clear ICP and topic space, a willingness to invest in an initial 4–6 week setup, and at least one person who can do a 20–30 minute editorial review. Businesses in professional services, SaaS, and B2B technology are ideal candidates.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-box reveal">
+        <div class="section-label" style="justify-content:center;">Build your content engine</div>
+        <h2>Ready to publish more content <em>without more headcount?</em></h2>
+        <p>MorseGrid builds custom AI content factories for B2B companies. We handle the full setup — keyword strategy, AI drafting, CMS integration — so you can focus on approvals and growth.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+          <a href="https://cal.com/morsegrid" class="btn-primary" target="_blank">Book a free call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+          <a href="mailto:info@morsegrid.com" class="btn-secondary">Email us directly</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo"><img src="../Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light"><img src="../Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark"></div>
+          <p>AI-powered operations for B2B companies. We build the systems, you build the business.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="../index.html#services">Services</a></li><li><a href="../index.html#about">About</a></li><li><a href="../index.html#results">Results</a></li><li><a href="../blog.html">Blog</a></li></ul></div>
+          <div class="footer-col"><h4>Services</h4><ul><li><a href="../index.html#services">Lead Generation</a></li><li><a href="../index.html#services">CRM Automation</a></li><li><a href="../index.html#services">Client Onboarding</a></li><li><a href="../index.html#services">AI Agents</a></li></ul></div>
+          <div class="footer-col"><h4>Connect</h4><ul><li><a href="https://cal.com/morsegrid" target="_blank">Book a call</a></li><li><a href="mailto:info@morsegrid.com">info@morsegrid.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>&copy; <span id="footerYear"></span> MorseGrid. All rights reserved.</span></div>
+    </div>
+  </footer>
+  <script>document.getElementById('footerYear').textContent = new Date().getFullYear();</script>
+  <script src="../script.js"></script>
+  <script type="module" src="../retell-voice.js"></script>
+</body>
+</html>

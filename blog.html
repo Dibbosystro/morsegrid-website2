@@ -55,7 +55,7 @@
           <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
           <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
         </button>
-        <a href="index.html#book" class="nav-cta">Book a call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+        <a href="https://cal.com/morsegrid" class="nav-cta" target="_blank">Book a call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
         <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -68,7 +68,7 @@
       <a href="index.html#about" onclick="closeMobile()">About</a>
       <a href="index.html#results" onclick="closeMobile()">Results</a>
       <a href="blog.html" onclick="closeMobile()">Blog</a>
-      <a href="index.html#book" onclick="closeMobile()" class="btn-primary">Book a call</a>
+      <a href="https://cal.com/morsegrid" onclick="closeMobile()" class="btn-primary" target="_blank">Book a call</a>
     </div>
   </div>
 
@@ -82,15 +82,15 @@
   <section class="blog-list">
     <div class="container">
       <div class="blog-list-grid">
-        <a href="blog-post.html" class="blog-card reveal">
+        <a href="blog/crm-revenue-leak.html" class="blog-card reveal">
           <div class="blog-card-img"><div class="blog-card-img-inner">⚡</div></div>
           <div class="blog-card-body">
             <div class="blog-card-cat">Automation</div>
             <h3>Why your CRM is leaking revenue (and how to fix it in a weekend)</h3>
-            <p>Most B2B teams lose 15-20% of leads to manual data entry errors. Here's the automation playbook.</p>
+            <p>Most B2B teams lose 15–20% of leads to manual data entry errors. Here's the automation playbook to stop the bleeding.</p>
           </div>
         </a>
-        <a href="#" class="blog-card reveal">
+        <a href="blog/ai-sales-concierge.html" class="blog-card reveal">
           <div class="blog-card-img"><div class="blog-card-img-inner">🤖</div></div>
           <div class="blog-card-body">
             <div class="blog-card-cat">AI Agents</div>
@@ -98,12 +98,76 @@
             <p>A technical deep-dive into building end-to-end sales automation with Make.com and OpenAI.</p>
           </div>
         </a>
-        <a href="#" class="blog-card reveal">
-          <div class="blog-card-img"><div class="blog-card-img-inner">📊</div></div>
+        <a href="blog/n8n-vs-make.html" class="blog-card reveal">
+          <div class="blog-card-img"><div class="blog-card-img-inner">⚙️</div></div>
           <div class="blog-card-body">
             <div class="blog-card-cat">Workflow Design</div>
             <h3>n8n vs Make.com: which automation platform is right for your business?</h3>
-            <p>We've built 50+ production workflows on both. Here's when to use each one.</p>
+            <p>We've built 50+ production workflows on both platforms. Here's exactly when to use each one.</p>
+          </div>
+        </a>
+        <a href="blog/ai-lead-generation.html" class="blog-card reveal">
+          <div class="blog-card-img"><div class="blog-card-img-inner">🎯</div></div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">Lead Generation</div>
+            <h3>How to build an AI-powered B2B lead generation engine from scratch</h3>
+            <p>From intent data to personalised outreach — the complete system for finding and converting high-quality B2B leads.</p>
+          </div>
+        </a>
+        <a href="blog/client-onboarding-automation.html" class="blog-card reveal">
+          <div class="blog-card-img"><div class="blog-card-img-inner">🚀</div></div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">Operations</div>
+            <h3>How to automate client onboarding and cut time-to-value by 80%</h3>
+            <p>The complete automation blueprint for onboarding new clients without the manual chaos.</p>
+          </div>
+        </a>
+        <a href="blog/ai-voice-agents.html" class="blog-card reveal">
+          <div class="blog-card-img"><div class="blog-card-img-inner">🎙️</div></div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">AI Agents</div>
+            <h3>AI voice agents: the future of B2B customer engagement</h3>
+            <p>How AI voice agents are handling calls, qualifying leads, and booking meetings 24/7 for B2B companies.</p>
+          </div>
+        </a>
+        <a href="blog/workflow-automation-roi.html" class="blog-card reveal">
+          <div class="blog-card-img"><div class="blog-card-img-inner">📊</div></div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">Strategy</div>
+            <h3>How to calculate the ROI of workflow automation (with real numbers)</h3>
+            <p>A practical framework to measure automation ROI — with formulas and real B2B examples you can use today.</p>
+          </div>
+        </a>
+        <a href="blog/ai-content-factory.html" class="blog-card reveal">
+          <div class="blog-card-img"><div class="blog-card-img-inner">🏭</div></div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">AI Operations</div>
+            <h3>How we built an AI content factory that publishes 30 posts per month</h3>
+            <p>The 5-stage automated content pipeline that produces 30 SEO-optimised blog posts monthly for under £800/month.</p>
+          </div>
+        </a>
+        <a href="blog/b2b-operations-playbook.html" class="blog-card reveal">
+          <div class="blog-card-img"><div class="blog-card-img-inner">📋</div></div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">Workflow Design</div>
+            <h3>The B2B operations playbook: 5 workflows every company should automate first</h3>
+            <p>The 5 highest-ROI workflows to automate first — in order of priority and implementation speed.</p>
+          </div>
+        </a>
+        <a href="blog/ai-proposal-generation.html" class="blog-card reveal">
+          <div class="blog-card-img"><div class="blog-card-img-inner">📄</div></div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">Sales Automation</div>
+            <h3>How AI proposal generation helped our clients close 40% faster</h3>
+            <p>Cutting proposal turnaround from 4+ days to under 2 hours — and what it does to your close rate.</p>
+          </div>
+        </a>
+        <a href="blog/no-code-automation-guide.html" class="blog-card reveal">
+          <div class="blog-card-img"><div class="blog-card-img-inner">🔗</div></div>
+          <div class="blog-card-body">
+            <div class="blog-card-cat">Growth Strategy</div>
+            <h3>The no-code automation guide: how B2B companies scale without hiring</h3>
+            <p>How forward-thinking B2B companies are growing revenue 50–80% year-over-year while keeping headcount flat.</p>
           </div>
         </a>
       </div>
@@ -123,16 +187,16 @@
         <div class="footer-cols">
           <div class="footer-col"><h4>Company</h4><ul><li><a href="index.html#services">Services</a></li><li><a href="index.html#about">About</a></li><li><a href="index.html#results">Results</a></li><li><a href="blog.html">Blog</a></li></ul></div>
           <div class="footer-col"><h4>Services</h4><ul><li><a href="index.html#services">Lead Generation</a></li><li><a href="index.html#services">CRM Automation</a></li><li><a href="index.html#services">Client Onboarding</a></li><li><a href="index.html#services">AI Agents</a></li></ul></div>
-          <div class="footer-col"><h4>Connect</h4><ul><li><a href="index.html#book">Book a call</a></li><li><a href="mailto:hello@morsegrid.com">hello@morsegrid.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
+          <div class="footer-col"><h4>Connect</h4><ul><li><a href="https://cal.com/morsegrid" target="_blank">Book a call</a></li><li><a href="mailto:info@morsegrid.com">info@morsegrid.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2025 MorseGrid. All rights reserved.</span>
-        <span>Built with AI. Obviously.</span>
+        <span>&copy; <span id="footerYear"></span> MorseGrid. All rights reserved.</span>
       </div>
     </div>
   </footer>
 
+  <script>document.getElementById('footerYear').textContent = new Date().getFullYear();</script>
   <script src="script.js"></script>
   <script type="module" src="retell-voice.js"></script>
 </body>

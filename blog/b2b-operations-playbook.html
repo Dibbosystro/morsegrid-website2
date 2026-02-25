@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The B2B Operations Playbook: 5 Workflows Every Company Should Automate First — MorseGrid</title>
+  <meta name="description" content="The 5 highest-ROI workflows for B2B companies to automate first — from lead follow-up to reporting — and how to implement each one." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light">
+        <img src="../Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark">
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#services">Services</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#results">Results</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
+        </button>
+        <a href="https://cal.com/morsegrid" class="nav-cta" target="_blank">Book a call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-panel">
+      <button class="mobile-close" id="mobileClose">&times;</button>
+      <a href="../index.html#services" onclick="closeMobile()">Services</a>
+      <a href="../index.html#about" onclick="closeMobile()">About</a>
+      <a href="../index.html#results" onclick="closeMobile()">Results</a>
+      <a href="../blog.html" onclick="closeMobile()">Blog</a>
+      <a href="https://cal.com/morsegrid" onclick="closeMobile()" class="btn-primary" target="_blank">Book a call</a>
+    </div>
+  </div>
+
+  <article>
+    <header class="blog-post-hero">
+      <div class="container">
+        <div class="blog-post-meta reveal">
+          <span class="blog-post-cat">Workflow Design</span><span>•</span>
+          <span>Jan 22, 2026</span><span>•</span><span>7 min read</span>
+        </div>
+        <h1 class="reveal">The B2B Operations Playbook: 5 Workflows Every Company Should Automate First</h1>
+        <div class="blog-post-author reveal">
+          <div class="blog-post-author-img">📋</div>
+          <div class="blog-post-author-info">
+            <div class="blog-post-author-name">MorseGrid Team</div>
+            <div class="blog-post-author-role">Automation Specialists</div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <div class="blog-post-content reveal">
+        <p>Every B2B company has a backlog of "we should automate that" items — but where do you actually start? After building automation systems for dozens of B2B companies, we've identified the five workflows that consistently deliver the fastest, largest ROI. Here they are, in order of recommended priority.</p>
+
+        <h2>Workflow 1: Lead Response & Initial Follow-Up</h2>
+        <p><strong>Why first?</strong> Speed-to-lead is the single biggest driver of B2B conversion. Research consistently shows that contacting a lead within 5 minutes makes you 100× more likely to connect than waiting 30 minutes.</p>
+        <p><strong>What to automate:</strong> When a lead fills in a form (your website, LinkedIn Lead Gen, a webinar registration), an automated workflow should: (1) immediately send a personalised email acknowledging their enquiry, (2) enrich their data via Clearbit or Apollo, (3) create or update their CRM record, (4) assign to the right sales rep, and (5) trigger a Slack notification so the rep can follow up personally if appropriate.</p>
+        <p><strong>Tools:</strong> Make.com or n8n + your CRM (HubSpot, Salesforce, Pipedrive) + Apollo/Clearbit</p>
+
+        <h2>Workflow 2: CRM Data Entry & Pipeline Updates</h2>
+        <p><strong>Why second?</strong> Salespeople typically spend 20–30% of their time on CRM admin. That's time not selling. Automating CRM updates also ensures your pipeline data is actually accurate — most CRMs are a graveyard of stale, incomplete records.</p>
+        <p><strong>What to automate:</strong> Auto-create contact records from email conversations (via Gmail/Outlook integration), log call notes from your dialler or Zoom transcripts (Fireflies.ai, Otter.ai), update deal stages based on email or calendar events, and trigger follow-up reminders when deals have been inactive for X days.</p>
+
+        <h2>Workflow 3: Proposal & Quote Generation</h2>
+        <p><strong>Why third?</strong> B2B proposals are high-effort, high-stakes documents. Every hour saved in proposal creation is an hour that can go into pipeline development. Automated proposals also mean less variation in quality and faster turnaround — which consistently improves close rates.</p>
+        <p><strong>What to automate:</strong> When a deal reaches "proposal ready" stage in your CRM, automatically pull the deal data (company name, requirements, deal size), generate a proposal draft using a GPT-powered template, create the document in PandaDoc or Proposify, assign it to the rep for review, and send one click later. Average time from "ready" to "sent" drops from days to hours.</p>
+
+        <h2>Workflow 4: Client Onboarding</h2>
+        <p><strong>Why fourth?</strong> The period immediately after signing is when clients form their strongest impressions of your business. Slow, disorganised onboarding is the #1 driver of early churn. Automated onboarding ensures every client gets a consistent, professional experience from Day 1.</p>
+        <p><strong>What to automate:</strong> Contract signed → auto-create project workspace, send welcome email with login credentials, schedule kickoff call, create onboarding task list, notify internal stakeholders, and send Week 1 and Week 2 check-in messages automatically.</p>
+
+        <h2>Workflow 5: Reporting & KPI Dashboards</h2>
+        <p><strong>Why fifth?</strong> Manual reporting is a time sink that often produces reports nobody reads because they take so long to produce they're already stale. Automated reporting means real-time visibility into the metrics that actually matter — every day, not every quarter.</p>
+        <p><strong>What to automate:</strong> Daily automated reports delivered to Slack or email summarising pipeline activity, revenue metrics, support ticket volumes, and marketing performance — pulled from your CRM, ad platforms, and support tools and formatted clearly without anyone touching a spreadsheet.</p>
+
+        <blockquote>"We automated all five of these in a 12-week engagement. Our team recovered 47 hours per week collectively. We reinvested that time into prospecting and closed £180k in new business in the following quarter." — COO, B2B Tech Services</blockquote>
+
+        <h2>Where to Start</h2>
+        <p>Don't try to automate everything at once. Start with Workflow 1 (lead response) — it's the fastest to implement and has the most immediate revenue impact. From there, build in order. Each workflow feeds into the next, creating a compound effect on your overall operational efficiency.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-box reveal">
+        <div class="section-label" style="justify-content:center;">Operations audit</div>
+        <h2>Which of these 5 workflows is <em>your biggest opportunity?</em></h2>
+        <p>Book a free 30-minute operations audit with MorseGrid. We'll map your current workflows, identify your highest-ROI automation opportunities, and give you a clear implementation roadmap — at no cost.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+          <a href="https://cal.com/morsegrid" class="btn-primary" target="_blank">Get your free operations audit <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+          <a href="mailto:info@morsegrid.com" class="btn-secondary">Email us directly</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo"><img src="../Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light"><img src="../Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark"></div>
+          <p>AI-powered operations for B2B companies. We build the systems, you build the business.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="../index.html#services">Services</a></li><li><a href="../index.html#about">About</a></li><li><a href="../index.html#results">Results</a></li><li><a href="../blog.html">Blog</a></li></ul></div>
+          <div class="footer-col"><h4>Services</h4><ul><li><a href="../index.html#services">Lead Generation</a></li><li><a href="../index.html#services">CRM Automation</a></li><li><a href="../index.html#services">Client Onboarding</a></li><li><a href="../index.html#services">AI Agents</a></li></ul></div>
+          <div class="footer-col"><h4>Connect</h4><ul><li><a href="https://cal.com/morsegrid" target="_blank">Book a call</a></li><li><a href="mailto:info@morsegrid.com">info@morsegrid.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>&copy; <span id="footerYear"></span> MorseGrid. All rights reserved.</span></div>
+    </div>
+  </footer>
+  <script>document.getElementById('footerYear').textContent = new Date().getFullYear();</script>
+  <script src="../script.js"></script>
+  <script type="module" src="../retell-voice.js"></script>
+</body>
+</html>

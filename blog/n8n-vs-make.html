@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>n8n vs Make.com: Which Automation Platform is Right for Your Business? — MorseGrid</title>
+  <meta name="description" content="We've built 50+ production workflows on both n8n and Make.com. Here's our honest breakdown of when to use each one." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light">
+        <img src="../Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark">
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#services">Services</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#results">Results</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
+        </button>
+        <a href="https://cal.com/morsegrid" class="nav-cta" target="_blank">Book a call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-panel">
+      <button class="mobile-close" id="mobileClose">&times;</button>
+      <a href="../index.html#services" onclick="closeMobile()">Services</a>
+      <a href="../index.html#about" onclick="closeMobile()">About</a>
+      <a href="../index.html#results" onclick="closeMobile()">Results</a>
+      <a href="../blog.html" onclick="closeMobile()">Blog</a>
+      <a href="https://cal.com/morsegrid" onclick="closeMobile()" class="btn-primary" target="_blank">Book a call</a>
+    </div>
+  </div>
+
+  <article>
+    <header class="blog-post-hero">
+      <div class="container">
+        <div class="blog-post-meta reveal">
+          <span class="blog-post-cat">Workflow Design</span><span>•</span>
+          <span>Feb 17, 2026</span><span>•</span><span>8 min read</span>
+        </div>
+        <h1 class="reveal">n8n vs Make.com: Which Automation Platform is Right for Your Business?</h1>
+        <div class="blog-post-author reveal">
+          <div class="blog-post-author-img">📊</div>
+          <div class="blog-post-author-info">
+            <div class="blog-post-author-name">MorseGrid Team</div>
+            <div class="blog-post-author-role">Automation Specialists</div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <div class="blog-post-content reveal">
+        <p>We get this question in almost every sales call: "Should we use n8n or Make.com?" After building over 50 production workflows on both platforms for clients across different industries, we have a clear and honest answer — and it depends entirely on your situation.</p>
+
+        <h2>A Quick Overview of Both Platforms</h2>
+        <p><strong>Make.com</strong> (formerly Integromat) is a cloud-based visual automation platform. It's incredibly polished, has 1,500+ native integrations, and is designed for teams who want to build visually without touching code. <strong>n8n</strong> is an open-source workflow automation tool that can be self-hosted. It's more technical, but it offers near-infinite flexibility and significantly lower costs at scale.</p>
+
+        <h2>When to Choose Make.com</h2>
+        <ul>
+          <li><strong>Speed to deployment matters.</strong> Make.com's drag-and-drop interface and massive integration library means you can build production-ready workflows in hours, not days.</li>
+          <li><strong>Your team is non-technical.</strong> Non-developers can build and maintain workflows without any coding knowledge.</li>
+          <li><strong>You need reliable support.</strong> Make.com has enterprise-grade SLAs and a mature support infrastructure.</li>
+          <li><strong>You're running moderate volume.</strong> For under 100k operations per month, Make.com's pricing is competitive.</li>
+        </ul>
+
+        <h2>When to Choose n8n</h2>
+        <ul>
+          <li><strong>Cost at scale is a priority.</strong> n8n's self-hosted version has no per-operation pricing. For high-volume workflows, the cost savings are enormous.</li>
+          <li><strong>You need custom logic.</strong> n8n lets you write JavaScript directly in nodes, giving you far more control over complex data transformations.</li>
+          <li><strong>Data privacy is critical.</strong> Self-hosting means your data never leaves your infrastructure — essential for healthcare, legal, and fintech use cases.</li>
+          <li><strong>You have a technical team.</strong> n8n requires someone comfortable with server administration and debugging JSON.</li>
+        </ul>
+
+        <h2>Our Honest Recommendation</h2>
+        <p>For most B2B companies getting started with automation, we recommend Make.com for the first 6 months. The speed of deployment and ease of iteration outweighs the cost savings of n8n until your workflow volume justifies the switch. Once you're running consistently high volumes or need custom logic that Make.com can't handle, migrating to n8n becomes the smart move.</p>
+
+        <blockquote>"The best automation tool is the one your team will actually maintain. That's almost always Make.com for non-technical teams."</blockquote>
+
+        <h2>The Hybrid Approach</h2>
+        <p>Some of our clients run both — Make.com for customer-facing workflows where speed and reliability are paramount, and n8n for internal data pipelines and high-volume backend processes. This hybrid approach gives you the best of both worlds without compromise.</p>
+
+        <h2>What About Zapier?</h2>
+        <p>We rarely recommend Zapier for serious B2B automation work. It's great for simple, single-step integrations, but it becomes expensive and limited quickly. For anything involving multi-step logic, data transformation, or meaningful volume, Make.com and n8n are the clear winners.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-box reveal">
+        <div class="section-label" style="justify-content:center;">Not sure where to start?</div>
+        <h2>We'll pick the right tools <em>for your stack.</em></h2>
+        <p>Every business is different. Book a free 30-minute call and we'll recommend the right automation platform for your use case — and show you the workflows we'd build first.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+          <a href="https://cal.com/morsegrid" class="btn-primary" target="_blank">Book a free call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+          <a href="mailto:info@morsegrid.com" class="btn-secondary">Email us directly</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo"><img src="../Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light"><img src="../Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark"></div>
+          <p>AI-powered operations for B2B companies. We build the systems, you build the business.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="../index.html#services">Services</a></li><li><a href="../index.html#about">About</a></li><li><a href="../index.html#results">Results</a></li><li><a href="../blog.html">Blog</a></li></ul></div>
+          <div class="footer-col"><h4>Services</h4><ul><li><a href="../index.html#services">Lead Generation</a></li><li><a href="../index.html#services">CRM Automation</a></li><li><a href="../index.html#services">Client Onboarding</a></li><li><a href="../index.html#services">AI Agents</a></li></ul></div>
+          <div class="footer-col"><h4>Connect</h4><ul><li><a href="https://cal.com/morsegrid" target="_blank">Book a call</a></li><li><a href="mailto:info@morsegrid.com">info@morsegrid.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>&copy; <span id="footerYear"></span> MorseGrid. All rights reserved.</span></div>
+    </div>
+  </footer>
+  <script>document.getElementById('footerYear').textContent = new Date().getFullYear();</script>
+  <script src="../script.js"></script>
+  <script type="module" src="../retell-voice.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How AI Proposal Generation Helped Our Clients Close 40% Faster — MorseGrid</title>
+  <meta name="description" content="AI-powered proposal generation is slashing turnaround times from days to hours. Here's how we built it and what it means for your close rate." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light">
+        <img src="../Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark">
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html#services">Services</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#results">Results</a></li>
+        <li><a href="../blog.html">Blog</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
+        </button>
+        <a href="https://cal.com/morsegrid" class="nav-cta" target="_blank">Book a call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-panel">
+      <button class="mobile-close" id="mobileClose">&times;</button>
+      <a href="../index.html#services" onclick="closeMobile()">Services</a>
+      <a href="../index.html#about" onclick="closeMobile()">About</a>
+      <a href="../index.html#results" onclick="closeMobile()">Results</a>
+      <a href="../blog.html" onclick="closeMobile()">Blog</a>
+      <a href="https://cal.com/morsegrid" onclick="closeMobile()" class="btn-primary" target="_blank">Book a call</a>
+    </div>
+  </div>
+
+  <article>
+    <header class="blog-post-hero">
+      <div class="container">
+        <div class="blog-post-meta reveal">
+          <span class="blog-post-cat">Sales Automation</span><span>•</span>
+          <span>Jan 15, 2026</span><span>•</span><span>6 min read</span>
+        </div>
+        <h1 class="reveal">How AI Proposal Generation Helped Our Clients Close 40% Faster</h1>
+        <div class="blog-post-author reveal">
+          <div class="blog-post-author-img">📄</div>
+          <div class="blog-post-author-info">
+            <div class="blog-post-author-name">MorseGrid Team</div>
+            <div class="blog-post-author-role">Automation Specialists</div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <div class="blog-post-content reveal">
+        <p>Proposals are often the most labour-intensive part of the B2B sales cycle — and ironically, one of the most impactful on close rate. Every delay between "we're interested" and "here's our proposal" gives your prospect more time to cool off, talk to competitors, or simply move on to more pressing priorities.</p>
+        <p>After deploying AI proposal generation systems for multiple B2B clients, we've consistently seen one outcome: faster proposals correlate directly with higher close rates. On average, our clients are closing deals 40% faster after implementation.</p>
+
+        <h2>Why Traditional Proposal Processes Are Broken</h2>
+        <p>The typical B2B proposal workflow looks something like this: sales rep finishes a call, adds it to their to-do list, puts together a brief for the proposal writer, the proposal writer drafts it over 2–3 days, it goes through internal review, revisions are made, and finally — usually 4–7 days after the sales call — the prospect receives a document they've half-forgotten about.</p>
+        <p>Meanwhile, your prospect has talked to two other vendors who sent proposals on the same day as the call.</p>
+
+        <h2>What AI Proposal Generation Actually Looks Like</h2>
+        <p>The system we build is a trigger-based automation that fires when a deal reaches "Proposal Stage" in the CRM. Here's the flow:</p>
+
+        <h3>Step 1: Data Extraction</h3>
+        <p>The workflow pulls all available deal data from the CRM: company name, contact name, industry, deal value, requirements captured in the CRM notes, and any meeting transcripts stored in the system. GPT-4o processes the meeting transcript (from Fireflies.ai or Otter.ai) to extract the 3–5 key pain points discussed and the success criteria the prospect mentioned.</p>
+
+        <h3>Step 2: Proposal Generation</h3>
+        <p>Using a brand-approved template and the extracted data, GPT-4o writes a full proposal including: executive summary tailored to the prospect's stated pain points, proposed solution section referencing their specific use case, investment section with the correct pricing tier pulled from a pricing table, case study selection (the system matches the most relevant case study from a library based on industry and use case), and next steps.</p>
+
+        <h3>Step 3: Document Creation & Review</h3>
+        <p>The generated content is pushed into a PandaDoc template via API, creating a fully formatted, branded proposal in under 60 seconds. A notification is sent to the sales rep with a one-click review link. The rep reviews (typically 10–15 minutes), makes any adjustments, and sends directly from PandaDoc — which also handles e-signature and read-receipt tracking.</p>
+
+        <h2>The Results Across Clients</h2>
+        <ul>
+          <li><strong>Average proposal turnaround time:</strong> from 4.2 days → 1.8 hours</li>
+          <li><strong>Proposal-to-close rate improvement:</strong> +22–40% across clients</li>
+          <li><strong>Rep time saved per proposal:</strong> 2–4 hours</li>
+          <li><strong>Proposal quality consistency:</strong> measurably higher (fewer missing sections, more consistent tone)</li>
+        </ul>
+
+        <blockquote>"Before, our proposals were an afterthought because they took so long. Now they go out the same day as the call. Our prospects always comment on how professional and fast we were — it sets the tone for the whole relationship." — Sales Director, B2B professional services firm</blockquote>
+
+        <h2>Is AI Proposal Generation Right for Your Business?</h2>
+        <p>This system works best for B2B companies that send 5+ proposals per month, have a reasonably consistent offer structure (even with customisation), and use a CRM to track deals. If your proposals currently take more than 48 hours to produce, AI proposal generation will almost certainly deliver significant ROI within 30 days of implementation.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-box reveal">
+        <div class="section-label" style="justify-content:center;">Automate your proposals</div>
+        <h2>Want proposals out the door <em>the same day as the call?</em></h2>
+        <p>MorseGrid builds custom AI proposal pipelines that pull from your CRM, generate professional proposals, and get them in front of prospects in hours instead of days. Book a call to see how it works.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+          <a href="https://cal.com/morsegrid" class="btn-primary" target="_blank">Book a free call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+          <a href="mailto:info@morsegrid.com" class="btn-secondary">Email us directly</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo"><img src="../Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light"><img src="../Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark"></div>
+          <p>AI-powered operations for B2B companies. We build the systems, you build the business.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="../index.html#services">Services</a></li><li><a href="../index.html#about">About</a></li><li><a href="../index.html#results">Results</a></li><li><a href="../blog.html">Blog</a></li></ul></div>
+          <div class="footer-col"><h4>Services</h4><ul><li><a href="../index.html#services">Lead Generation</a></li><li><a href="../index.html#services">CRM Automation</a></li><li><a href="../index.html#services">Client Onboarding</a></li><li><a href="../index.html#services">AI Agents</a></li></ul></div>
+          <div class="footer-col"><h4>Connect</h4><ul><li><a href="https://cal.com/morsegrid" target="_blank">Book a call</a></li><li><a href="mailto:info@morsegrid.com">info@morsegrid.com</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Twitter / X</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>&copy; <span id="footerYear"></span> MorseGrid. All rights reserved.</span></div>
+    </div>
+  </footer>
+  <script>document.getElementById('footerYear').textContent = new Date().getFullYear();</script>
+  <script src="../script.js"></script>
+  <script type="module" src="../retell-voice.js"></script>
+</body>
+</html>
