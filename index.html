@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="Morsegrid_icon_Color.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -28,14 +29,15 @@
           <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
         </button>
         <div class="nav-talk-ai-wrap">
-          <a href="#talk" class="nav-cta nav-talk-ai" id="navTalkAI"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Talk to AI</a>
+          <a href="#talk" class="nav-cta nav-talk-ai" id="navTalkAI"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Let's Talk</a>
           <!-- Floating Voice Agent Teaser -->
           <div class="float-voice-tease" id="floatVoiceTease">
-            <div class="float-voice-tease__label">
-              <span class="float-voice-tease__icon">🎙️</span>
-              Checkout Our New<br>Voice Agent
+            <div class="float-voice-tease__bubble">
+              Check out our new<br>Voice Agent!
+              <button class="float-voice-tease__close" onclick="document.getElementById('floatVoiceTease').style.display='none'" aria-label="Dismiss">&times;</button>
             </div>
-            <button class="float-voice-tease__close" onclick="document.getElementById('floatVoiceTease').style.display='none'" aria-label="Dismiss">&times;</button>
+            <span class="float-voice-tease__robot" aria-hidden="true">🤖</span>
+            <span class="float-voice-tease__arrow" aria-hidden="true">�</span>
           </div>
         </div>
         <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -50,7 +52,7 @@
       <a href="#about" onclick="closeMobile()">About</a>
       <a href="#results" onclick="closeMobile()">Results</a>
       <a href="blog.html" onclick="closeMobile()">Blog</a>
-      <a href="#talk" onclick="closeMobile()" class="btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Talk to AI</a>
+      <a href="#talk" onclick="closeMobile()" class="btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Let's Talk</a>
     </div>
   </div>
 

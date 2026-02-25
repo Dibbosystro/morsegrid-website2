@@ -1746,10 +1746,10 @@ body::after {
 .mg-voice-float,
 #mgVoiceToast { display: none !important; }
 
-/* Gentle bob animation — must include translateX(-50%) to preserve centering */
+/* Gentle bob */
 @keyframes float-bob {
-  0%, 100% { transform: translateX(-50%) translateY(0px); }
-  50%       { transform: translateX(-50%) translateY(-7px); }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
 }
 
 /* Wrapper for Talk to AI button — anchors the banner */
@@ -1757,75 +1757,78 @@ body::after {
   position: relative;
 }
 
-/* Banner — absolutely positioned below the button */
+/* Speech bubble — floats BELOW the Let's Talk button */
 .float-voice-tease {
   position: absolute;
+  right: 0;
   top: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%);
   z-index: 9990;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  animation: float-bob 2.6s ease-in-out infinite;
+  align-items: flex-end;
+  gap: 0;
   white-space: nowrap;
-  overflow: visible;
+  animation: float-bob 2.8s ease-in-out infinite;
 }
 
-/* Upward pointer triangle — centered above the card */
-.float-voice-tease::before {
-  content: '';
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 9px solid var(--accent);
-  flex-shrink: 0;
-}
-
-/* The card */
-.float-voice-tease__label {
+/* Speech bubble */
+.float-voice-tease__bubble {
+  position: relative;
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   line-height: 1.45;
   text-align: center;
-  color: #fff;
-  background: linear-gradient(135deg, var(--accent) 0%, #6366f1 100%);
-  border-radius: 12px;
-  padding: 9px 14px 9px 12px;
-  box-shadow: 0 8px 28px rgba(79, 70, 229, 0.45), 0 2px 8px rgba(0,0,0,0.12);
+  color: #ffffff;
+  background: #0f172a;
+  border-radius: 10px;
+  padding: 8px 22px 8px 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0,0,0,0.1);
   white-space: nowrap;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
-.float-voice-tease__icon {
-  font-size: 15px;
-  line-height: 1;
-  flex-shrink: 0;
+/* Upward-pointing tail on speech bubble */
+.float-voice-tease__bubble::after {
+  content: '';
+  position: absolute;
+  top: -9px;
+  right: 18px;
+  transform: none;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 9px solid #0f172a;
 }
 
-[data-theme="dark"] .float-voice-tease__label {
-  background: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
-  box-shadow: 0 8px 28px rgba(79, 70, 229, 0.55), 0 2px 8px rgba(0,0,0,0.25);
+[data-theme="dark"] .float-voice-tease__bubble {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.12), 0 2px 8px rgba(0,0,0,0.25);
+}
+[data-theme="dark"] .float-voice-tease__bubble::after {
+  border-bottom-color: #ffffff;
+}
+
+/* Hide robot and arrow — not needed in below layout */
+.float-voice-tease__robot,
+.float-voice-tease__arrow {
+  display: none;
 }
 
 /* Dismiss button */
 .float-voice-tease__close {
   pointer-events: all;
   position: absolute;
-  top: 7px;
+  top: -7px;
   right: -7px;
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.22);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   color: #fff;
-  font-size: 11px;
+  font-size: 10px;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -1837,7 +1840,17 @@ body::after {
 }
 
 .float-voice-tease__close:hover {
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.48);
+}
+
+@keyframes robot-nod {
+  0%, 100% { transform: translateY(0)   rotate(-5deg); }
+  50%       { transform: translateY(-4px) rotate(5deg); }
+}
+
+@keyframes arrow-nudge {
+  0%, 100% { transform: translateY(0);   }
+  50%       { transform: translateY(-4px); }
 }
 
 /* Nav "Talk to AI" subtle glow pulse */
@@ -1851,6 +1864,6 @@ body::after {
 }
 
 /* Hide on small screens */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .float-voice-tease { display: none; }
 }
