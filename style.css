@@ -1746,114 +1746,7 @@ body::after {
 .mg-voice-float,
 #mgVoiceToast { display: none !important; }
 
-/* Gentle bob */
-@keyframes float-bob {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-5px); }
-}
-
-/* Wrapper for Talk to AI button — anchors the banner */
-.nav-talk-ai-wrap {
-  position: relative;
-}
-
-/* Speech bubble — floats BELOW the Let's Talk button */
-.float-voice-tease {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 10px);
-  z-index: 9990;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0;
-  white-space: nowrap;
-  animation: float-bob 2.8s ease-in-out infinite;
-}
-
-/* Speech bubble */
-.float-voice-tease__bubble {
-  position: relative;
-  font-family: var(--sans);
-  font-size: 11.5px;
-  font-weight: 600;
-  line-height: 1.45;
-  text-align: center;
-  color: #ffffff;
-  background: #0f172a;
-  border-radius: 10px;
-  padding: 8px 22px 8px 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0,0,0,0.1);
-  white-space: nowrap;
-}
-
-/* Upward-pointing tail on speech bubble */
-.float-voice-tease__bubble::after {
-  content: '';
-  position: absolute;
-  top: -9px;
-  right: 18px;
-  transform: none;
-  width: 0;
-  height: 0;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-bottom: 9px solid #0f172a;
-}
-
-[data-theme="dark"] .float-voice-tease__bubble {
-  background: #ffffff;
-  color: #0f172a;
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.12), 0 2px 8px rgba(0,0,0,0.25);
-}
-[data-theme="dark"] .float-voice-tease__bubble::after {
-  border-bottom-color: #ffffff;
-}
-
-/* Hide robot and arrow — not needed in below layout */
-.float-voice-tease__robot,
-.float-voice-tease__arrow {
-  display: none;
-}
-
-/* Dismiss button */
-.float-voice-tease__close {
-  pointer-events: all;
-  position: absolute;
-  top: -7px;
-  right: -7px;
-  width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: #fff;
-  font-size: 10px;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  transition: background var(--transition);
-}
-
-.float-voice-tease__close:hover {
-  background: rgba(255, 255, 255, 0.48);
-}
-
-@keyframes robot-nod {
-  0%, 100% { transform: translateY(0)   rotate(-5deg); }
-  50%       { transform: translateY(-4px) rotate(5deg); }
-}
-
-@keyframes arrow-nudge {
-  0%, 100% { transform: translateY(0);   }
-  50%       { transform: translateY(-4px); }
-}
-
-/* Nav "Talk to AI" subtle glow pulse */
+/* Nav "Let's Talk" subtle glow pulse */
 .nav-talk-ai {
   animation: nav-pulse-glow 3s ease-in-out infinite;
 }
@@ -1861,9 +1754,4 @@ body::after {
 @keyframes nav-pulse-glow {
   0%, 100% { box-shadow: 0 4px 16px var(--accent-glow); }
   50%       { box-shadow: 0 4px 28px rgba(79, 70, 229, 0.55); }
-}
-
-/* Hide on small screens */
-@media (max-width: 768px) {
-  .float-voice-tease { display: none; }
 }
