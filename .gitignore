@@ -1,4 +1,43 @@
-Company Playbook.md
-Morsegrid logo (with background).png
-Morsegrid logo.png
-Social Proof and Portfolio.pdf
+# ============================================
+# MorseGrid Website — Whitelist .gitignore
+# Only website deployment files are tracked.
+# Internal docs, brand guides, agent directives,
+# and prototypes stay local.
+# ============================================
+
+# Ignore everything by default
+*
+
+# ── Website files (tracked) ──────────────────
+!.gitignore
+!index.html
+!blog.html
+!blog-post.html
+!style.css
+!script.js
+!retell-voice.js
+!vercel.json
+!favicon.png
+!Morsegrid logo(color).png
+!Morsegrid logo(white).png
+
+# ── API routes (tracked) ─────────────────────
+!api/
+!api/**
+
+# ── Blog posts (tracked) ─────────────────────
+!blog/
+!blog/**
+
+# ── Always ignore these ──────────────────────
+.DS_Store
+.env
+.env.*
+node_modules/
+venv/
+__pycache__/
+*.pyc
+
+# ── Internal & directives (never tracked) ────
+internal/
+directives/
