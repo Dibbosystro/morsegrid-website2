@@ -232,6 +232,10 @@ body::after {
   color: var(--text-primary);
 }
 
+.nav-links a.nav-active {
+  color: var(--accent);
+}
+
 .nav-right {
   display: flex;
   align-items: center;
