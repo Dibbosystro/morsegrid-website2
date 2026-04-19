@@ -75,9 +75,12 @@
     }
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 32px;
       margin-top: 56px;
+      max-width: 860px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .team-card {
       background: var(--bg-card);
@@ -97,20 +100,18 @@
       border-color: var(--accent);
     }
     .team-avatar {
-      width: 88px;
-      height: 88px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), #818cf8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--heading);
-      font-size: 2rem;
-      font-weight: 700;
-      color: #fff;
+      object-fit: cover;
       margin-bottom: 20px;
       flex-shrink: 0;
+      border: 3px solid var(--border);
       box-shadow: 0 8px 24px var(--accent-glow);
+      transition: border-color var(--transition);
+    }
+    .team-card:hover .team-avatar {
+      border-color: var(--accent);
     }
     .team-name {
       font-family: var(--heading);
@@ -166,21 +167,15 @@
 
     @media (max-width: 600px) {
       .team-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 20px;
       }
       .team-card {
         padding: 28px 18px 24px;
       }
       .team-avatar {
-        width: 72px;
-        height: 72px;
-        font-size: 1.6rem;
-      }
-    }
-    @media (max-width: 400px) {
-      .team-grid {
-        grid-template-columns: 1fr;
+        width: 80px;
+        height: 80px;
       }
     }
   </style>
@@ -246,7 +241,7 @@
 
         <!-- Maks — Founder (first) -->
         <div class="team-card reveal">
-          <div class="team-avatar">M</div>
+          <img class="team-avatar" src="https://media.licdn.com/dms/image/v2/D5603AQEHnQWnuiPiGQ/profile-displayphoto-scale_400_400/B56ZzULVigIoAg-/0/1773086272504?e=1778112000&v=beta&t=xnF9lXvWmKlsLSJ7_Zm1sPFlkWrxlC4Gh6V18t8wcg4" alt="Maks">
           <div class="team-name">Maks</div>
           <div class="team-role">Founder</div>
           <p class="team-bio">Placeholder — leads strategy, client relationships, and overall vision for MorseGrid. Drop your real bio here whenever you're ready.</p>
@@ -259,7 +254,7 @@
 
         <!-- Dibbo — Co-Founder -->
         <div class="team-card reveal">
-          <div class="team-avatar">D</div>
+          <img class="team-avatar" src="https://media.licdn.com/dms/image/v2/D5603AQFZCsCM8aFIpA/profile-displayphoto-crop_800_800/B56Zm_CWqYHUAI-/0/1759846693459?e=1778112000&v=beta&t=hwrw2I_YUc1O6c66JqUjxx-hRu5mBNj4fvtPH3xmW6Q" alt="Dibbo">
           <div class="team-name">Dibbo</div>
           <div class="team-role">Co-Founder</div>
           <p class="team-bio">Placeholder — drives growth, partnerships, and product direction at MorseGrid. Drop your real bio here whenever you're ready.</p>
@@ -272,7 +267,7 @@
 
         <!-- Arshi — Associate -->
         <div class="team-card reveal">
-          <div class="team-avatar">A</div>
+          <img class="team-avatar" src="https://media.licdn.com/dms/image/v2/D5603AQFxxZ8lvwIr5Q/profile-displayphoto-crop_800_800/B56ZmZXOeQIAAI-/0/1759214628651?e=1778112000&v=beta&t=BroywcLR5mdTqZexfM_UR6Ey6j26PjxFKPiEJ2yv8po" alt="Arshi">
           <div class="team-name">Arshi</div>
           <div class="team-role">Associate</div>
           <p class="team-bio">Placeholder — keeps every client project on track and ensures MorseGrid's delivery quality stays sharp. Drop your real bio here whenever you're ready.</p>
@@ -285,7 +280,7 @@
 
         <!-- Faiyaz — Associate -->
         <div class="team-card reveal">
-          <div class="team-avatar">F</div>
+          <img class="team-avatar" src="https://media.licdn.com/dms/image/v2/D5603AQFoYoNTOaDRsg/profile-displayphoto-shrink_200_200/B56ZbKV3OIGoAc-/0/1747151451633?e=1778112000&v=beta&t=A33Vr1eYF2swRymswYFMy3eCoICvWwqM4KS9UCPm5gI" alt="Faiyaz">
           <div class="team-name">Faiyaz</div>
           <div class="team-role">Associate</div>
           <p class="team-bio">Placeholder — builds the AI pipelines, agents, and integrations that power MorseGrid's most complex client automations. Drop your real bio here whenever you're ready.</p>
