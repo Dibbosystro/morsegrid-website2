@@ -212,10 +212,10 @@ body::after {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 24px;
   list-style: none;
   background: var(--bg-elevated);
-  padding: 7px 24px;
+  padding: 7px 22px;
   border-radius: 100px;
   border: 1px solid var(--border);
   box-shadow: var(--card-shadow);
