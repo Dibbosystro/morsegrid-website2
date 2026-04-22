@@ -23,6 +23,13 @@
 !favicon.png
 !Morsegrid logo(color).png
 !Morsegrid logo(white).png
+!Morsegrid logo(black).png
+
+# ── Team & other images (tracked) ────────────
+!Team pictures/
+!Team pictures/**
+!Other images/
+!Other images/**
 
 # ── API routes (tracked) ─────────────────────
 !api/

@@ -1,156 +1,194 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy — MorseGrid</title>
-  <meta name="description" content="MorseGrid Privacy Policy. Learn how we collect, use, and protect your personal information." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - MorseGrid</title>
+  <meta name="description" content="MorseGrid Privacy Policy. Learn how we collect, use, and protect your personal information.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    .legal-page { padding: 160px 0 80px; }
-    .legal-page h1 { font-size: 2.6rem; margin-bottom: 0.4rem; font-weight: 700; }
-    .legal-page .legal-updated { color: var(--text-secondary); margin-bottom: 2.5rem; font-size: 0.9rem; opacity: 0.7; }
-    .legal-page h2 { font-size: 1.3rem; margin-top: 2.4rem; margin-bottom: 0.6rem; font-weight: 600; }
-    .legal-page p, .legal-page li { line-height: 1.8; color: var(--text-secondary); font-size: 1rem; }
-    .legal-page ul { padding-left: 1.5rem; margin-bottom: 1rem; }
-    .legal-page ul li { margin-bottom: 0.4rem; }
-    .legal-page a { color: var(--accent); text-decoration: none; }
-    .legal-page a:hover { text-decoration: underline; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #2D5016; --bg: #F4F4F5; --white: #FFFFFF;
+      --ink: #131313; --gray: #6B6B76; --border: #E2E2E8;
+      --font: 'Hanken Grotesk', -apple-system, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--white); color: var(--ink); -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 32px; left: 24px; right: 24px; height: 64px; z-index: 100;
+      display: flex; align-items: center;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(16px);
+      border: 1px solid var(--border); border-radius: 22px; padding: 0 32px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-links { position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-size: 17px; font-weight: 500; color: var(--gray); padding: 8px 14px; border-radius: 993px; transition: color 0.15s, background 0.15s; }
+    .nav-links a:hover { color: var(--ink); background: var(--bg); }
+    .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .pill { font-family: var(--font); font-size: 14px; font-weight: 600; border-radius: 993px; padding: 7px 16px; cursor: pointer; border: 1.5px solid transparent; transition: all 0.15s; display: inline-flex; align-items: center; }
+    .pill-outline { border-color: var(--border); color: var(--ink); background: transparent; }
+    .pill-outline:hover { background: var(--bg); }
+    .pill-dark { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .pill-dark:hover { background: #2a2a2a; }
+
+    /* LEGAL CONTENT */
+    .legal-wrap { max-width: 780px; margin: 0 auto; padding: 160px 24px 100px; }
+    .legal-wrap h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; margin-bottom: 10px; }
+    .legal-updated { font-size: 14px; color: var(--gray); margin-bottom: 48px; }
+    .legal-wrap > p { font-size: 16px; color: var(--gray); line-height: 1.75; margin-bottom: 20px; }
+    .legal-wrap h2 { font-size: 18px; font-weight: 700; color: var(--ink); margin-top: 40px; margin-bottom: 12px; }
+    .legal-wrap p { font-size: 16px; color: var(--gray); line-height: 1.75; margin-bottom: 16px; }
+    .legal-wrap ul { padding-left: 20px; margin-bottom: 16px; }
+    .legal-wrap ul li { font-size: 16px; color: var(--gray); line-height: 1.75; margin-bottom: 6px; }
+    .legal-wrap a { color: var(--green); }
+    .legal-wrap a:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .footer { padding: 80px 0 40px; background: var(--ink); }
+    .footer-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-bottom: 64px; }
+    .footer-brand { text-align: left; margin-top: -12px; }
+    .footer-brand img { height: auto; max-width: 180px; margin-bottom: 20px; filter: brightness(0) invert(1); opacity: 0.85; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.45); margin-top: 4px; max-width: 320px; line-height: 1.6; }
+    .footer-product-line { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 4px; max-width: 260px; line-height: 1.5; }
+    .footer-cols { display: flex; justify-content: space-between; gap: 40px; }
+    .footer-col h4 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.9); margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .footer-col a { font-size: 15px; color: rgba(255,255,255,0.45); transition: color 0.15s; font-weight: 500; }
+    .footer-col a:hover { color: rgba(255,255,255,0.9); }
+    .footer-address { font-size: 15px; color: rgba(255,255,255,0.45); font-weight: 500; line-height: 1.5; max-width: 220px; display: inline-block; }
+    .footer-bottom { display: flex; justify-content: center; align-items: center; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: rgba(255,255,255,0.25); font-weight: 500; }
+
+    @media (max-width: 900px) {
+      nav { top: 12px; left: 12px; right: 12px; padding: 0 20px; }
+      .nav-links { display: none; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
+      .footer-cols { flex-wrap: wrap; gap: 24px; }
+    }
   </style>
 </head>
 <body>
-  <nav class="nav" id="nav">
-    <div class="container nav-inner">
-      <a href="index.html" class="nav-logo">
-        <img src="Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light">
-        <img src="Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark">
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html#services">Services</a></li>
-        <li><a href="index.html#about">About</a></li>
-        <li><a href="index.html#results">Results</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="team.html">Team</a></li>
-      </ul>
-      <div class="nav-right">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
-          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
-        </button>
-        <a href="https://cal.com/morsegrid" target="_blank" class="btn btn-primary nav-cta">Book a Call</a>
-        <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
-      </div>
+
+  <nav>
+    <a href="index.html" class="nav-logo"><img src="Morsegrid logo(black).png" alt="MorseGrid"></a>
+    <ul class="nav-links">
+      <li><a href="index.html#method">How it works</a></li>
+      <li><a href="index.html#stories">Results</a></li>
+      <li><a href="index.html#what">What we build</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="team.html">Team</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="index.html#faq" class="pill pill-outline">FAQ</a>
+      <a href="https://cal.com/maksudur-systro/discovery-call-process" class="pill pill-dark" target="_blank" rel="noopener">Book a call</a>
     </div>
   </nav>
 
-  <section class="legal-page">
-    <div class="container" style="max-width:780px;">
-      <h1>Privacy Policy</h1>
-      <p class="legal-updated">Last updated: March 12, 2026</p>
+  <div class="legal-wrap">
+    <h1>Privacy Policy</h1>
+    <p class="legal-updated">Last updated: March 12, 2026</p>
 
-      <p>Systro AI LLC ("MorseGrid," "we," "us," or "our") operates the website <strong>morsegrid.com</strong>. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or engage our services.</p>
+    <p>Systro AI LLC ("MorseGrid," "we," "us," or "our") operates the website <strong>morsegrid.com</strong>. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or engage our services.</p>
 
-      <h2>1. Information We Collect</h2>
-      <p><strong>Personal Information You Provide.</strong> When you book a call, fill out a contact form, subscribe to our newsletter, or correspond with us, we may collect:</p>
-      <ul>
-        <li>Name</li>
-        <li>Email address</li>
-        <li>Company name and job title</li>
-        <li>Phone number</li>
-        <li>Any other information you voluntarily provide</li>
-      </ul>
-      <p><strong>Automatically Collected Information.</strong> When you access our website, we may automatically collect:</p>
-      <ul>
-        <li>IP address and approximate location</li>
-        <li>Browser type, device, and operating system</li>
-        <li>Pages visited, time spent, and referring URLs</li>
-        <li>Cookies and similar tracking technologies</li>
-      </ul>
+    <h2>1. Information We Collect</h2>
+    <p><strong>Personal Information You Provide.</strong> When you book a call, fill out a contact form, subscribe to our newsletter, or correspond with us, we may collect:</p>
+    <ul>
+      <li>Name</li>
+      <li>Email address</li>
+      <li>Company name and job title</li>
+      <li>Phone number</li>
+      <li>Any other information you voluntarily provide</li>
+    </ul>
+    <p><strong>Automatically Collected Information.</strong> When you access our website, we may automatically collect:</p>
+    <ul>
+      <li>IP address and approximate location</li>
+      <li>Browser type, device, and operating system</li>
+      <li>Pages visited, time spent, and referring URLs</li>
+      <li>Cookies and similar tracking technologies</li>
+    </ul>
 
-      <h2>2. How We Use Your Information</h2>
-      <p>We use the information we collect to:</p>
-      <ul>
-        <li>Respond to your inquiries and schedule consultations</li>
-        <li>Provide, operate, and improve our services</li>
-        <li>Send relevant communications about our services (with your consent)</li>
-        <li>Analyze website usage to improve user experience</li>
-        <li>Comply with legal obligations</li>
-      </ul>
+    <h2>2. How We Use Your Information</h2>
+    <p>We use the information we collect to:</p>
+    <ul>
+      <li>Respond to your inquiries and schedule consultations</li>
+      <li>Provide, operate, and improve our services</li>
+      <li>Send relevant communications about our services (with your consent)</li>
+      <li>Analyze website usage to improve user experience</li>
+      <li>Comply with legal obligations</li>
+    </ul>
 
-      <h2>3. Sharing of Information</h2>
-      <p>We do not sell your personal information. We may share your data with:</p>
-      <ul>
-        <li><strong>Service providers</strong> — third-party tools we use to operate our business (e.g., scheduling, email, analytics)</li>
-        <li><strong>Legal requirements</strong> — when required by law, regulation, or legal process</li>
-        <li><strong>Business transfers</strong> — in connection with a merger, acquisition, or sale of assets</li>
-      </ul>
+    <h2>3. Sharing of Information</h2>
+    <p>We do not sell your personal information. We may share your data with:</p>
+    <ul>
+      <li><strong>Service providers</strong> - third-party tools we use to operate our business (e.g., scheduling, email, analytics)</li>
+      <li><strong>Legal requirements</strong> - when required by law, regulation, or legal process</li>
+      <li><strong>Business transfers</strong> - in connection with a merger, acquisition, or sale of assets</li>
+    </ul>
 
-      <h2>4. Cookies &amp; Tracking</h2>
-      <p>We use cookies and similar technologies to analyze traffic and personalize your experience. You can control cookies through your browser settings. Disabling cookies may affect site functionality.</p>
+    <h2>4. Cookies &amp; Tracking</h2>
+    <p>We use cookies and similar technologies to analyze traffic and personalize your experience. You can control cookies through your browser settings. Disabling cookies may affect site functionality.</p>
 
-      <h2>5. Third-Party Services</h2>
-      <p>Our website may contain links to third-party sites or integrate services such as Cal.com for scheduling, analytics platforms, and email providers. We are not responsible for the privacy practices of third-party services.</p>
+    <h2>5. Third-Party Services</h2>
+    <p>Our website may contain links to third-party sites or integrate services such as Cal.com for scheduling, analytics platforms, and email providers. We are not responsible for the privacy practices of third-party services.</p>
 
-      <h2>6. Data Retention</h2>
-      <p>We retain personal information for as long as necessary to fulfill the purposes described in this policy, unless a longer retention period is required by law.</p>
+    <h2>6. Data Retention</h2>
+    <p>We retain personal information for as long as necessary to fulfill the purposes described in this policy, unless a longer retention period is required by law.</p>
 
-      <h2>7. Data Security</h2>
-      <p>We implement reasonable administrative, technical, and physical safeguards to protect your information. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+    <h2>7. Data Security</h2>
+    <p>We implement reasonable administrative, technical, and physical safeguards to protect your information. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
 
-      <h2>8. Your Rights</h2>
-      <p>Depending on your jurisdiction, you may have the right to:</p>
-      <ul>
-        <li>Access, correct, or delete your personal data</li>
-        <li>Opt out of marketing communications</li>
-        <li>Request a copy of the data we hold about you</li>
-        <li>Withdraw consent at any time</li>
-      </ul>
-      <p>To exercise any of these rights, contact us at <a href="mailto:support@morsegrid.com">support@morsegrid.com</a>.</p>
+    <h2>8. Your Rights</h2>
+    <p>Depending on your jurisdiction, you may have the right to:</p>
+    <ul>
+      <li>Access, correct, or delete your personal data</li>
+      <li>Opt out of marketing communications</li>
+      <li>Request a copy of the data we hold about you</li>
+      <li>Withdraw consent at any time</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at <a href="mailto:support@morsegrid.com">support@morsegrid.com</a>.</p>
 
-      <h2>9. Children's Privacy</h2>
-      <p>Our services are not directed to individuals under the age of 18. We do not knowingly collect personal information from children.</p>
+    <h2>9. Children's Privacy</h2>
+    <p>Our services are not directed to individuals under the age of 18. We do not knowingly collect personal information from children.</p>
 
-      <h2>10. Changes to This Policy</h2>
-      <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with a revised "Last updated" date. We encourage you to review this policy periodically.</p>
+    <h2>10. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with a revised "Last updated" date. We encourage you to review this policy periodically.</p>
 
-      <h2>11. Contact Us</h2>
-      <p>If you have questions about this Privacy Policy, contact us at:</p>
-      <p>
-        <strong>Systro AI LLC (MorseGrid)</strong><br />
-        5830 E 2nd St, Ste 7000 #25548<br />
-        Casper, Wyoming 82609, US<br />
-        <a href="mailto:support@morsegrid.com">support@morsegrid.com</a>
-      </p>
-    </div>
-  </section>
+    <h2>11. Contact Us</h2>
+    <p>If you have questions about this Privacy Policy, contact us at:</p>
+    <p>
+      <strong>Systro AI LLC (MorseGrid)</strong><br>
+      5830 E 2nd St, Ste 7000 #25548<br>
+      Casper, Wyoming 82609, US<br>
+      <a href="mailto:support@morsegrid.com">support@morsegrid.com</a>
+    </p>
+  </div>
 
   <footer class="footer">
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
-          <div class="nav-logo">
-            <img src="Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light">
-            <img src="Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark">
-          </div>
-          <p class="footer-product-line">MorseGrid &mdash; A product of <strong>Systro AI LLC</strong>.</p>
+          <img src="Morsegrid logo(color).png" alt="MorseGrid Logo">
+          <p class="footer-product-line">MorseGrid - A product of <strong>Systro AI LLC</strong>.</p>
           <p>AI-powered operations for B2B companies. We build the systems, you build the business.</p>
         </div>
         <div class="footer-cols">
-          <div class="footer-col"><h4>Company</h4><ul><li><a href="index.html#services">Services</a></li><li><a href="index.html#about">About</a></li><li><a href="index.html#results">Results</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="index.html#services">Services</a></li><li><a href="index.html#about">About</a></li><li><a href="index.html#results">Results</a></li><li><a href="team.html">Team</a></li></ul></div>
           <div class="footer-col"><h4>Contact Us</h4><ul><li><a href="mailto:maksudur@systro.ai">maksudur@systro.ai</a></li><li><a href="mailto:support@morsegrid.com">support@morsegrid.com</a></li><li><span class="footer-address">5830 E 2nd St, Ste 7000 #25548, Casper, Wyoming, 82609, US</span></li></ul></div>
           <div class="footer-col"><h4>Legal</h4><ul><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="#">Refund Policy</a></li></ul></div>
         </div>
       </div>
-      <div class="footer-bottom">
-        <span>&copy; 2026 Systro AI LLC. All rights reserved.</span>
-      </div>
+      <div class="footer-bottom"><span>&copy; 2026 Systro AI LLC. All rights reserved.</span></div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>

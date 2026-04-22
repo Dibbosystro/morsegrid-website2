@@ -1,330 +1,364 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Team — MorseGrid</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team - MorseGrid</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    /* ── Team page ─────────────────────────────────────────────── */
-    .team-hero {
-      padding: 140px 0 72px;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-    .team-hero::before {
-      content: '';
-      position: absolute;
-      top: -15%;
-      right: -5%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
-      pointer-events: none;
-      animation: heroPulse 10s ease-in-out infinite;
-    }
-    .team-hero::after {
-      content: '';
-      position: absolute;
-      bottom: -20%;
-      left: -5%;
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 65%);
-      pointer-events: none;
-      animation: heroPulse 8s ease-in-out infinite reverse;
-    }
-    .team-hero-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .team-hero h1 {
-      font-family: var(--heading);
-      font-size: clamp(2.8rem, 7vw, 5rem);
-      font-weight: 700;
-      line-height: 1.06;
-      letter-spacing: -0.03em;
-      margin-bottom: 20px;
-    }
-    .team-hero h1 em {
-      font-style: normal;
-      background: linear-gradient(135deg, var(--accent), #818cf8);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .team-hero p {
-      font-size: 18px;
-      color: var(--text-secondary);
-      max-width: 560px;
-      line-height: 1.6;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:   #2D5016;
+      --green-m: #3d6b1f;
+      --green-l: #EBF5E8;
+      --bg:      #F4F4F5;
+      --white:   #FFFFFF;
+      --ink:     #131313;
+      --gray:    #6B6B76;
+      --gray-l:  #E8E8EC;
+      --border:  #E2E2E8;
+      --font:    'Hanken Grotesk', -apple-system, sans-serif;
     }
 
-    /* ── Team grid ─────────────────────────────────────────────── */
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 32px;
+      left: 24px;
+      right: 24px;
+      height: 64px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 0 32px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-links {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--gray);
+      padding: 8px 14px;
+      border-radius: 993px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--ink); background: var(--bg); }
+    .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .pill {
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 993px;
+      padding: 7px 16px;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+    }
+    .pill-outline { border-color: var(--border); color: var(--ink); background: transparent; }
+    .pill-outline:hover { background: var(--bg); }
+    .pill-dark { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .pill-dark:hover { background: #2a2a2a; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: 160px 40px 80px;
+      text-align: center;
+      background: var(--bg);
+    }
+    .page-hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+    }
+    .page-hero-label .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+    .page-hero h1 {
+      font-size: clamp(44px, 7vw, 80px);
+      font-weight: 800;
+      letter-spacing: -0.038em;
+      line-height: 1.03;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .page-hero p {
+      font-size: 18px;
+      color: var(--gray);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* ── TEAM GRID ── */
     .team-section {
-      padding: 80px 0 100px;
+      padding: 96px 40px 120px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .team-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-      margin-top: 56px;
-      max-width: 860px;
-      margin-left: auto;
-      margin-right: auto;
+      gap: 40px;
     }
     .team-card {
-      background: var(--bg-card);
+      background: var(--white);
       border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 36px 28px 32px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      box-shadow: var(--card-shadow);
-      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
     .team-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--card-shadow-hover);
-      border-color: var(--accent);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.10);
+      transform: translateY(-4px);
     }
-    .team-avatar {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
+    .team-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
       object-fit: cover;
-      margin-bottom: 20px;
-      flex-shrink: 0;
-      border: 3px solid var(--border);
-      box-shadow: 0 8px 24px var(--accent-glow);
-      transition: border-color var(--transition);
+      object-position: top center;
+      display: block;
     }
-    .team-card:hover .team-avatar {
-      border-color: var(--accent);
+    .team-info {
+      padding: 28px 32px 32px;
+      border-top: 1px solid var(--border);
+    }
+    .team-role-tag {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--green);
+      margin-bottom: 8px;
     }
     .team-name {
-      font-family: var(--heading);
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 6px;
-      letter-spacing: -0.01em;
-    }
-    .team-role {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      margin-bottom: 16px;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 12px;
     }
     .team-bio {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
+      font-size: 15px;
+      color: var(--gray);
       line-height: 1.65;
-      flex: 1;
+      margin-bottom: 20px;
     }
-    .team-socials {
-      display: flex;
-      gap: 12px;
-      margin-top: 20px;
-    }
-    .team-social-link {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      display: flex;
+    .team-linkedin {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      transition: border-color var(--transition), color var(--transition), background var(--transition);
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      border: 1.5px solid var(--border);
+      border-radius: 993px;
+      padding: 8px 16px;
+      transition: border-color 0.15s, color 0.15s;
     }
-    .team-social-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--accent-dim);
+    .team-linkedin:hover {
+      border-color: var(--green);
+      color: var(--green);
     }
+    .team-linkedin svg { flex-shrink: 0; }
 
-    /* ── Section header ───────────────────────────────────────── */
-    .team-section-header {
-      text-align: center;
+    /* ── FOOTER ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .footer {
+      padding: 80px 0 40px;
+      background: var(--ink);
     }
-    .team-section-header .section-label {
-      justify-content: center;
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      margin-bottom: 64px;
     }
-    .team-section-header .section-title {
-      margin-top: 8px;
-    }
+    .footer-brand { text-align: left; margin-top: -12px; }
+    .footer-brand img { height: auto; max-width: 180px; margin-bottom: 20px; filter: brightness(0) invert(1); opacity: 0.85; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.45); margin-top: 4px; max-width: 320px; line-height: 1.6; }
+    .footer-product-line { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 4px; max-width: 260px; line-height: 1.5; }
+    .footer-cols { display: flex; justify-content: space-between; gap: 40px; }
+    .footer-col h4 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.9); margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .footer-col a { font-size: 15px; color: rgba(255,255,255,0.45); transition: color 0.15s; font-weight: 500; }
+    .footer-col a:hover { color: rgba(255,255,255,0.9); }
+    .footer-address { font-size: 15px; color: rgba(255,255,255,0.45); font-weight: 500; line-height: 1.5; max-width: 220px; display: inline-block; }
+    .footer-bottom { display: flex; justify-content: center; align-items: center; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: rgba(255,255,255,0.25); font-weight: 500; }
 
-    @media (max-width: 600px) {
-      .team-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      .team-card {
-        padding: 28px 18px 24px;
-      }
-      .team-avatar {
-        width: 80px;
-        height: 80px;
-      }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { top: 12px; left: 12px; right: 12px; padding: 0 20px; }
+      .nav-links { display: none; }
+      .team-grid { grid-template-columns: 1fr; gap: 24px; }
+      .page-hero { padding: 120px 24px 60px; }
+      .team-section { padding: 60px 24px 80px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
+      .footer-cols { flex-wrap: wrap; gap: 24px; }
     }
   </style>
 </head>
 <body>
-  <nav class="nav" id="nav">
-    <div class="container nav-inner">
-      <a href="index.html" class="nav-logo">
-        <img src="Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light">
-        <img src="Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark">
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html#services">Services</a></li>
-        <li><a href="index.html#about">About</a></li>
-        <li><a href="index.html#results">Results</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="team.html" class="nav-active">Team</a></li>
-      </ul>
-      <div class="nav-right">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
-          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
-        </button>
-        <div class="nav-talk-ai-wrap">
-          <a href="index.html#talk" class="nav-cta nav-talk-ai"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Let's Talk</a>
-        </div>
-        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
-      </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="Morsegrid logo(black).png" alt="MorseGrid">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#method">How it works</a></li>
+      <li><a href="index.html#stories">Results</a></li>
+      <li><a href="index.html#what">What we build</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="team.html" class="active">Team</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="index.html#faq" class="pill pill-outline">FAQ</a>
+      <a href="https://cal.com/maksudur-systro/discovery-call-process" class="pill pill-dark" target="_blank" rel="noopener">Book a call</a>
     </div>
   </nav>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-panel">
-      <button class="mobile-close" id="mobileClose">&times;</button>
-      <a href="index.html#services" onclick="closeMobile()">Services</a>
-      <a href="index.html#about" onclick="closeMobile()">About</a>
-      <a href="index.html#results" onclick="closeMobile()">Results</a>
-      <a href="blog.html" onclick="closeMobile()">Blog</a>
-      <a href="team.html" onclick="closeMobile()">Team</a>
-      <a href="index.html#talk" onclick="closeMobile()" class="btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg> Let's Talk</a>
-    </div>
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-hero-label"><span class="dot"></span> The people behind the systems</div>
+    <h1>Meet the team.</h1>
+    <p>A small, focused crew of automation engineers and operators obsessed with building systems that actually work in production.</p>
   </div>
 
-  <!-- ── Team Hero ──────────────────────────────────────────────── -->
-  <section class="team-hero">
-    <div class="container">
-      <div class="team-hero-content">
-        <div class="section-label reveal"><span class="dot"></span> The people behind the systems</div>
-        <h1 class="reveal">Meet the <em>team</em></h1>
-        <p class="reveal">We're a small, focused crew of automation engineers, AI specialists, and operators obsessed with building systems that actually work in production.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Team Cards ─────────────────────────────────────────────── -->
+  <!-- TEAM -->
   <section class="team-section">
-    <div class="container">
-      <div class="team-section-header reveal">
-        <div class="section-label">Our crew</div>
-        <h2 class="section-title">Builders, not <em>buzzword merchants.</em></h2>
+    <div class="team-grid">
+
+      <div class="team-card">
+        <img class="team-photo" src="Team pictures/Maksudur.png" alt="Maksudur Rahman">
+        <div class="team-info">
+          <div class="team-role-tag">Founder</div>
+          <div class="team-name">Maksudur Rahman</div>
+          <p class="team-bio">Leads strategy, client relationships, and overall vision for MorseGrid. He joins every first call personally and makes sure every system we build is one the client actually uses.</p>
+          <a href="https://www.linkedin.com/in/maksudurrahman22/" class="team-linkedin" target="_blank" rel="noopener">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn
+          </a>
+        </div>
       </div>
-      <div class="team-grid">
 
-        <!-- Maks — Founder (first) -->
-        <div class="team-card reveal">
-          <img class="team-avatar" src="https://media.licdn.com/dms/image/v2/D5603AQEHnQWnuiPiGQ/profile-displayphoto-scale_400_400/B56ZzULVigIoAg-/0/1773086272504?e=1778112000&v=beta&t=xnF9lXvWmKlsLSJ7_Zm1sPFlkWrxlC4Gh6V18t8wcg4" alt="Maks">
-          <div class="team-name">Maks</div>
-          <div class="team-role">Founder</div>
-          <p class="team-bio">Placeholder — leads strategy, client relationships, and overall vision for MorseGrid. Drop your real bio here whenever you're ready.</p>
-          <div class="team-socials">
-            <a href="https://www.linkedin.com/in/maksudurrahman22/" class="team-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-          </div>
+      <div class="team-card">
+        <img class="team-photo" src="Team pictures/Dibbo.png" alt="Dibbo Das Avi">
+        <div class="team-info">
+          <div class="team-role-tag">Co-Founder</div>
+          <div class="team-name">Dibbo Das Avi</div>
+          <p class="team-bio">Drives growth, partnerships, and product direction at MorseGrid. Dibbo works closely with clients to scope projects and makes sure the right things get built in the right order.</p>
+          <a href="https://www.linkedin.com/in/dibbodasavi/" class="team-linkedin" target="_blank" rel="noopener">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn
+          </a>
         </div>
-
-        <!-- Dibbo — Co-Founder -->
-        <div class="team-card reveal">
-          <img class="team-avatar" src="https://media.licdn.com/dms/image/v2/D5603AQFZCsCM8aFIpA/profile-displayphoto-crop_800_800/B56Zm_CWqYHUAI-/0/1759846693459?e=1778112000&v=beta&t=hwrw2I_YUc1O6c66JqUjxx-hRu5mBNj4fvtPH3xmW6Q" alt="Dibbo">
-          <div class="team-name">Dibbo</div>
-          <div class="team-role">Co-Founder</div>
-          <p class="team-bio">Placeholder — drives growth, partnerships, and product direction at MorseGrid. Drop your real bio here whenever you're ready.</p>
-          <div class="team-socials">
-            <a href="https://www.linkedin.com/in/dibbodasavi/" class="team-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Arshi — Associate -->
-        <div class="team-card reveal">
-          <img class="team-avatar" src="https://media.licdn.com/dms/image/v2/D5603AQFxxZ8lvwIr5Q/profile-displayphoto-crop_800_800/B56ZmZXOeQIAAI-/0/1759214628651?e=1778112000&v=beta&t=BroywcLR5mdTqZexfM_UR6Ey6j26PjxFKPiEJ2yv8po" alt="Arshi">
-          <div class="team-name">Arshi</div>
-          <div class="team-role">Associate</div>
-          <p class="team-bio">Placeholder — keeps every client project on track and ensures MorseGrid's delivery quality stays sharp. Drop your real bio here whenever you're ready.</p>
-          <div class="team-socials">
-            <a href="https://www.linkedin.com/in/arshi-irtiza/" class="team-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Faiyaz — Associate -->
-        <div class="team-card reveal">
-          <img class="team-avatar" src="https://media.licdn.com/dms/image/v2/D5603AQFoYoNTOaDRsg/profile-displayphoto-shrink_200_200/B56ZbKV3OIGoAc-/0/1747151451633?e=1778112000&v=beta&t=A33Vr1eYF2swRymswYFMy3eCoICvWwqM4KS9UCPm5gI" alt="Faiyaz">
-          <div class="team-name">Faiyaz</div>
-          <div class="team-role">Associate</div>
-          <p class="team-bio">Placeholder — builds the AI pipelines, agents, and integrations that power MorseGrid's most complex client automations. Drop your real bio here whenever you're ready.</p>
-          <div class="team-socials">
-            <a href="https://www.linkedin.com/in/faiyaz-hossain-031491218/" class="team-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-          </div>
-        </div>
-
       </div>
+
+      <div class="team-card">
+        <img class="team-photo" src="Team pictures/Arshi.png" alt="Arshi Irtiza">
+        <div class="team-info">
+          <div class="team-role-tag">Associate</div>
+          <div class="team-name">Arshi Irtiza</div>
+          <p class="team-bio">Keeps every client project on track and ensures MorseGrid's delivery quality stays sharp. Arshi is the operational backbone that makes sure nothing slips through the cracks.</p>
+          <a href="https://www.linkedin.com/in/arshi-irtiza/" class="team-linkedin" target="_blank" rel="noopener">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img class="team-photo" src="Team pictures/Faiyaz.png" alt="Faiyaz Hossain">
+        <div class="team-info">
+          <div class="team-role-tag">Associate</div>
+          <div class="team-name">Faiyaz Hossain</div>
+          <p class="team-bio">Builds the AI pipelines, agents, and integrations that power MorseGrid's most complex client automations. Faiyaz is the one who makes the technically hard things look easy.</p>
+          <a href="https://www.linkedin.com/in/faiyaz-hossain-031491218/" class="team-linkedin" target="_blank" rel="noopener">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- ── CTA ────────────────────────────────────────────────────── -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-box reveal">
-        <div class="section-label" style="justify-content:center;">Work with us</div>
-        <h2>Ready to put your operations <em>on autopilot?</em></h2>
-        <p>Book a free 30-minute discovery call. We'll audit one workflow in your business and show you exactly what we'd automate — no pitch decks, just a working plan.</p>
-        <a href="https://cal.com/morsegrid" class="btn-primary" target="_blank">Book your free call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
-      </div>
-    </div>
-  </section>
-
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
-          <div class="nav-logo">
-            <img src="Morsegrid logo(color).png" alt="MorseGrid Logo" class="logo-light">
-            <img src="Morsegrid logo(white).png" alt="MorseGrid Logo" class="logo-dark">
-          </div>
-          <p class="footer-product-line">MorseGrid &mdash; A product of <strong>Systro AI LLC</strong>.</p>
+          <img src="Morsegrid logo(color).png" alt="MorseGrid Logo">
+          <p class="footer-product-line">MorseGrid - A product of <strong>Systro AI LLC</strong>.</p>
           <p>AI-powered operations for B2B companies. We build the systems, you build the business.</p>
         </div>
         <div class="footer-cols">
-          <div class="footer-col"><h4>Company</h4><ul><li><a href="index.html#services">Services</a></li><li><a href="index.html#about">About</a></li><li><a href="index.html#results">Results</a></li><li><a href="blog.html">Blog</a></li><li><a href="team.html">Team</a></li></ul></div>
-          <div class="footer-col"><h4>Contact Us</h4><ul><li><a href="mailto:maksudur@systro.ai">maksudur@systro.ai</a></li><li><a href="mailto:support@morsegrid.com">support@morsegrid.com</a></li><li><span class="footer-address">5830 E 2nd St, Ste 7000 #25548, Casper, Wyoming, 82609, US</span></li></ul></div>
-          <div class="footer-col"><h4>Legal</h4><ul><li><a href="terms-of-service.html">Terms of Service</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="#">Refund Policy</a></li></ul></div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="index.html#services">Services</a></li>
+              <li><a href="index.html#about">About</a></li>
+              <li><a href="index.html#results">Results</a></li>
+              <li><a href="team.html">Team</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <ul>
+              <li><a href="mailto:maksudur@systro.ai">maksudur@systro.ai</a></li>
+              <li><a href="mailto:support@morsegrid.com">support@morsegrid.com</a></li>
+              <li><span class="footer-address">5830 E 2nd St, Ste 7000 #25548, Casper, Wyoming, 82609, US</span></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="terms-of-service.html">Terms of Service</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+              <li><a href="#">Refund Policy</a></li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">
@@ -333,6 +367,5 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>

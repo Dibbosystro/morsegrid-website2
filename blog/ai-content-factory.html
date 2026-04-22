@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How We Built an AI Content Factory That Publishes 30 Posts Per Month — MorseGrid</title>
+  <title>How We Built an AI Content Factory That Publishes 30 Posts Per Month - MorseGrid</title>
   <meta name="description" content="A step-by-step look at the AI content engine we built that produces 30 high-quality blog posts per month with minimal human effort." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -67,7 +67,7 @@
     </div>
     <div class="container">
       <div class="blog-post-content reveal">
-        <p>Content marketing works — but it's brutally labour-intensive at scale. A single high-quality blog post traditionally takes a skilled writer 4–8 hours to research, write, edit, and publish. At 30 posts per month, that's 120–240 hours of writing time, or roughly 1.5–3 full-time employees just for content.</p>
+        <p>Content marketing works - but it's brutally labour-intensive at scale. A single high-quality blog post traditionally takes a skilled writer 4–8 hours to research, write, edit, and publish. At 30 posts per month, that's 120–240 hours of writing time, or roughly 1.5–3 full-time employees just for content.</p>
         <p>We built a content factory system for a client that produces 30 polished, SEO-optimised blog posts per month for under £800/month in total costs, including tooling. Here's exactly how it works.</p>
 
         <h2>The System Architecture</h2>
@@ -83,16 +83,16 @@
         <p>When a post's scheduled publish date is 7 days out, the workflow triggers GPT-4o with a carefully engineered prompt that includes: the target keyword, the approved title, the research notes, the brand voice guide, the desired word count (1,200–1,800 words), and instructions to include headers, a strong opening, and a clear CTA section. The draft is written into a Google Doc automatically.</p>
 
         <h3>Stage 4: Human Edit Pass</h3>
-        <p>A notification is sent to the editor's Slack with a link to the Google Doc draft. The editor spends 20–30 minutes reviewing, adjusting tone, adding any proprietary insights, and approving. This is the only manual step in the whole pipeline — and it's intentional. Human editorial oversight is what keeps the content from being generic.</p>
+        <p>A notification is sent to the editor's Slack with a link to the Google Doc draft. The editor spends 20–30 minutes reviewing, adjusting tone, adding any proprietary insights, and approving. This is the only manual step in the whole pipeline - and it's intentional. Human editorial oversight is what keeps the content from being generic.</p>
 
         <h3>Stage 5: Publishing</h3>
-        <p>Once the Google Doc is marked as "Approved" in Airtable, the workflow automatically formats the post for HTML, generates a meta description and Open Graph tags using GPT, uploads a featured image sourced from Unsplash (with the appropriate license), and publishes to WordPress via its REST API — with the correct category, tags, and scheduled publish time.</p>
+        <p>Once the Google Doc is marked as "Approved" in Airtable, the workflow automatically formats the post for HTML, generates a meta description and Open Graph tags using GPT, uploads a featured image sourced from Unsplash (with the appropriate license), and publishes to WordPress via its REST API - with the correct category, tags, and scheduled publish time.</p>
 
         <h2>The Results</h2>
         <p>Within 6 months of running this system, the client's organic traffic grew from 1,200 to 9,400 monthly visitors. Their domain authority increased from 18 to 31. They ranked on page 1 for 47 new keywords.</p>
         <p>Total monthly cost of the system: £780 (tooling + editor time). The equivalent output from a traditional content agency would cost £4,500–£6,000/month.</p>
 
-        <blockquote>"We went from publishing 2 posts a month to 30, without adding headcount. The quality is actually higher because we have more time to focus on the editorial review." — Head of Marketing, B2B SaaS</blockquote>
+        <blockquote>"We went from publishing 2 posts a month to 30, without adding headcount. The quality is actually higher because we have more time to focus on the editorial review." - Head of Marketing, B2B SaaS</blockquote>
 
         <h2>Can This Work for Your Business?</h2>
         <p>This architecture works best for companies with a clear ICP and topic space, a willingness to invest in an initial 4–6 week setup, and at least one person who can do a 20–30 minute editorial review. Businesses in professional services, SaaS, and B2B technology are ideal candidates.</p>
@@ -105,7 +105,7 @@
       <div class="cta-box reveal">
         <div class="section-label" style="justify-content:center;">Build your content engine</div>
         <h2>Ready to publish more content <em>without more headcount?</em></h2>
-        <p>MorseGrid builds custom AI content factories for B2B companies. We handle the full setup — keyword strategy, AI drafting, CMS integration — so you can focus on approvals and growth.</p>
+        <p>MorseGrid builds custom AI content factories for B2B companies. We handle the full setup - keyword strategy, AI drafting, CMS integration - so you can focus on approvals and growth.</p>
         <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
           <a href="https://cal.com/morsegrid" class="btn-primary" target="_blank">Book a free call <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
           <a href="mailto:info@morsegrid.com" class="btn-secondary">Email us directly</a>
