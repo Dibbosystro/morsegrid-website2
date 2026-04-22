@@ -9,80 +9,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --green:   #2D5016;
-      --green-m: #3d6b1f;
-      --green-l: #EBF5E8;
-      --bg:      #F4F4F5;
-      --white:   #FFFFFF;
-      --ink:     #131313;
-      --gray:    #6B6B76;
-      --gray-l:  #E8E8EC;
-      --border:  #E2E2E8;
-      --font:    'Hanken Grotesk', -apple-system, sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font);
-      background: var(--white);
-      color: var(--ink);
-      -webkit-font-smoothing: antialiased;
-    }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
-
-    /* ── PILLS ── */
-    .pill {
-      font-family: var(--font);
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 993px;
-      padding: 9px 20px;
-      cursor: pointer;
-      border: 1.5px solid transparent;
-      transition: all 0.15s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-    .pill-ghost  { background: transparent; color: var(--gray); border-color: transparent; }
-    .pill-ghost:hover { background: var(--bg); color: var(--ink); }
-    .pill-outline { background: transparent; color: var(--ink); border-color: #C7C7C7; }
-    .pill-outline:hover { border-color: var(--ink); }
-    .pill-dark   { background: var(--ink); color: #fff; border-color: var(--ink); }
-    .pill-dark:hover { background: var(--green); border-color: var(--green); }
-    .pill-green  { background: var(--green); color: #fff; border-color: var(--green); }
-    .pill-green:hover { opacity: 0.88; }
-    .pill-green-outline { background: transparent; color: var(--green); border-color: var(--green); }
-    .pill-green-outline:hover { background: var(--green-l); }
-
-    /* ── NAV ── */
+    /* ── NAV: transparent-start override (index only) ── */
     nav {
-      position: fixed;
-      top: 32px; left: 24px; right: 24px;
-      z-index: 200;
-      height: 64px;
       background: transparent;
-      border: 1px solid transparent;
-      border-radius: 22px;
-      display: flex;
-      align-items: center;
-      padding: 0 32px;
+      border-color: transparent;
+      box-shadow: none;
       transition: background 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease;
-    }
-    .nav-links {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      list-style: none;
     }
     nav.scrolled {
       background: rgba(255,255,255,0.97);
@@ -95,19 +29,6 @@
     nav:not(.scrolled) .nav-links a:hover { color: var(--ink); background: rgba(255,255,255,0.3); }
     nav:not(.scrolled) .pill-outline { border-color: rgba(19,19,19,0.3); color: var(--ink); background: rgba(255,255,255,0.3); }
     nav:not(.scrolled) .pill-dark { background: var(--ink); color: #fff; }
-    .nav-logo img { height: 36px; width: auto; }
-    .nav-links a {
-      font-size: 17px;
-      font-weight: 500;
-      color: var(--gray);
-      padding: 8px 14px;
-      border-radius: 993px;
-      transition: color 0.15s, background 0.15s;
-      display: flex; align-items: center; gap: 4px;
-    }
-    .nav-links a:hover { color: var(--ink); background: var(--bg); }
-    .nav-links a svg { width: 12px; height: 12px; stroke: currentColor; }
-    .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
 
     /* ── HERO ── */
     .hero-wrap {
@@ -831,38 +752,8 @@
     #cta p { font-size: 17px; color: var(--gray); max-width: 400px; margin: 0 auto 36px; line-height: 1.6; }
     #cta .cta-note { margin-top: 24px; color: var(--gray); }
 
-    /* ── FOOTER ── */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-    .footer {
-      padding: 80px 0 40px;
-      background: var(--ink);
-      border-top: none;
-    }
-    .footer-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
-      margin-bottom: 64px;
-    }
-    .footer-brand { text-align: left; margin-top: -12px; }
-    .footer-brand .nav-logo img { height: auto; padding: 0 0 20px 0; max-width: 200px; filter: brightness(0) invert(1); opacity: 0.85; }
-    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.45); margin-top: 4px; max-width: 320px; line-height: 1.6; }
-    .footer-product-line { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 4px; max-width: 260px; line-height: 1.5; }
-    .footer-cols { display: flex; justify-content: space-between; gap: 40px; }
-    .footer-col h4 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.9); margin-bottom: 20px; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-    .footer-col a { font-size: 15px; color: rgba(255,255,255,0.45); transition: color 0.15s; font-weight: 500; }
-    .footer-col a:hover { color: rgba(255,255,255,0.9); }
-    .footer-address { font-size: 15px; color: rgba(255,255,255,0.45); font-weight: 500; line-height: 1.5; max-width: 220px; display: inline-block; }
-    .footer-bottom { display: flex; justify-content: center; align-items: center; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: rgba(255,255,255,0.25); font-weight: 500; }
-
-
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      nav { top: 12px; left: 12px; right: 12px; padding: 0 20px; }
-      .nav-links { display: none; }
 
       .hero-wrap { margin: 20px 12px 0; height: calc(100vh - 80px); }
       #hero { height: 100%; min-height: 600px; }
@@ -895,9 +786,6 @@
 
       #faq { padding: 64px 20px; }
       #cta { padding: 80px 20px; }
-      .footer { padding: 48px 0 32px; }
-      .footer-inner { grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; margin-bottom: 40px; }
-      .footer-cols { flex-wrap: wrap; gap: 24px; }
     }
   </style>
 </head>
@@ -1215,9 +1103,7 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-brand">
-          <div class="nav-logo">
-            <img src="Morsegrid logo(color).png" alt="MorseGrid Logo">
-          </div>
+          <img src="Morsegrid logo(color).png" alt="MorseGrid Logo">
           <p class="footer-product-line">MorseGrid - A product of <strong>Systro AI LLC</strong>.</p>
           <p>AI-powered operations for B2B companies. We build the systems, you build the business.</p>
         </div>
