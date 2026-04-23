@@ -34,6 +34,7 @@
     .hero-wrap {
       margin: 28px 16px 0;
       height: calc(100vh - 96px);
+      min-height: 680px;
       border-radius: 24px;
       overflow: visible;
       box-shadow: 0 2px 48px rgba(0,0,0,0.09);
@@ -74,7 +75,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      min-height: inherit;
+      height: 100%;
       gap: 0;
     }
 
@@ -756,7 +757,7 @@
 
     /* ≤1200px: collapse hero to single column, hide panel */
     @media (max-width: 1200px) {
-      .hero-shell { grid-template-columns: 1fr; min-height: calc(100vh - 96px); }
+      .hero-shell { grid-template-columns: 1fr; }
       .hero-content { padding: 0 80px; max-width: 720px; justify-content: center; }
       .hero-visual { display: none; }
       .hero-tag { display: none; }
