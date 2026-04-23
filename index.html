@@ -753,6 +753,23 @@
     #cta .cta-note { margin-top: 24px; color: var(--gray); }
 
     /* ── RESPONSIVE ── */
+
+    /* Medium screens: hero panel gets tight before mobile breakpoint */
+    @media (max-width: 1140px) {
+      .hero-content { padding: 0 16px 0 48px; }
+      .hero-visual { padding: 0 32px 0 16px; }
+      .activity-panel { width: 360px; }
+      .hero-tag { max-width: 150px; font-size: 12px; }
+    }
+
+    @media (max-width: 1000px) {
+      .hero-content { padding: 0 12px 0 32px; }
+      .hero-visual { padding: 0 20px 0 12px; }
+      .activity-panel { width: 320px; }
+      .hero-tag { display: none; }
+      .hero-h1 { font-size: clamp(40px, 5.5vw, 68px); }
+    }
+
     @media (max-width: 900px) {
 
       .hero-wrap { margin: 20px 12px 0; height: calc(100vh - 80px); }

@@ -160,6 +160,11 @@ nav {
 }
 
 /* ── RESPONSIVE ── */
+
+@media (max-width: 1060px) {
+  .nav-links a { font-size: 15px; padding: 7px 10px; }
+}
+
 @media (max-width: 900px) {
   nav { top: 12px; left: 12px; right: 12px; padding: 0 20px; }
   .nav-links { display: none; }
