@@ -570,84 +570,6 @@
     }
 
     /* ── ROI TICKER ── */
-    #roi {
-      background: var(--ink);
-      padding: 88px 40px;
-      overflow: hidden;
-    }
-    .roi-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-    .roi-tag { font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5FD99A; margin-bottom: 12px; }
-    .roi-header h2 {
-      font-size: clamp(28px, 3.2vw, 40px);
-      font-weight: 800; letter-spacing: -0.025em;
-      color: #fff;
-    }
-    .roi-header a {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: 14px; font-weight: 600; color: #5FD99A;
-      margin-top: 14px;
-    }
-    .roi-header a:hover { text-decoration: underline; }
-    .ticker-outer { overflow: hidden; }
-    .ticker-track {
-      display: flex; gap: 12px;
-      animation: ticker 24s linear infinite;
-      width: max-content;
-    }
-    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .ticker-card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 28px 36px;
-      min-width: 210px; flex-shrink: 0;
-    }
-    .t-client { font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 8px; }
-    .t-num { font-size: 44px; font-weight: 800; letter-spacing: -0.04em; color: #fff; line-height: 1; }
-    .t-lbl { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 6px; line-height: 1.3; }
-
-    /* ── ABOUT ── */
-    #about {
-      padding: 96px 40px;
-      max-width: 1160px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 96px;
-      align-items: start;
-    }
-    .about-photo {
-      position: sticky; top: 80px;
-      aspect-ratio: 3/4;
-      border-radius: 16px;
-      overflow: hidden;
-    }
-    .about-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      display: block;
-    }
-    .about-eyebrow { font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
-    .about-content h2 {
-      font-size: clamp(28px, 3vw, 36px);
-      font-weight: 800; letter-spacing: -0.025em;
-      color: var(--ink); margin-bottom: 28px; line-height: 1.15;
-    }
-    .about-content p {
-      font-size: 16px; color: var(--gray);
-      line-height: 1.75; margin-bottom: 20px;
-    }
-    .about-content p strong { color: var(--ink); font-weight: 600; }
-    .about-content blockquote {
-      font-size: 16px; font-style: italic;
-      color: var(--gray); line-height: 1.7;
-      border-left: 2px solid var(--green);
-      padding-left: 20px; margin-top: 8px;
-    }
 
     /* ── FAQ ── */
     #faq {
@@ -728,11 +650,6 @@
       #what { padding: 64px 20px; }
       .how-cards { grid-template-columns: 1fr 1fr; gap: 12px; }
 
-      #roi { padding: 64px 20px; }
-
-      #about { grid-template-columns: 1fr; gap: 40px; padding: 64px 20px; }
-      .about-photo { position: static; aspect-ratio: 4/3; }
-
       #faq { padding: 64px 20px; }
       #cta { padding: 80px 20px; }
     }
@@ -760,7 +677,7 @@
       <li class="nav-dropdown">
         <button class="nav-dd-btn">Company<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
         <div class="nav-dd-panel">
-          <a href="#about" class="nav-dd-item"><span class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>About</a>
+          <a href="about.html" class="nav-dd-item"><span class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>About</a>
           <a href="team.html" class="nav-dd-item"><span class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span>Team</a>
           <a href="#" class="nav-dd-item"><span class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></span>Careers</a>
         </div>
@@ -992,43 +909,6 @@
     </div>
   </section>
 
-  <!-- ROI TICKER -->
-  <section id="roi">
-    <div class="roi-header">
-      <div class="roi-tag">Results that matter</div>
-      <h2>Across every engagement.</h2>
-      <a href="#stories">See all client results →</a>
-    </div>
-    <div class="ticker-outer">
-      <div class="ticker-track">
-        <div class="ticker-card"><div class="t-client">Cafe Racer Garage</div><div class="t-num">10×</div><div class="t-lbl">content output</div></div>
-        <div class="ticker-card"><div class="t-client">Omar City</div><div class="t-num">20 min</div><div class="t-lbl">saved per sale</div></div>
-        <div class="ticker-card"><div class="t-client">Prana Thrive</div><div class="t-num">0</div><div class="t-lbl">intake threads dropped</div></div>
-        <div class="ticker-card"><div class="t-client">Nexus Advisor</div><div class="t-num">2–4 wk</div><div class="t-lbl">idea to live system</div></div>
-        <div class="ticker-card"><div class="t-client">All clients</div><div class="t-num">4–6</div><div class="t-lbl">engagements per year</div></div>
-        <div class="ticker-card"><div class="t-client">Cafe Racer Garage</div><div class="t-num">10×</div><div class="t-lbl">content output</div></div>
-        <div class="ticker-card"><div class="t-client">Omar City</div><div class="t-num">20 min</div><div class="t-lbl">saved per sale</div></div>
-        <div class="ticker-card"><div class="t-client">Prana Thrive</div><div class="t-num">0</div><div class="t-lbl">intake threads dropped</div></div>
-        <div class="ticker-card"><div class="t-client">Nexus Advisor</div><div class="t-num">2–4 wk</div><div class="t-lbl">idea to live system</div></div>
-        <div class="ticker-card"><div class="t-client">All clients</div><div class="t-num">4–6</div><div class="t-lbl">engagements per year</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-photo"><img src="Team pictures/Maksudur.png" alt="Maksudur Rahman"></div>
-    <div class="about-content">
-      <div class="about-eyebrow">About</div>
-      <h2>I'm Maksudur Rahman.<br>People call me Maks.</h2>
-      <p>I started doing this work because I spent years inside small businesses watching smart people lose hours every week to things a quiet system could have handled. The owners knew it. They couldn't afford to hire someone full-time to fix it, and the agencies they talked to wanted to sell them something larger and shinier than what they actually needed.</p>
-      <p>So I started a small studio that does only this: looks at how a business actually runs, identifies what shouldn't require a human, and builds the thing that quietly takes it off their plate.</p>
-      <p>I work with a few specialists I trust: a ClickUp consultant, a couple of engineers, a designer. We take on a <strong>small number of clients each year</strong>. We diagnose first. We price after we understand the problem. And what we build belongs to you when we leave.</p>
-      <blockquote>If you'd like to talk, the door is below.</blockquote>
-      <a href="https://cal.com/maksudur-systro/discovery-call-process" class="pill pill-dark" style="margin-top:28px;width:fit-content;" target="_blank" rel="noopener">Find a time to talk →</a>
-    </div>
-  </section>
-
   <!-- FAQ -->
   <section id="faq">
     <div class="faq-inner">
@@ -1077,7 +957,7 @@
             <h4>Company</h4>
             <ul>
               <li><a href="#services">Services</a></li>
-              <li><a href="#about">About</a></li>
+              <li><a href="about.html">About</a></li>
               <li><a href="#results">Results</a></li>
               <li><a href="blog.html">Blog</a></li>
               <li><a href="team.html">Team</a></li>
