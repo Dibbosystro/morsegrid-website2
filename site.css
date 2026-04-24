@@ -113,9 +113,9 @@ nav {
   transition: color 0.15s, background 0.15s;
 }
 .nav-dd-btn:hover,
-.nav-dropdown.open .nav-dd-btn { color: var(--ink); background: var(--bg); }
+.nav-dropdown:hover .nav-dd-btn { color: var(--ink); background: var(--bg); }
 .nav-dd-btn .chevron { width: 13px; height: 13px; stroke: currentColor; transition: transform 0.2s ease; flex-shrink: 0; }
-.nav-dropdown.open .nav-dd-btn .chevron { transform: rotate(180deg); }
+.nav-dropdown:hover .nav-dd-btn .chevron { transform: rotate(180deg); }
 
 .nav-dd-panel {
   display: none;
@@ -129,7 +129,14 @@ nav {
   min-width: 230px;
   z-index: 10;
 }
-.nav-dropdown.open .nav-dd-panel { display: block; }
+.nav-dropdown:hover .nav-dd-panel { display: block; }
+.nav-dd-panel::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0; right: 0;
+  height: 10px;
+}
 
 .nav-dd-item {
   display: flex; align-items: center; gap: 14px;
