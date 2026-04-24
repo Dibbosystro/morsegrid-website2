@@ -92,7 +92,7 @@ function setState(state) {
   if (state === 'idle') {
     iconIdle.classList.remove('mg-hidden');
     label.textContent = 'Talk to our AI';
-    if (navBtn) { navBtn.dataset.state = 'idle'; navBtn.querySelector('.mg-nav-label').textContent = 'Talk to AI'; }
+    if (navBtn) { navBtn.dataset.state = 'idle'; navBtn.querySelector('.mg-nav-label').textContent = 'Ask anything'; }
   } else if (state === 'loading') {
     iconLoad.classList.remove('mg-hidden');
     floatWrap.classList.add('is-loading');
