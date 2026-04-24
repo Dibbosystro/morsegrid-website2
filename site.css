@@ -118,7 +118,6 @@ nav {
 .nav-dropdown:hover .nav-dd-btn .chevron { transform: rotate(180deg); }
 
 .nav-dd-panel {
-  display: none;
   position: absolute;
   top: calc(100% + 10px);
   left: 50%; transform: translateX(-50%);
@@ -128,8 +127,17 @@ nav {
   padding: 10px;
   min-width: 230px;
   z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.12s ease, visibility 0s ease 0.18s;
 }
-.nav-dropdown:hover .nav-dd-panel { display: block; }
+.nav-dropdown:hover .nav-dd-panel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.12s ease, visibility 0s ease 0s;
+}
 .nav-dd-panel::before {
   content: '';
   position: absolute;
