@@ -509,76 +509,6 @@
     }
     .client-tab[data-idx="3"] .tab-bar { background: linear-gradient(90deg, #7E22CE, #C084FC); }
 
-    /* ── METHOD ── */
-    #method {
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-      padding: 96px 40px;
-    }
-    .method-inner { max-width: 1160px; margin: 0 auto; }
-    .method-intro {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 48px;
-      margin-bottom: 64px;
-      flex-wrap: wrap;
-    }
-    .method-intro-left { max-width: 540px; }
-    .method-eyebrow {
-      font-size: 11.5px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--gray); margin-bottom: 12px;
-    }
-    .method-intro h2 {
-      font-size: clamp(28px, 3.2vw, 40px);
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      line-height: 1.1;
-      color: var(--ink);
-      margin-bottom: 14px;
-    }
-    .method-intro p { font-size: 16px; color: var(--gray); line-height: 1.65; }
-    .method-steps { display: flex; flex-direction: column; gap: 0; }
-    .method-step {
-      display: grid;
-      grid-template-columns: 48px 1fr 1fr;
-      gap: 48px;
-      align-items: center;
-      padding: 52px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .method-step:last-child { border-bottom: none; }
-    .step-n {
-      font-size: 52px; font-weight: 800;
-      color: #1e1e1e;
-      letter-spacing: -0.04em; line-height: 1;
-    }
-    .step-body h3 {
-      font-size: 24px; font-weight: 700;
-      color: var(--ink); letter-spacing: -0.015em;
-      margin-bottom: 12px; line-height: 1.25;
-    }
-    .step-body h3 strong { color: var(--green); font-style: normal; }
-    .step-body p { font-size: 15px; color: var(--gray); line-height: 1.7; }
-    .step-body .pill { margin-top: 24px; }
-    .step-img {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      color: #C0C0C8; font-size: 12px; letter-spacing: 0.06em;
-    }
-    .step-img img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      display: block;
-    }
-    .step-img img.img-center { object-position: center center; }
-
     /* ── WHAT WE MAKE - tabs ── */
     #what {
       padding: 96px 40px;
@@ -809,11 +739,6 @@
       .story-left { padding-right: 0; padding-bottom: 40px; }
       .story-qdivider { display: none; }
       .story-right { padding-left: 0; }
-
-      #method { padding: 64px 20px; }
-      .method-step { grid-template-columns: 1fr; gap: 20px; }
-      .step-n { font-size: 36px; }
-      .step-img { display: none; }
 
       #what { padding: 64px 20px; }
       .what-top { flex-direction: column; align-items: flex-start; }
@@ -1048,54 +973,6 @@
         </div>
       </div>
 
-    </div>
-  </section>
-
-  <!-- METHOD -->
-  <section id="method">
-    <div class="method-inner">
-      <div class="method-intro">
-        <div class="method-intro-left">
-          <div class="method-eyebrow">The MorseGrid method</div>
-          <h2>Complete, end-to-end engagements.</h2>
-          <p>We don't drop a tool and walk away. Every engagement ends with documentation, a recorded walkthrough, and the keys so the system works without us.</p>
-        </div>
-        <a href="https://cal.com/maksudur-systro/discovery-call-process" class="pill pill-dark" target="_blank" rel="noopener">Start with a call →</a>
-      </div>
-
-      <div class="method-steps">
-        <div class="method-step">
-          <div class="step-n">1</div>
-          <div class="step-body">
-            <h3><strong>Diagnose</strong> your operations</h3>
-            <p>Every engagement begins with a conversation. We listen first: how the business actually operates, where the energy is leaking, and what the team has already tried. From there, we map one specific workflow we'd improve and show you what that work would look like.</p>
-            <a href="https://cal.com/maksudur-systro/discovery-call-process" class="pill pill-green-outline" target="_blank">Book a discovery call →</a>
-          </div>
-          <div class="step-img">
-            <img src="Other images/Maks cal link ss.png" alt="Discovery call booking">
-          </div>
-        </div>
-        <div class="method-step">
-          <div class="step-n">2</div>
-          <div class="step-body">
-            <h3><strong>Build</strong> the system</h3>
-            <p>If it's a fit, we build over the next two to four weeks. We share progress as we go. You see the work every week. By the time we hand it over, there are no surprises. If something's off, we fix it before you pay the final invoice.</p>
-          </div>
-          <div class="step-img">
-            <img src="Other images/n8n.webp" alt="n8n automation workflow" class="img-center">
-          </div>
-        </div>
-        <div class="method-step">
-          <div class="step-n">3</div>
-          <div class="step-body">
-            <h3><strong>Hand over</strong> everything</h3>
-            <p>At the end, you get the system, full documentation, a recorded walkthrough, and whatever your team needs to run it without us. Some clients keep us on a small monthly retainer. Most don't need to. We're fine either way.</p>
-          </div>
-          <div class="step-img">
-            <img src="Other images/Clickup.png" alt="ClickUp project handover" class="img-center">
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
