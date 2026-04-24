@@ -509,79 +509,64 @@
     }
     .client-tab[data-idx="3"] .tab-bar { background: linear-gradient(90deg, #7E22CE, #C084FC); }
 
-    /* ── WHAT WE MAKE - tabs ── */
+    /* ── HOW WE WORK ── */
     #what {
+      background: #1A1A1A;
       padding: 96px 40px;
-      max-width: 1160px;
-      margin: 0 auto;
     }
-    .what-top {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 48px;
-      gap: 24px;
-      flex-wrap: wrap;
+    .how-inner { max-width: 1160px; margin: 0 auto; }
+    .how-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 28px;
     }
-    .what-top h2 {
-      font-size: clamp(28px, 3.2vw, 40px);
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      line-height: 1.1; color: var(--ink);
-      max-width: 420px;
-    }
-    .tabs {
-      display: flex; gap: 8px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 993px;
-      padding: 4px;
-    }
-    .tab {
-      font-family: var(--font);
-      font-size: 13px; font-weight: 600;
-      color: var(--gray);
-      padding: 7px 18px;
-      border-radius: 993px;
-      cursor: pointer; border: none;
-      background: transparent;
-      transition: all 0.15s;
-    }
-    .tab.active { background: var(--white); color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-    .tab-panel {
-      display: none;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-      grid-template-columns: 1fr 1fr;
-    }
-    .tab-panel.active { display: grid; }
-    .tab-info { padding: 52px; display: flex; flex-direction: column; justify-content: center; }
-    .tab-tag {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--green); margin-bottom: 14px;
-    }
-    .tab-info h3 {
-      font-size: 26px; font-weight: 700;
-      letter-spacing: -0.02em; line-height: 1.2;
-      color: var(--ink); margin-bottom: 14px;
-    }
-    .tab-info p { font-size: 15px; color: var(--gray); line-height: 1.7; margin-bottom: 28px; }
-    .tab-visual {
-      background: var(--white);
-      border-left: 1px solid var(--border);
+    .how-badge {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
       display: flex; align-items: center; justify-content: center;
-      min-height: 360px;
-      overflow: hidden;
-      color: #C0C0C8; font-size: 12px; letter-spacing: 0.06em;
+      font-size: 13px; font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      flex-shrink: 0;
     }
-    .tab-visual img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
+    .how-label {
+      font-size: 14px; font-weight: 500;
+      color: rgba(255,255,255,0.45);
+    }
+    .how-title {
+      font-size: clamp(36px, 4.5vw, 64px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 56px;
+    }
+    .how-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .how-card {
+      background: #242424;
+      border-radius: 18px;
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .how-card-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 24px;
+    }
+    .how-card h3 {
+      font-size: 20px; font-weight: 700;
+      color: #fff; letter-spacing: -0.015em;
+      margin-bottom: 12px; line-height: 1.2;
+    }
+    .how-card p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.68;
     }
 
     /* ── ROI TICKER ── */
@@ -741,9 +726,7 @@
       .story-right { padding-left: 0; }
 
       #what { padding: 64px 20px; }
-      .what-top { flex-direction: column; align-items: flex-start; }
-      .tab-panel.active { display: flex; flex-direction: column; }
-      .tab-visual { display: none; }
+      .how-cards { grid-template-columns: 1fr 1fr; gap: 12px; }
 
       #roi { padding: 64px 20px; }
 
@@ -976,45 +959,36 @@
     </div>
   </section>
 
-  <!-- WHAT WE MAKE -->
+  <!-- HOW WE WORK -->
   <section id="what">
-    <div class="what-top">
-      <h2><strong>One studio.</strong> Three types of systems.</h2>
-      <div class="tabs">
-        <button class="tab active" onclick="switchTab(this,'ops')">Operations</button>
-        <button class="tab" onclick="switchTab(this,'pipeline')">Pipelines</button>
-        <button class="tab" onclick="switchTab(this,'content')">Content</button>
+    <div class="how-inner">
+      <div class="how-header">
+        <div class="how-badge">5</div>
+        <span class="how-label">How we work</span>
       </div>
-    </div>
-
-    <div class="tab-panel active" id="tab-ops">
-      <div class="tab-info">
-        <div class="tab-tag">Operations</div>
-        <h3>Operations that run themselves</h3>
-        <p>The order that comes in at midnight, gets billed, gets fulfilled, gets followed up on, and ends up in the right ledger by morning. Without anyone touching it.</p>
-        <a href="https://cal.com/maksudur-systro/discovery-call-process" class="pill pill-dark" style="width:fit-content;" target="_blank">Book a call →</a>
+      <h2 class="how-title">From first call to launch.</h2>
+      <div class="how-cards">
+        <div class="how-card">
+          <div class="how-card-num">1</div>
+          <h3>Funnel Map Audit</h3>
+          <p>A free 30-minute session where we audit your funnel, identify bottlenecks, and map out exactly where AI can move the needle.</p>
+        </div>
+        <div class="how-card">
+          <div class="how-card-num">2</div>
+          <h3>Proposal</h3>
+          <p>We deliver a clear scope, timeline, and fixed price. No surprises, no hourly billing. You know exactly what you're getting.</p>
+        </div>
+        <div class="how-card">
+          <div class="how-card-num">3</div>
+          <h3>Project</h3>
+          <p>Our team builds, tests, and deploys your systems. You get weekly updates and a working product — not a deck full of promises.</p>
+        </div>
+        <div class="how-card">
+          <div class="how-card-num">4</div>
+          <h3>Ongoing Management</h3>
+          <p>Optional retainer for monitoring, optimization, and iteration. Most clients see compounding returns over time.</p>
+        </div>
       </div>
-      <div class="tab-visual"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80" alt="Operations dashboard"></div>
-    </div>
-
-    <div class="tab-panel" id="tab-pipeline">
-      <div class="tab-info">
-        <div class="tab-tag">Pipelines</div>
-        <h3>Pipelines that don't drop people</h3>
-        <p>The lead that fills out a form on Tuesday and is in front of the right person, with the right context, by Wednesday. Every time. No follow-up forgotten. No thread dropped.</p>
-        <a href="https://cal.com/maksudur-systro/discovery-call-process" class="pill pill-dark" style="width:fit-content;" target="_blank">Book a call →</a>
-      </div>
-      <div class="tab-visual"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80" alt="Sales pipeline"></div>
-    </div>
-
-    <div class="tab-panel" id="tab-content">
-      <div class="tab-info">
-        <div class="tab-tag">Content ops</div>
-        <h3>Systems your team owns</h3>
-        <p>What we build belongs to the company that pays for it. We document everything, train who needs training, and step back. If we ever step away, the system keeps working.</p>
-        <a href="https://cal.com/maksudur-systro/discovery-call-process" class="pill pill-dark" style="width:fit-content;" target="_blank">Book a call →</a>
-      </div>
-      <div class="tab-visual"><img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=900&q=80" alt="Content systems"></div>
     </div>
   </section>
 
@@ -1142,14 +1116,6 @@
     }
     window.addEventListener('scroll', updateNav, { passive: true });
     updateNav();
-
-    /* ── Tab switcher (what section) ── */
-    function switchTab(btn, id) {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('tab-' + id).classList.add('active');
-    }
 
     /* ── Client results tabs ── */
     (function () {
