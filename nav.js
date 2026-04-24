@@ -1,101 +1,142 @@
-// Desktop dropdowns: CSS :hover handles open/close.
-// Mobile (<= 900px): inject hamburger + slide-down menu panel.
+// Desktop dropdowns: CSS :hover — no JS needed.
+// Mobile (≤ 900px): full-screen overlay menu.
 
 (function () {
-  const nav = document.querySelector('nav');
+  var nav = document.querySelector('nav');
   if (!nav) return;
 
-  // ── Inject hamburger button ────────────────────────────────────────────────
-  const burger = document.createElement('button');
+  // ── Hamburger button (injected into nav) ──────────────────────────────────
+  var burger = document.createElement('button');
   burger.className = 'mg-burger';
   burger.setAttribute('aria-label', 'Open menu');
-  burger.innerHTML = `
-    <span class="mg-bar"></span>
-    <span class="mg-bar"></span>
-    <span class="mg-bar"></span>`;
+  burger.innerHTML =
+    '<span class="mg-bar"></span>' +
+    '<span class="mg-bar"></span>' +
+    '<span class="mg-bar"></span>';
   nav.appendChild(burger);
 
-  // ── Build mobile menu ─────────────────────────────────────────────────────
-  const menu = document.createElement('div');
-  menu.className = 'mg-mobile-menu';
-  menu.setAttribute('aria-hidden', 'true');
+  // ── Full-screen overlay ───────────────────────────────────────────────────
+  var overlay = document.createElement('div');
+  overlay.className = 'mg-mobile-menu';
 
-  const linksEl = document.createElement('div');
-  linksEl.className = 'mg-mobile-links';
+  // — Header row —
+  var mmHeader = document.createElement('div');
+  mmHeader.className = 'mg-mm-header';
+
+  var logoEl = nav.querySelector('.nav-logo');
+  if (logoEl) mmHeader.appendChild(logoEl.cloneNode(true));
+
+  var mmHRight = document.createElement('div');
+  mmHRight.className = 'mg-mm-header-right';
+
+  var bookLink = nav.querySelector('.pill-dark');
+  if (bookLink) {
+    var bookClone = bookLink.cloneNode(true);
+    mmHRight.appendChild(bookClone);
+  }
+
+  var closeBtn = document.createElement('button');
+  closeBtn.className = 'mg-mm-close';
+  closeBtn.setAttribute('aria-label', 'Close menu');
+  closeBtn.innerHTML =
+    '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"' +
+    ' stroke="currentColor" stroke-width="2" stroke-linecap="round">' +
+    '<line x1="18" y1="6" x2="6" y2="18"/>' +
+    '<line x1="6" y1="6" x2="18" y2="18"/></svg>';
+  mmHRight.appendChild(closeBtn);
+  mmHeader.appendChild(mmHRight);
+  overlay.appendChild(mmHeader);
+
+  // — Nav items —
+  var mmNav = document.createElement('div');
+  mmNav.className = 'mg-mm-nav';
 
   nav.querySelectorAll('.nav-links > li').forEach(function (li) {
-    var directLink = li.querySelector(':scope > a');
-    var ddBtn      = li.querySelector('.nav-dd-btn');
-    var ddPanel    = li.querySelector('.nav-dd-panel');
+    var directA = li.querySelector(':scope > a');
+    var ddBtn   = li.querySelector('.nav-dd-btn');
+    var ddPanel = li.querySelector('.nav-dd-panel');
 
-    if (directLink) {
-      var a = document.createElement('a');
-      a.href = directLink.href;
-      a.textContent = directLink.textContent.trim();
-      a.className = 'mg-ml-link';
-      linksEl.appendChild(a);
-    }
+    if (directA) {
+      // Simple row — no chevron
+      var row = document.createElement('a');
+      row.href = directA.href;
+      row.className = 'mg-mm-row';
+      row.textContent = directA.textContent.trim();
+      mmNav.appendChild(row);
 
-    if (ddBtn && ddPanel) {
-      var label = ddBtn.childNodes[0] && ddBtn.childNodes[0].nodeType === 3
-        ? ddBtn.childNodes[0].textContent.trim()
-        : ddBtn.textContent.trim().replace(/\s+/g, ' ').split(' ')[0];
+    } else if (ddBtn && ddPanel) {
+      // Accordion row
+      var labelText = '';
+      ddBtn.childNodes.forEach(function (n) {
+        if (n.nodeType === 3 && n.textContent.trim()) labelText = n.textContent.trim();
+      });
 
-      var grp = document.createElement('div');
-      grp.className = 'mg-ml-group';
-      grp.textContent = label;
-      linksEl.appendChild(grp);
+      var toggleRow = document.createElement('div');
+      toggleRow.className = 'mg-mm-row mg-mm-accordion';
+      toggleRow.innerHTML =
+        '<span>' + labelText + '</span>' +
+        '<svg class="mg-mm-chev" width="20" height="20" viewBox="0 0 24 24"' +
+        ' fill="none" stroke="currentColor" stroke-width="2"' +
+        ' stroke-linecap="round" stroke-linejoin="round">' +
+        '<path d="M6 9l6 6 6-6"/></svg>';
+
+      var subList = document.createElement('div');
+      subList.className = 'mg-mm-subs';
 
       ddPanel.querySelectorAll('a').forEach(function (pa) {
         var sub = document.createElement('a');
         sub.href = pa.href;
+        sub.className = 'mg-mm-sub';
         sub.textContent = pa.textContent.trim();
-        sub.className = 'mg-ml-sub';
-        linksEl.appendChild(sub);
+        subList.appendChild(sub);
       });
+
+      toggleRow.addEventListener('click', function () {
+        var now = subList.classList.toggle('is-open');
+        toggleRow.classList.toggle('is-open', now);
+      });
+
+      mmNav.appendChild(toggleRow);
+      mmNav.appendChild(subList);
     }
   });
 
-  menu.appendChild(linksEl);
+  overlay.appendChild(mmNav);
 
-  // CTA row
-  var ctas = document.createElement('div');
-  ctas.className = 'mg-mobile-ctas';
-  nav.querySelectorAll('.nav-right > *').forEach(function (el) {
-    var clone = el.cloneNode(true);
-    if (clone.id === 'mgNavVoiceBtn') clone.removeAttribute('id');
-    ctas.appendChild(clone);
-  });
-  menu.appendChild(ctas);
+  // — Footer CTA —
+  var mmFooter = document.createElement('div');
+  mmFooter.className = 'mg-mm-footer';
 
-  document.body.appendChild(menu);
+  var voiceBtn = nav.querySelector('#mgNavVoiceBtn');
+  if (voiceBtn) {
+    var vClone = voiceBtn.cloneNode(true);
+    vClone.removeAttribute('id');
+    mmFooter.appendChild(vClone);
+  }
+
+  overlay.appendChild(mmFooter);
+  document.body.appendChild(overlay);
 
   // ── Toggle ────────────────────────────────────────────────────────────────
-  var open = false;
+  var isOpen = false;
 
   function openMenu() {
-    open = true;
-    burger.classList.add('is-open');
-    menu.classList.add('is-open');
-    menu.setAttribute('aria-hidden', 'false');
+    isOpen = true;
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
   }
   function closeMenu() {
-    open = false;
-    burger.classList.remove('is-open');
-    menu.classList.remove('is-open');
-    menu.setAttribute('aria-hidden', 'true');
+    isOpen = false;
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
   }
 
   burger.addEventListener('click', function (e) {
     e.stopPropagation();
-    open ? closeMenu() : openMenu();
+    isOpen ? closeMenu() : openMenu();
   });
-
-  document.addEventListener('click', function (e) {
-    if (open && !menu.contains(e.target)) closeMenu();
-  });
-
-  menu.querySelectorAll('a').forEach(function (a) {
+  closeBtn.addEventListener('click', closeMenu);
+  overlay.querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', closeMenu);
   });
 })();
