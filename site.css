@@ -218,6 +218,9 @@ nav {
   font-size: 14px; color: rgba(255,255,255,0.25); font-weight: 500;
 }
 
+/* ── VOICE WIDGET ── */
+.mg-voice-float { display: none; }
+
 /* ── RESPONSIVE ── */
 
 @media (max-width: 1060px) {

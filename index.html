@@ -577,21 +577,6 @@
       border-top: 1px solid var(--border);
       padding: 96px 40px;
     }
-    .faq-inner { max-width: 720px; margin: 0 auto; }
-    .faq-eyebrow { font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); margin-bottom: 16px; }
-    .faq-inner h2 {
-      font-size: clamp(28px, 3vw, 36px);
-      font-weight: 800; letter-spacing: -0.025em;
-      color: var(--ink); margin-bottom: 48px;
-    }
-    .faq-item { padding: 28px 0; border-bottom: 1px solid var(--border); }
-    .faq-item:first-of-type { border-top: 1px solid var(--border); }
-    .faq-q {
-      font-size: 17px; font-weight: 700;
-      color: var(--ink); margin-bottom: 12px; line-height: 1.4;
-    }
-    .faq-a { font-size: 15px; color: var(--gray); line-height: 1.7; }
-
     /* ── FINAL CTA ── */
     #cta {
       background: var(--white);
@@ -650,7 +635,6 @@
       #what { padding: 64px 20px; }
       .how-cards { grid-template-columns: 1fr 1fr; gap: 12px; }
 
-      #faq { padding: 64px 20px; }
       #cta { padding: 80px 20px; }
     }
   </style>
@@ -680,11 +664,15 @@
           <a href="about.html" class="nav-dd-item"><span class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>About</a>
           <a href="team.html" class="nav-dd-item"><span class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span>Team</a>
           <a href="#" class="nav-dd-item"><span class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></span>Careers</a>
+          <a href="faq.html" class="nav-dd-item"><span class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>FAQ</a>
         </div>
       </li>
     </ul>
     <div class="nav-right">
-      <a href="#faq" class="pill pill-outline" style="font-size:14px;padding:7px 16px;">FAQ</a>
+      <button id="mgNavVoiceBtn" class="pill pill-outline" style="font-size:14px;padding:7px 16px;" data-state="idle">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        <span class="mg-nav-label">Talk to AI</span>
+      </button>
       <a href="https://cal.com/maksudur-systro/discovery-call-process" class="pill pill-dark" style="font-size:14px;padding:7px 16px;" target="_blank" rel="noopener">Book a call</a>
     </div>
   </nav>
@@ -909,30 +897,6 @@
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section id="faq">
-    <div class="faq-inner">
-      <div class="faq-eyebrow">Things people ask</div>
-      <h2>Common questions.</h2>
-      <div class="faq-item">
-        <p class="faq-q">"How is this different from hiring a freelancer?"</p>
-        <p class="faq-a">Mostly: we document everything, we build for handoff, and we're around afterward if you want us to be. A freelancer is a pair of hands. We're closer to a small studio.</p>
-      </div>
-      <div class="faq-item">
-        <p class="faq-q">"What if my industry isn't on your list?"</p>
-        <p class="faq-a">The patterns transfer. We've worked across e-commerce, health, construction, consulting, and education. If you'd like, write to us and we'll tell you honestly whether it's a fit.</p>
-      </div>
-      <div class="faq-item">
-        <p class="faq-q">"What if I don't like what you build?"</p>
-        <p class="faq-a">You see the work in progress, every week. By the time we hand it over, there should be no surprises. If something's off, we fix it before you pay the final invoice.</p>
-      </div>
-      <div class="faq-item">
-        <p class="faq-q">"Where are you based?"</p>
-        <p class="faq-a">Maks is in Dhaka. The team works asynchronously with clients in Australia, the United States, and Belgium. We're moving to Dublin in autumn 2026.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- FINAL CTA -->
   <section id="cta">
     <div class="cta-inner">
@@ -988,6 +952,7 @@
   </footer>
 
   <script src="nav.js"></script>
+  <script src="retell-voice.js" type="module"></script>
   <script>
     /* ── NAV scroll state ── */
     const nav = document.getElementById('nav');

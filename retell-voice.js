@@ -87,17 +87,22 @@ function setState(state) {
   iconActive.classList.add('mg-hidden');
   floatWrap.classList.remove('is-loading', 'is-active');
 
+  const navBtn = document.getElementById('mgNavVoiceBtn');
+
   if (state === 'idle') {
     iconIdle.classList.remove('mg-hidden');
     label.textContent = 'Talk to our AI';
+    if (navBtn) { navBtn.dataset.state = 'idle'; navBtn.querySelector('.mg-nav-label').textContent = 'Talk to AI'; }
   } else if (state === 'loading') {
     iconLoad.classList.remove('mg-hidden');
     floatWrap.classList.add('is-loading');
     label.textContent = 'Connecting…';
+    if (navBtn) { navBtn.dataset.state = 'loading'; navBtn.querySelector('.mg-nav-label').textContent = 'Connecting…'; }
   } else if (state === 'active') {
     iconActive.classList.remove('mg-hidden');
     floatWrap.classList.add('is-active');
     label.textContent = 'End call';
+    if (navBtn) { navBtn.dataset.state = 'active'; navBtn.querySelector('.mg-nav-label').textContent = 'End call'; }
   }
 
   syncEmbedCard(state);
@@ -184,6 +189,13 @@ function syncEmbedCard(state) {
 
 document.addEventListener('click', (e) => {
   if (e.target.closest('#mgVoiceBtnEmbed')) {
+    callActive ? stopCall() : startCall();
+  }
+});
+
+// ── Nav button ────────────────────────────────────────────────────────────────
+document.addEventListener('click', (e) => {
+  if (e.target.closest('#mgNavVoiceBtn')) {
     callActive ? stopCall() : startCall();
   }
 });
