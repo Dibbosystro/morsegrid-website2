@@ -614,11 +614,14 @@
     }
     /* ── FINAL CTA ── */
     #cta {
-      background: #0a0a0a;
-      padding: 80px 40px;
-      margin: 24px 16px;
-      border-radius: 28px;
+      padding: 100px 40px;
+      margin: 24px 0 0;
       text-align: center;
+      background:
+        radial-gradient(ellipse 55% 70% at 50% 110%, rgba(45,80,22,0.55) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 50% at 15% 60%, rgba(74,222,128,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 35% 50% at 85% 60%, rgba(100,120,255,0.08) 0%, transparent 60%),
+        #080808;
     }
     .cta-inner { max-width: 680px; margin: 0 auto; }
     #cta h2 {
@@ -697,7 +700,7 @@
       .how-title { font-size: 36px; }
       .how-cards { grid-template-columns: 1fr 1fr; gap: 12px; }
 
-      #cta { padding: 60px 24px; margin: 16px 8px; border-radius: 20px; }
+      #cta { padding: 72px 24px; margin: 16px 0 0; }
     }
   </style>
 </head>
