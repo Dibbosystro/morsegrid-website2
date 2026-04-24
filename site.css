@@ -102,6 +102,50 @@ nav {
 .nav-links a svg { width: 12px; height: 12px; stroke: currentColor; }
 .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
 
+/* ── NAV DROPDOWNS ── */
+.nav-dropdown { position: relative; }
+
+.nav-dd-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font); font-size: 17px; font-weight: 500;
+  color: var(--gray); padding: 8px 14px; border-radius: 993px;
+  display: flex; align-items: center; gap: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+.nav-dd-btn:hover,
+.nav-dropdown.open .nav-dd-btn { color: var(--ink); background: var(--bg); }
+.nav-dd-btn .chevron { width: 13px; height: 13px; stroke: currentColor; transition: transform 0.2s ease; flex-shrink: 0; }
+.nav-dropdown.open .nav-dd-btn .chevron { transform: rotate(180deg); }
+
+.nav-dd-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%; transform: translateX(-50%);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.13), 0 0 0 1px rgba(0,0,0,0.06);
+  padding: 6px;
+  min-width: 210px;
+  z-index: 10;
+}
+.nav-dropdown.open .nav-dd-panel { display: block; }
+
+.nav-dd-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 10px; border-radius: 9px;
+  color: var(--ink); font-size: 14px; font-weight: 600;
+  transition: background 0.13s; white-space: nowrap;
+}
+.nav-dd-item:hover { background: var(--bg); }
+
+.nav-dd-icon {
+  width: 32px; height: 32px; border-radius: 7px;
+  background: var(--green-l);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.nav-dd-icon svg { width: 15px; height: 15px; }
+
 /* ── CONTAINER ── */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
