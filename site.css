@@ -254,17 +254,19 @@ nav.mg-nav-open {
   border-color: var(--border) !important;
 }
 
-/* ── MOBILE MENU (drops below the nav pill) ── */
+/* ── MOBILE MENU ── */
+/* Starts at top:0 so it covers the hero behind the nav pill.
+   z-index 190 keeps the nav pill (z-index 200) visible on top.
+   padding-top pushes content below the nav pill area. */
 .mg-mobile-menu {
   position: fixed;
-  /* nav sits at top:12px, height:64px → bottom edge ≈ 76px. Add gap. */
-  top: 80px; left: 0; right: 0; bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   background: #fff;
-  border-top: 1px solid var(--border);
   z-index: 190;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  padding-top: 80px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease, visibility 0s ease 0.2s;
@@ -274,6 +276,8 @@ nav.mg-nav-open {
   visibility: visible;
   transition: opacity 0.2s ease;
 }
+/* Divider line between nav pill and menu items */
+.mg-mm-nav { border-top: 1px solid var(--border); }
 
 .mg-mm-nav {
   display: flex;
