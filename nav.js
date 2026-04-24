@@ -73,9 +73,16 @@
 
   overlay.appendChild(mmNav);
 
-  // — Footer CTA: Book a call —
+  // — Footer CTAs: Ask anything + Book a call —
   var mmFooter = document.createElement('div');
   mmFooter.className = 'mg-mm-footer';
+
+  var voiceBtn = nav.querySelector('#mgNavVoiceBtn');
+  if (voiceBtn) {
+    var vClone = voiceBtn.cloneNode(true);
+    vClone.removeAttribute('id');
+    mmFooter.appendChild(vClone);
+  }
 
   var bookLink = nav.querySelector('.pill-dark');
   if (bookLink) {
