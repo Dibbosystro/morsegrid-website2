@@ -381,20 +381,6 @@
     .stories-hd {
       padding: 64px 0 48px;
     }
-    .stories-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 993px;
-      padding: 6px 14px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 16px;
-    }
-    .stories-eyebrow::before { content: '✦'; color: var(--green); font-size: 10px; }
     .stories-hd h2 {
       font-size: clamp(26px, 3vw, 38px);
       font-weight: 800;
@@ -429,20 +415,20 @@
     }
     @keyframes tab-fill { from { width: 0; } to { width: 100%; } }
     .client-tab.active .tab-bar { animation: tab-fill 6s linear forwards; }
-    .tab-name { font-size: 15px; font-weight: 700; color: var(--ink); }
-    .tab-sub { font-size: 12px; color: var(--gray); margin-top: 3px; }
+    .tab-name { font-size: 18px; font-weight: 700; color: var(--ink); }
+    .tab-sub { font-size: 13px; color: var(--gray); margin-top: 4px; }
     .story-panel {
       display: none;
       padding: 64px 0;
     }
     .story-panel.active {
       display: grid;
-      grid-template-columns: 1fr 1px 1fr;
+      grid-template-columns: 7fr 1px 3fr;
     }
     .story-left { padding-right: 72px; }
     .story-qdivider { background: var(--border); align-self: stretch; }
     .story-right {
-      padding-left: 72px;
+      padding-left: 56px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -938,7 +924,6 @@
     <div class="stories-inner">
 
       <div class="stories-hd">
-        <div class="stories-eyebrow">Client results</div>
         <h2>Powering operations for growing businesses.</h2>
       </div>
 
