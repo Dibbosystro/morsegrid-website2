@@ -164,7 +164,8 @@
 
     .activity-panel {
       width: 420px;
-      flex-shrink: 0;
+      max-width: 100%;
+      flex-shrink: 1;
       background: rgba(255,255,255,0.68);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -604,13 +605,18 @@
 
     /* ≤1200px: tighten padding, cap hero height on tall viewports (e.g. iPad portrait) */
     @media (max-width: 1200px) {
-      .hero-content { padding: 80px 8% 40px; }
+      .hero-shell { grid-template-columns: 3fr 2fr; }
+      .hero-content { padding: 80px 6% 40px; }
       .hero-wrap { max-height: 840px; }
+      .hero-visual { padding: 0 16px 0 8px; }
+      .activity-panel { width: 100%; max-width: 380px; }
     }
 
-    /* 901–1060px: tighten hero padding further */
+    /* 901–1060px: tighten further */
     @media (max-width: 1060px) and (min-width: 901px) {
-      .hero-content { padding: 72px 6% 40px; }
+      .hero-content { padding: 72px 5% 40px; }
+      .activity-panel { max-width: 320px; }
+      .hero-tag { display: none; }
     }
 
     @media (max-width: 900px) {
