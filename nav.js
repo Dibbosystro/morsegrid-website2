@@ -93,12 +93,14 @@
     isOpen = true;
     burger.classList.add('is-open');
     overlay.classList.add('is-open');
+    nav.classList.add('mg-nav-open');
     document.body.style.overflow = 'hidden';
   }
   function closeMenu() {
     isOpen = false;
     burger.classList.remove('is-open');
     overlay.classList.remove('is-open');
+    nav.classList.remove('mg-nav-open');
     document.body.style.overflow = '';
   }
 

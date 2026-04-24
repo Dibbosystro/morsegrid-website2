@@ -248,6 +248,12 @@ nav {
 .mg-burger.is-open .mg-bar:nth-child(2) { opacity: 0; }
 .mg-burger.is-open .mg-bar:nth-child(3) { transform: translateY(-6.8px) rotate(-45deg); }
 
+/* Force nav white when mobile menu is open (overrides hero transparent state) */
+nav.mg-nav-open {
+  background: rgba(255,255,255,1) !important;
+  border-color: var(--border) !important;
+}
+
 /* ── MOBILE MENU (drops below the nav pill) ── */
 .mg-mobile-menu {
   position: fixed;
