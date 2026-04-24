@@ -512,8 +512,11 @@
 
     /* ── HOW WE WORK ── */
     #what {
-      background: #131313;
       padding: 120px 0;
+      background:
+        radial-gradient(ellipse 50% 60% at 10% 90%, rgba(45,80,22,0.35) 0%, transparent 65%),
+        radial-gradient(ellipse 30% 40% at 85% 20%, rgba(45,80,22,0.15) 0%, transparent 60%),
+        #0e0e0e;
     }
     .how-inner {
       max-width: 1160px; margin: 0 auto; padding: 0 40px;
@@ -525,9 +528,9 @@
     .how-left { position: sticky; top: 120px; }
     .how-label {
       display: inline-block;
-      font-size: 11.5px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.35);
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: rgba(74,222,128,0.65);
       margin-bottom: 28px;
     }
     .how-title {
@@ -538,10 +541,14 @@
       color: #fff;
       margin-bottom: 24px;
     }
+    .how-accent {
+      color: #4ade80;
+      text-shadow: 0 0 48px rgba(74,222,128,0.35);
+    }
     .how-sub {
       font-size: 16px;
-      color: rgba(255,255,255,0.4);
-      line-height: 1.7;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.72;
       max-width: 360px;
     }
     .how-steps { display: flex; flex-direction: column; }
@@ -549,19 +556,40 @@
       display: flex;
       gap: 24px;
       padding: 40px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .how-step:first-child { padding-top: 0; }
-    .how-step:last-child { border-bottom: none; padding-bottom: 0; }
+    .how-step:last-child { padding-bottom: 0; }
+
+    /* Track = number circle + connecting line */
+    .how-step-track {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      width: 34px;
+    }
     .how-step-num {
       width: 34px; height: 34px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(74,222,128,0.45);
+      background: rgba(74,222,128,0.08);
+      box-shadow: 0 0 14px rgba(74,222,128,0.22), inset 0 0 8px rgba(74,222,128,0.06);
       display: flex; align-items: center; justify-content: center;
       font-size: 13px; font-weight: 700;
-      color: rgba(255,255,255,0.5);
-      flex-shrink: 0; margin-top: 2px;
+      color: #4ade80;
+      flex-shrink: 0;
     }
+    .how-step-line {
+      flex: 1;
+      width: 1.5px;
+      margin-top: 8px;
+      border-radius: 1px;
+      background: linear-gradient(to bottom, rgba(74,222,128,0.45) 0%, rgba(74,222,128,0.03) 100%);
+      box-shadow: 0 0 6px rgba(74,222,128,0.15);
+      min-height: 24px;
+    }
+    .how-step:last-child .how-step-line { display: none; }
+
+    .how-step-body { padding-top: 4px; }
     .how-step-body h3 {
       font-size: 21px; font-weight: 700;
       color: #fff; letter-spacing: -0.02em;
@@ -569,8 +597,8 @@
     }
     .how-step-body p {
       font-size: 15px;
-      color: rgba(255,255,255,0.45);
-      line-height: 1.72;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.75;
     }
 
     /* ── ROI TICKER ── */
@@ -882,33 +910,45 @@
     <div class="how-inner">
       <div class="how-left">
         <span class="how-label">How we work</span>
-        <h2 class="how-title">From first call<br>to launch.</h2>
+        <h2 class="how-title">From first call<br>to <span class="how-accent">launch.</span></h2>
         <p class="how-sub">Four clear steps from the first conversation to a working system in your hands.</p>
       </div>
       <div class="how-steps">
         <div class="how-step">
-          <div class="how-step-num">1</div>
+          <div class="how-step-track">
+            <div class="how-step-num">1</div>
+            <div class="how-step-line"></div>
+          </div>
           <div class="how-step-body">
             <h3>Funnel Map Audit</h3>
             <p>A free 30-minute session where we audit your funnel, identify bottlenecks, and map out exactly where AI can move the needle.</p>
           </div>
         </div>
         <div class="how-step">
-          <div class="how-step-num">2</div>
+          <div class="how-step-track">
+            <div class="how-step-num">2</div>
+            <div class="how-step-line"></div>
+          </div>
           <div class="how-step-body">
             <h3>Proposal</h3>
             <p>We deliver a clear scope, timeline, and fixed price. No surprises, no hourly billing. You know exactly what you're getting.</p>
           </div>
         </div>
         <div class="how-step">
-          <div class="how-step-num">3</div>
+          <div class="how-step-track">
+            <div class="how-step-num">3</div>
+            <div class="how-step-line"></div>
+          </div>
           <div class="how-step-body">
             <h3>Project</h3>
             <p>Our team builds, tests, and deploys your systems. You get weekly updates and a working product, not a deck full of promises.</p>
           </div>
         </div>
         <div class="how-step">
-          <div class="how-step-num">4</div>
+          <div class="how-step-track">
+            <div class="how-step-num">4</div>
+            <div class="how-step-line"></div>
+          </div>
           <div class="how-step-body">
             <h3>Ongoing Management</h3>
             <p>Optional retainer for monitoring, optimization, and iteration. Most clients see compounding returns over time.</p>
