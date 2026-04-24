@@ -1,5 +1,5 @@
 // Desktop dropdowns: CSS :hover — no JS needed.
-// Mobile (≤ 900px): full-screen overlay menu.
+// Mobile (≤ 900px): overlay menu that drops below the nav pill.
 
 (function () {
   var nav = document.querySelector('nav');
@@ -15,37 +15,9 @@
     '<span class="mg-bar"></span>';
   nav.appendChild(burger);
 
-  // ── Full-screen overlay ───────────────────────────────────────────────────
+  // ── Overlay (starts below the nav pill) ──────────────────────────────────
   var overlay = document.createElement('div');
   overlay.className = 'mg-mobile-menu';
-
-  // — Header row —
-  var mmHeader = document.createElement('div');
-  mmHeader.className = 'mg-mm-header';
-
-  var logoEl = nav.querySelector('.nav-logo');
-  if (logoEl) mmHeader.appendChild(logoEl.cloneNode(true));
-
-  var mmHRight = document.createElement('div');
-  mmHRight.className = 'mg-mm-header-right';
-
-  var bookLink = nav.querySelector('.pill-dark');
-  if (bookLink) {
-    var bookClone = bookLink.cloneNode(true);
-    mmHRight.appendChild(bookClone);
-  }
-
-  var closeBtn = document.createElement('button');
-  closeBtn.className = 'mg-mm-close';
-  closeBtn.setAttribute('aria-label', 'Close menu');
-  closeBtn.innerHTML =
-    '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"' +
-    ' stroke="currentColor" stroke-width="2" stroke-linecap="round">' +
-    '<line x1="18" y1="6" x2="6" y2="18"/>' +
-    '<line x1="6" y1="6" x2="18" y2="18"/></svg>';
-  mmHRight.appendChild(closeBtn);
-  mmHeader.appendChild(mmHRight);
-  overlay.appendChild(mmHeader);
 
   // — Nav items —
   var mmNav = document.createElement('div');
@@ -57,7 +29,6 @@
     var ddPanel = li.querySelector('.nav-dd-panel');
 
     if (directA) {
-      // Simple row — no chevron
       var row = document.createElement('a');
       row.href = directA.href;
       row.className = 'mg-mm-row';
@@ -65,7 +36,6 @@
       mmNav.appendChild(row);
 
     } else if (ddBtn && ddPanel) {
-      // Accordion row
       var labelText = '';
       ddBtn.childNodes.forEach(function (n) {
         if (n.nodeType === 3 && n.textContent.trim()) labelText = n.textContent.trim();
@@ -103,15 +73,14 @@
 
   overlay.appendChild(mmNav);
 
-  // — Footer CTA —
+  // — Footer CTA: Book a call —
   var mmFooter = document.createElement('div');
   mmFooter.className = 'mg-mm-footer';
 
-  var voiceBtn = nav.querySelector('#mgNavVoiceBtn');
-  if (voiceBtn) {
-    var vClone = voiceBtn.cloneNode(true);
-    vClone.removeAttribute('id');
-    mmFooter.appendChild(vClone);
+  var bookLink = nav.querySelector('.pill-dark');
+  if (bookLink) {
+    var bookClone = bookLink.cloneNode(true);
+    mmFooter.appendChild(bookClone);
   }
 
   overlay.appendChild(mmFooter);
@@ -122,11 +91,13 @@
 
   function openMenu() {
     isOpen = true;
+    burger.classList.add('is-open');
     overlay.classList.add('is-open');
     document.body.style.overflow = 'hidden';
   }
   function closeMenu() {
     isOpen = false;
+    burger.classList.remove('is-open');
     overlay.classList.remove('is-open');
     document.body.style.overflow = '';
   }
@@ -135,7 +106,6 @@
     e.stopPropagation();
     isOpen ? closeMenu() : openMenu();
   });
-  closeBtn.addEventListener('click', closeMenu);
   overlay.querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', closeMenu);
   });
