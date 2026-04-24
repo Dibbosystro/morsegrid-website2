@@ -165,17 +165,6 @@ nav {
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
 /* ── FOOTER ── */
-/* ── FOOTER GRADIENT ── */
-.footer-gradient {
-  height: 180px;
-  margin: 0 16px;
-  background:
-    radial-gradient(ellipse 40% 100% at 50% 100%, rgba(186, 224, 155, 0.5) 0%, transparent 70%),
-    radial-gradient(ellipse 25% 80% at 35% 100%, rgba(120, 185, 225, 0.4) 0%, transparent 65%),
-    radial-gradient(ellipse 25% 80% at 65% 100%, rgba(185, 160, 230, 0.4) 0%, transparent 65%);
-  pointer-events: none;
-}
-
 .footer {
   padding: 80px 0 40px;
   background: var(--ink);
@@ -244,7 +233,6 @@ nav {
   nav { top: 12px; left: 12px; right: 12px; padding: 0 20px; }
   .nav-links { display: none; }
   .footer { padding: 48px 0 32px; margin: 0 8px 8px; border-radius: 16px; }
-  .footer-gradient { height: 140px; margin: 0 8px; }
   .footer-inner { grid-template-columns: 1fr; gap: 32px; margin-bottom: 40px; }
   .footer-cols { flex-wrap: wrap; gap: 24px; }
 }
