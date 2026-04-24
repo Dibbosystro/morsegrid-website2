@@ -369,23 +369,23 @@
 
     /* ── CASE STUDIES ── */
     #stories {
-      padding: 42px 40px 96px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stories-inner {
       max-width: 1160px;
       margin: 0 auto;
+      padding: 0 40px;
     }
-    .stories-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 48px;
-      gap: 24px;
-      flex-wrap: wrap;
+    .stories-hd {
+      padding: 64px 0 48px;
     }
     .stories-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--bg);
+      background: var(--white);
       border: 1px solid var(--border);
       border-radius: 993px;
       padding: 6px 14px;
@@ -395,90 +395,110 @@
       margin-bottom: 16px;
     }
     .stories-eyebrow::before { content: '✦'; color: var(--green); font-size: 10px; }
-    .stories-top h2 {
+    .stories-hd h2 {
       font-size: clamp(26px, 3vw, 38px);
       font-weight: 800;
       letter-spacing: -0.025em;
       line-height: 1.12;
       color: var(--ink);
-      max-width: 440px;
+      max-width: 540px;
     }
-    .story-featured {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 48px;
-      margin-bottom: 16px;
+    .client-tabs {
+      display: flex;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .client-tab {
+      flex: 1;
+      padding: 22px 24px;
+      cursor: pointer;
+      position: relative;
+      opacity: 0.38;
+      transition: opacity 0.2s;
+      border-right: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .client-tab:last-child { border-right: none; }
+    .client-tab.active { opacity: 1; }
+    .tab-bar {
+      position: absolute;
+      top: 0; left: 0;
+      height: 3px;
+      background: var(--green);
+      width: 0;
+    }
+    @keyframes tab-fill { from { width: 0; } to { width: 100%; } }
+    .client-tab.active .tab-bar { animation: tab-fill 6s linear forwards; }
+    .tab-name { font-size: 15px; font-weight: 700; color: var(--ink); }
+    .tab-sub { font-size: 12px; color: var(--gray); margin-top: 3px; }
+    .story-panel {
+      display: none;
+      padding: 64px 0;
+    }
+    .story-panel.active {
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 48px;
-      align-items: end;
-      transition: border-color 0.15s;
+      grid-template-columns: 1fr 1px 1fr;
     }
-    .story-featured:hover { border-color: var(--green); }
-    .story-label {
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--gray);
-      margin-bottom: 20px;
+    .story-left { padding-right: 72px; }
+    .story-qdivider { background: var(--border); align-self: stretch; }
+    .story-right {
+      padding-left: 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-    .story-quote {
-      font-size: clamp(17px, 1.8vw, 21px);
-      font-weight: 600;
-      color: var(--ink);
-      line-height: 1.45;
-      letter-spacing: -0.01em;
-      max-width: 560px;
+    .story-q-mark {
+      font-size: 80px;
+      font-weight: 800;
+      color: var(--green);
+      line-height: 0.65;
       margin-bottom: 28px;
+      font-family: Georgia, serif;
     }
-    .story-quote strong { color: var(--green); }
-    .story-author { display: flex; align-items: center; gap: 12px; }
+    .story-q-text {
+      font-size: clamp(17px, 1.6vw, 21px);
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.52;
+      margin-bottom: 40px;
+      max-width: 520px;
+    }
+    .story-attr { display: flex; align-items: center; gap: 14px; }
     .s-avatar {
-      width: 40px; height: 40px;
+      width: 44px; height: 44px;
       border-radius: 50%;
       background: var(--gray-l);
       display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700; color: var(--gray);
+      font-size: 12px; font-weight: 700; color: var(--gray);
       flex-shrink: 0;
     }
-    .s-name { font-size: 14px; font-weight: 600; color: var(--ink); }
-    .s-role { font-size: 13px; color: var(--gray); }
-    .story-metric { text-align: right; }
-    .metric-big {
-      font-size: 60px; font-weight: 800;
-      letter-spacing: -0.05em;
-      color: var(--ink); line-height: 1;
+    .s-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .s-role { font-size: 13px; color: var(--gray); margin-top: 2px; }
+    .story-stat-num {
+      font-size: clamp(64px, 8vw, 96px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 10px;
     }
-    .metric-lbl { font-size: 13px; color: var(--gray); margin-top: 6px; line-height: 1.4; }
-    .stories-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+    .story-stat-lbl {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.35;
+      margin-bottom: 32px;
     }
-    .story-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px 32px;
-      transition: border-color 0.15s;
-    }
-    .story-card:hover { border-color: var(--green); }
-    .card-label {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
+    .story-read-link {
+      font-size: 15px;
+      font-weight: 600;
       color: var(--green);
-      margin-bottom: 14px;
+      text-decoration: underline;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
-    .card-quote {
-      font-size: 15px; font-weight: 500;
-      color: var(--ink); line-height: 1.55;
-      margin-bottom: 28px;
-    }
-    .card-num {
-      font-size: 38px; font-weight: 800;
-      letter-spacing: -0.04em; color: var(--ink); line-height: 1;
-    }
-    .card-num-lbl { font-size: 12px; color: var(--gray); margin-top: 4px; }
+    .story-read-link:hover { opacity: 0.75; }
 
     /* ── METHOD ── */
     #method {
@@ -773,10 +793,14 @@
 
       #logos { margin-top: 36px; }
 
-      #stories { padding: 64px 20px; }
-      .story-featured { grid-template-columns: 1fr; gap: 24px; }
-      .story-metric { text-align: left; }
-      .stories-grid { grid-template-columns: 1fr; }
+      .stories-inner { padding: 0 20px; }
+      .stories-hd { padding: 48px 0 32px; }
+      .client-tabs { overflow-x: auto; }
+      .client-tab { min-width: 140px; padding: 16px 16px; }
+      .story-panel.active { grid-template-columns: 1fr; gap: 0; }
+      .story-left { padding-right: 0; padding-bottom: 40px; }
+      .story-qdivider { display: none; }
+      .story-right { padding-left: 0; }
 
       #method { padding: 64px 20px; }
       .method-step { grid-template-columns: 1fr; gap: 20px; }
@@ -911,51 +935,91 @@
 
   <!-- CASE STUDIES -->
   <section id="stories">
-    <div class="stories-top">
-      <div>
+    <div class="stories-inner">
+
+      <div class="stories-hd">
         <div class="stories-eyebrow">Client results</div>
         <h2>Powering operations for growing businesses.</h2>
       </div>
-      <a href="#cta" class="pill pill-green-outline">See all engagements</a>
-    </div>
 
-    <div class="story-featured">
-      <div>
-        <div class="story-label">Cafe Racer Garage · Australia</div>
-        <p class="story-quote">"We rebuilt our whole content operation. Long-form videos now turn into newsletters and posts <strong>automatically</strong>. The team makes more, types less."</p>
-        <div class="story-author">
-          <div class="s-avatar">CRG</div>
-          <div>
-            <div class="s-name">Cafe Racer Garage</div>
-            <div class="s-role">220K-subscriber YouTube channel</div>
-          </div>
+      <div class="client-tabs" id="clientTabs">
+        <div class="client-tab active" data-idx="0">
+          <div class="tab-bar"></div>
+          <div class="tab-name">Cafe Racer Garage</div>
+          <div class="tab-sub">Australia</div>
+        </div>
+        <div class="client-tab" data-idx="1">
+          <div class="tab-bar"></div>
+          <div class="tab-name">Omar City</div>
+          <div class="tab-sub">Belgium</div>
+        </div>
+        <div class="client-tab" data-idx="2">
+          <div class="tab-bar"></div>
+          <div class="tab-name">Prana Thrive</div>
+          <div class="tab-sub">Australia</div>
         </div>
       </div>
-      <div class="story-metric">
-        <div class="metric-big">10×</div>
-        <div class="metric-lbl">content output,<br>same team size</div>
-      </div>
-    </div>
 
-    <div class="stories-grid">
-      <div class="story-card">
-        <div class="card-label">Omar City · Belgium</div>
-        <p class="card-quote">"Every sale used to require fifteen to twenty minutes of manual entry. We connected our shop to accounting invisibly. We don't think about it. That's the goal."</p>
-        <div class="card-num">20 min</div>
-        <div class="card-num-lbl">manual work eliminated per sale</div>
+      <div class="story-panel active" data-idx="0">
+        <div class="story-left">
+          <div class="story-q-mark">&ldquo;</div>
+          <p class="story-q-text">We rebuilt our whole content operation. Long-form videos now turn into newsletters and posts automatically. The team makes more, types less.</p>
+          <div class="story-attr">
+            <div class="s-avatar">CRG</div>
+            <div>
+              <div class="s-name">Cafe Racer Garage</div>
+              <div class="s-role">220K-subscriber YouTube channel</div>
+            </div>
+          </div>
+        </div>
+        <div class="story-qdivider"></div>
+        <div class="story-right">
+          <div class="story-stat-num">10×</div>
+          <div class="story-stat-lbl">content output,<br>same team size</div>
+          <a href="#" class="story-read-link">Read story &#8594;</a>
+        </div>
       </div>
-      <div class="story-card">
-        <div class="card-label">Prana Thrive · Australia</div>
-        <p class="card-quote">"Intake used to be a tangle of forms and dropped threads. We rebuilt it into something patients move through easily and practitioners can trust."</p>
-        <div class="card-num">0</div>
-        <div class="card-num-lbl">intake threads dropped since launch</div>
+
+      <div class="story-panel" data-idx="1">
+        <div class="story-left">
+          <div class="story-q-mark">&ldquo;</div>
+          <p class="story-q-text">Every sale used to require fifteen to twenty minutes of manual entry. We connected our shop to accounting invisibly. We don't think about it. That's the goal.</p>
+          <div class="story-attr">
+            <div class="s-avatar">OC</div>
+            <div>
+              <div class="s-name">Omar City</div>
+              <div class="s-role">Shopify DTC brand</div>
+            </div>
+          </div>
+        </div>
+        <div class="story-qdivider"></div>
+        <div class="story-right">
+          <div class="story-stat-num">20 min</div>
+          <div class="story-stat-lbl">manual work eliminated<br>per sale</div>
+          <a href="#" class="story-read-link">Read story &#8594;</a>
+        </div>
       </div>
-      <div class="story-card">
-        <div class="card-label">Nexus Advisor · AU / ZA</div>
-        <p class="card-quote">"Contracts, compliance, billing, subcontractor coordination - the things our team would otherwise be doing on Saturdays are handled now."</p>
-        <div class="card-num">2–4 wk</div>
-        <div class="card-num-lbl">from kick-off to a live, working system</div>
+
+      <div class="story-panel" data-idx="2">
+        <div class="story-left">
+          <div class="story-q-mark">&ldquo;</div>
+          <p class="story-q-text">Intake used to be a tangle of forms and dropped threads. We rebuilt it into something patients move through easily and practitioners can trust.</p>
+          <div class="story-attr">
+            <div class="s-avatar">PT</div>
+            <div>
+              <div class="s-name">Prana Thrive</div>
+              <div class="s-role">Wellness practice</div>
+            </div>
+          </div>
+        </div>
+        <div class="story-qdivider"></div>
+        <div class="story-right">
+          <div class="story-stat-num">0</div>
+          <div class="story-stat-lbl">intake threads dropped<br>since launch</div>
+          <a href="#" class="story-read-link">Read story &#8594;</a>
+        </div>
       </div>
+
     </div>
   </section>
 
@@ -1174,13 +1238,42 @@
     window.addEventListener('scroll', updateNav, { passive: true });
     updateNav();
 
-    /* ── Tab switcher ── */
+    /* ── Tab switcher (what section) ── */
     function switchTab(btn, id) {
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('tab-' + id).classList.add('active');
     }
+
+    /* ── Client results tabs ── */
+    (function () {
+      var tabs = Array.from(document.querySelectorAll('.client-tab'));
+      var panels = Array.from(document.querySelectorAll('.story-panel'));
+      var current = 0;
+      var timer;
+      var DURATION = 6000;
+
+      function activate(idx) {
+        tabs.forEach(function (t) { t.classList.remove('active'); });
+        panels.forEach(function (p) { p.classList.remove('active'); });
+        tabs[idx].classList.add('active');
+        panels[idx].classList.add('active');
+        var bar = tabs[idx].querySelector('.tab-bar');
+        bar.style.animation = 'none';
+        void bar.offsetWidth;
+        bar.style.animation = '';
+        current = idx;
+        clearTimeout(timer);
+        timer = setTimeout(function () { activate((current + 1) % tabs.length); }, DURATION);
+      }
+
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () { activate(i); });
+      });
+
+      timer = setTimeout(function () { activate(1); }, DURATION);
+    })();
 
     /* ── Live activity feed ── */
     const events = [
