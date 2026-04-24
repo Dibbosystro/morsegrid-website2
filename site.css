@@ -23,13 +23,13 @@
 }
 
 /* ── BASE ── */
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
   font-family: var(--font);
   background: var(--white);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
@@ -268,7 +268,8 @@ nav.mg-nav-open {
    padding-top pushes content below the nav pill area. */
 .mg-mobile-menu {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
   background: #fff;
   z-index: 190;
   display: flex;
