@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "fjYLtj4j5yZ0nlE7G6JNb"
+uri = "file://artifacts/morsegrid/src/assets/hero-bg.png"
+type = "image"
+title = "Abstract tech connection nodes"
+
+[[generated]]
+id = "QmtSsIdnq0OsY-qUNPtLO"
+uri = "file://artifacts/morsegrid/src/assets/sarah-founder.png"
+type = "image"
+title = "Sarah founder portrait"
+
+[[generated]]
+id = "3YPD6mzh0lhZH5EuEt1WU"
+uri = "file://artifacts/morsegrid/src/assets/james-ops.png"
+type = "image"
+title = "James ops lead portrait"
+
+[[generated]]
+id = "-N5hLaNmQ9anduv8r690_"
+uri = "file://artifacts/morsegrid/src/assets/crm-vis.png"
+type = "image"
+title = "CRM visualization abstract"
+
+[[generated]]
+id = "ejA9vLXvWIIBLIyYV1G4H"
+uri = "file://artifacts/morsegrid/src/assets/hero-band.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "tUTIA0MZjO_aUbdtPdxJ3"
+uri = "file://artifacts/morsegrid/src/assets/omnichannel.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "aJoxq6r5x7accxk8lEAPh"
+uri = "file://artifacts/morsegrid/src/assets/collage-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "FG278EXK3SFdu4GsjhZ-Q"
+uri = "file://artifacts/morsegrid/src/assets/collage-2.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "ZhunTGz6c4G0QF1W6zUQc"
+uri = "file://artifacts/morsegrid/src/assets/collage-3.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "elYIIBUCPcjL7Pdrfr9ay"
+uri = "file://artifacts/morsegrid/src/assets/resource-network.png"
+type = "image"
+title = "generated_image"

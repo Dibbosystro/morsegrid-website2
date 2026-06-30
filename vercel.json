@@ -1,4 +1,11 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "buildCommand": "BASE_PATH=/ PORT=4321 pnpm --filter @workspace/morsegrid run build",
+  "outputDirectory": "artifacts/morsegrid/dist/public",
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }

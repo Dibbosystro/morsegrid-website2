@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Morsegrid"
+version = "1.0.0"
+id = "artifacts/morsegrid"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23205
+
+[services.development]
+run = "pnpm --filter @workspace/morsegrid run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/morsegrid", "run", "build" ]
+publicDir = "artifacts/morsegrid/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23205"
+BASE_PATH = "/"

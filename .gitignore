@@ -1,57 +1,61 @@
-# ============================================
-# MorseGrid Website — Whitelist .gitignore
-# Only website deployment files are tracked.
-# Internal docs, brand guides, agent directives,
-# and prototypes stay local.
-# ============================================
+# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
-# Ignore everything by default
-*
+# compiled output
+dist
+tmp
+out-tsc
+*.tsbuildinfo
+.expo
+.expo-shared
 
-# ── Website files (tracked) ──────────────────
-!.gitignore
-!index.html
-!blog.html
-!blog-post.html
-!style.css
-!site.css
-!nav.js
-!script.js
-!retell-voice.js
-!vercel.json
-!privacy-policy.html
-!terms-of-service.html
-!team.html
-!about.html
-!faq.html
-!favicon.png
-!Morsegrid logo(color).png
-!Morsegrid logo(white).png
-!Morsegrid logo(black).png
+# dependencies
+node_modules
 
-# ── Team & other images (tracked) ────────────
-!Team pictures/
-!Team pictures/**
-!Other images/
-!Other images/**
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-# ── API routes (tracked) ─────────────────────
-!api/
-!api/**
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
-# ── Blog posts (tracked) ─────────────────────
-!blog/
-!blog/**
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
 
-# ── Always ignore these ──────────────────────
+# System Files
 .DS_Store
+Thumbs.db
+
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
+
+# Replit
+.cache/
+.local/
+
+# Playwright test artifacts
+test-results/
+playwright-report/
+
+# Playwright runtime artifacts
+artifacts/morsegrid/test-results/
+artifacts/morsegrid/playwright-report/
+
+# Local env
 .env
 .env.*
-node_modules/
-venv/
-__pycache__/
-*.pyc
-
-# ── Internal & directives (never tracked) ────
-internal/
-directives/
