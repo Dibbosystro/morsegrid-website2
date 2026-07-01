@@ -59,3 +59,6 @@ artifacts/morsegrid/playwright-report/
 # Local env
 .env
 .env.*
+
+# Vercel CLI link
+.vercel

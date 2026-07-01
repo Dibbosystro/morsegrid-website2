@@ -14,6 +14,7 @@ import {
 import {
   visibleQuestions,
   isAnswered,
+  score,
   type AnswerMap,
   type AnswerValue,
 } from "@/lib/assessment-scoring";
@@ -202,6 +203,7 @@ export default function AssessmentPage() {
         body: JSON.stringify({
           sessionId,
           answers,
+          result: score(answers),
           contact: {
             name: contact.name.trim(),
             email: contact.email.trim(),
