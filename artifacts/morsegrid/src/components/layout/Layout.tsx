@@ -31,7 +31,10 @@ export function Layout({ children }: LayoutProps) {
           </>
         ) : (
           <BannerProvider>
-            <Navbar forceLight={location === "/" || location === "/proactive-agents" || location === "/products/clickup"} />
+            <Navbar
+              overlay={location === "/" || location === "/proactive-agents" || location === "/products/clickup"}
+              forceLight={location === "/proactive-agents" || location === "/products/clickup"}
+            />
             <main id="main" className="flex-1 flex flex-col">
               {children}
             </main>

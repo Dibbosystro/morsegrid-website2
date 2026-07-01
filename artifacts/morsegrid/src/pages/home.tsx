@@ -10,7 +10,8 @@ import {
   animate,
 } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, ChevronDown, Plus, Gauge, Star, SquareKanban } from "lucide-react";
+import { ArrowRight, ChevronDown, Plus, Gauge, Star, SquareKanban, Check, Route, Film, User, FileText, Send } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { usePageMeta } from "@/hooks/use-page-meta";
 import { siteConfig } from "@/config/site";
 import { FadeIn } from "@/components/ui/fade-in";
@@ -70,117 +71,176 @@ function PillBadge({ children }: { children: React.ReactNode }) {
 /* ---------- 2. Hero ---------- */
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function Hero() {
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
+const HERO_ICONS: Record<string, LucideIcon> = {
+  check: Check,
+  route: Route,
+  film: Film,
+  user: User,
+  doc: FileText,
+  send: Send,
+};
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const trimmed = email.trim();
-    if (!EMAIL_RE.test(trimmed)) {
-      setEmailError("Please enter a valid email address.");
-      return;
-    }
-    setEmailError("");
-    const params = new URLSearchParams({
-      email: trimmed,
-      utm_source: "morsegrid_hero",
-    });
-    const url = `${siteConfig.links.bookCall}?${params.toString()}`;
-    track("cta_email_capture_submit", { location: "hero", valid: true });
-    track("cta_hero_email_submit", { email: trimmed, utm_source: "morsegrid_hero" });
-    track("cta_book_call_click", { location: "hero" });
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
+type HeroEvent = {
+  icon: keyof typeof HERO_ICONS;
+  color: string;
+  bg: string;
+  action: string;
+  client: string;
+  time: string;
+};
+
+const HERO_EVENTS: HeroEvent[] = [
+  { icon: "check", color: "#2D5016", bg: "#EBF5E8", action: "Invoice #1042 sent automatically", client: "Omar City", time: "just now" },
+  { icon: "route", color: "#1a5276", bg: "#EBF5F9", action: "New lead routed to CRM", client: "Nexus Advisor", time: "1 min ago" },
+  { icon: "film", color: "#6C3483", bg: "#F4ECF7", action: "YouTube video → newsletter draft", client: "Cafe Racer Garage", time: "3 min ago" },
+  { icon: "user", color: "#7B241C", bg: "#FDEDEC", action: "Intake form submitted, practitioner notified", client: "Prana Thrive", time: "5 min ago" },
+  { icon: "check", color: "#2D5016", bg: "#EBF5E8", action: "Order fulfilled, tracking sent", client: "Omar City", time: "7 min ago" },
+  { icon: "doc", color: "#1E8449", bg: "#EAFAF1", action: "Subcontractor contract generated", client: "Nexus Advisor", time: "9 min ago" },
+  { icon: "send", color: "#1a5276", bg: "#EBF5F9", action: "Follow-up email sent to prospect", client: "Nexus Advisor", time: "11 min ago" },
+  { icon: "film", color: "#6C3483", bg: "#F4ECF7", action: "Video transcript → social captions", client: "Cafe Racer Garage", time: "13 min ago" },
+  { icon: "check", color: "#2D5016", bg: "#EBF5E8", action: "Billing synced to Xero", client: "Omar City", time: "15 min ago" },
+  { icon: "user", color: "#7B241C", bg: "#FDEDEC", action: "Patient intake thread closed cleanly", client: "Prana Thrive", time: "18 min ago" },
+];
+
+function Hero() {
+  const reduce = useReducedMotion();
+  const [feed, setFeed] = useState(() =>
+    HERO_EVENTS.slice(0, 5).map((ev, i) => ({ ...ev, key: i })),
+  );
+  const [count, setCount] = useState(247);
+
+  useEffect(() => {
+    if (reduce) return;
+    let idx = 5;
+    const id = setInterval(() => {
+      const ev = HERO_EVENTS[idx % HERO_EVENTS.length];
+      idx += 1;
+      const nextKey = idx;
+      setCount((c) => c + 1);
+      setFeed((prev) => [{ ...ev, key: nextKey }, ...prev].slice(0, 5));
+    }, 2800);
+    return () => clearInterval(id);
+  }, [reduce]);
 
   return (
-    <section className="relative pt-4 pb-4 px-4 md:px-5">
-      <div className="relative rounded-[28px] overflow-hidden min-h-[calc(100dvh-6rem)] flex flex-col">
-        <picture>
-          <source
-            type="image/avif"
-            srcSet="/images/hero-band-1280.avif 1280w, /images/hero-band-1920.avif 1920w, /images/hero-band-2560.avif 2560w"
-            sizes="100vw"
-          />
-          <source
-            type="image/webp"
-            srcSet="/images/hero-band-1280.webp 1280w, /images/hero-band-1920.webp 1920w, /images/hero-band-2560.webp 2560w"
-            sizes="100vw"
-          />
-          <img
-            src="/images/hero-band-1920.jpg"
-            srcSet="/images/hero-band-1280.jpg 1280w, /images/hero-band-1920.jpg 1920w, /images/hero-band-2560.jpg 2560w"
-            sizes="100vw"
-            alt=""
-            aria-hidden="true"
-            fetchPriority="high"
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        </picture>
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(135deg, rgba(80,110,75,0.55), rgba(180,190,140,0.35))",
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20 pointer-events-none" />
-        <div className="relative z-10 flex-1 flex flex-col justify-start pt-28 md:pt-36 pb-24 px-6 md:px-16 max-w-6xl mx-auto w-full">
-          <FadeIn>
-            <h1 className="text-5xl md:text-[4.5rem] lg:text-8xl font-semibold tracking-tight text-[#1a2418] leading-[1.02] max-w-3xl">
-              The operations studio<br />for growing businesses.
-            </h1>
-          </FadeIn>
-          <FadeIn delay={0.1}>
-            <p className="mt-6 text-lg md:text-xl text-[#1a2418]/80 max-w-xl leading-relaxed">
-              Build, optimize, and scale the internal systems that growing teams actually run on.
-            </p>
-          </FadeIn>
-          <FadeIn delay={0.2}>
-            <form
-              onSubmit={onSubmit}
-              noValidate
-              className="mt-10 flex items-center gap-2 max-w-md bg-white/30 backdrop-blur-sm rounded-full p-1.5 border border-white/40"
-            >
-              <input
-                type="email"
-                placeholder="Enter your work email"
-                aria-label="Work email"
-                aria-invalid={emailError ? true : undefined}
-                aria-describedby={emailError ? "hero-email-error" : undefined}
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (emailError) setEmailError("");
-                }}
-                className="flex-1 bg-transparent px-4 py-2 text-sm text-[#1a2418] placeholder:text-[#1a2418]/60 focus:outline-none"
-                data-testid="input-hero-email"
-              />
-              <MagneticButton>
-                <button
-                  type="submit"
-                  className="flex items-center gap-1 bg-[#0d0d0d] text-white rounded-full px-4 py-2 text-sm font-medium hover:bg-black transition-colors"
-                  data-testid="button-hero-cta"
-                >
-                  Book a call <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </MagneticButton>
-            </form>
-            {emailError && (
-              <p
-                id="hero-email-error"
-                className="mt-2 ml-4 text-sm text-red-700"
-                data-testid="text-hero-email-error"
-              >
-                {emailError}
+    <section className="px-3 sm:px-4 md:px-5 pt-3 sm:pt-4 pb-6">
+      <div
+        className="relative rounded-[24px] overflow-hidden min-h-[calc(100dvh-6rem)] shadow-[0_2px_48px_rgba(0,0,0,0.09)]"
+        style={{
+          background:
+            "linear-gradient(140deg,#EDE8E0 0%,#E4DDD4 18%,#D8D4C8 38%,#D0D8C4 58%,#C8D8B8 80%,#BFD4AC 100%)",
+        }}
+      >
+        <div className="relative z-[2] grid grid-cols-1 lg:grid-cols-2 items-center min-h-[calc(100dvh-6rem)] gap-6 lg:gap-0">
+          {/* LEFT: copy */}
+          <div className="flex flex-col px-6 pt-28 pb-6 md:px-12 lg:pl-20 lg:pr-4 lg:pt-20 lg:pb-10">
+            <FadeIn>
+              <span className="inline-flex items-center gap-2 text-[11.5px] font-bold uppercase tracking-[0.1em] text-[#131313]/50 mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2D5016]" />
+                Systems &amp; automation studio
+              </span>
+            </FadeIn>
+            <FadeIn delay={0.05}>
+              <h1 className="font-extrabold tracking-[-0.038em] leading-[1.03] text-[#131313] text-[clamp(2.25rem,4.5vw,5rem)] text-balance">
+                A small studio that<br />builds the systems<br />your business runs on.
+              </h1>
+            </FadeIn>
+            <FadeIn delay={0.12}>
+              <p className="mt-5 text-[17px] leading-[1.65] text-[#131313]/60 max-w-[470px]">
+                We work with a handful of growing companies a year. Quietly, carefully,
+                and in a way you can hand to your team when we're done.
               </p>
-            )}
-          </FadeIn>
+            </FadeIn>
+            <FadeIn delay={0.18}>
+              <div className="mt-8 flex items-center gap-2 flex-wrap">
+                <a
+                  href={siteConfig.links.bookCall}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => track("cta_book_call_click", { location: "hero" })}
+                  className="rounded-full bg-[#131313] text-white px-6 py-3 text-sm font-medium hover:bg-[#2D5016] transition-colors"
+                >
+                  Book a call
+                </a>
+                <a
+                  href="#stories"
+                  className="rounded-full px-4 py-3 text-sm font-semibold text-[#131313]/60 hover:text-[#131313] hover:bg-white/40 transition-colors"
+                >
+                  See how it works →
+                </a>
+              </div>
+            </FadeIn>
+          </div>
+
+          {/* RIGHT: live activity panel */}
+          <div className="hidden lg:flex items-center justify-center relative pr-14 pl-4" aria-hidden="true">
+            <div className="flex flex-row items-end gap-3">
+              {/* floating notification badge */}
+              <div className="shrink-0 rounded-[14px] bg-[#131313] text-white px-[18px] py-[14px] text-[13px] font-semibold leading-snug max-w-[150px] shadow-[0_8px_32px_rgba(0,0,0,0.18)]">
+                Your order has been fulfilled automatically.
+                <div className="mt-1.5 text-[11px] font-medium text-white/55">just now · Omar City</div>
+              </div>
+
+              {/* activity panel */}
+              <div className="w-[420px] max-w-full rounded-[22px] overflow-hidden border border-white/90 bg-white/[0.68] backdrop-blur-xl shadow-[0_8px_48px_rgba(0,0,0,0.10),inset_0_1px_0_rgba(255,255,255,0.6)]">
+                <div className="flex items-center justify-between px-5 py-4 border-b border-black/[0.07]">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse" />
+                    <span className="text-[12.5px] font-bold text-[#131313] tracking-tight">Live automations</span>
+                  </div>
+                  <span className="text-[11px] font-semibold text-[#2D5016] bg-[#EBF5E8] rounded-full px-2.5 py-[3px]">Running</span>
+                </div>
+
+                <div className="px-4 pt-3 pb-4 flex flex-col gap-1.5 max-h-[310px] overflow-hidden">
+                  <AnimatePresence initial={false}>
+                    {feed.map((ev) => {
+                      const Icon = HERO_ICONS[ev.icon];
+                      return (
+                        <motion.div
+                          key={ev.key}
+                          layout
+                          initial={reduce ? false : { opacity: 0, y: 14, scale: 0.97 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                          transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+                          className="flex items-center gap-2.5 px-4 py-3 rounded-[13px] bg-white/[0.72] border border-black/[0.06]"
+                        >
+                          <span
+                            className="w-8 h-8 rounded-[9px] flex items-center justify-center shrink-0"
+                            style={{ background: ev.bg, color: ev.color }}
+                          >
+                            <Icon className="w-[15px] h-[15px]" strokeWidth={2.5} />
+                          </span>
+                          <span className="flex-1 min-w-0">
+                            <span className="block text-[13px] font-semibold text-[#131313] leading-[1.35] truncate">{ev.action}</span>
+                            <span className="flex items-center gap-1.5 text-[11.5px] text-[#131313]/45 whitespace-nowrap overflow-hidden">
+                              <span className="font-semibold text-[#131313]/55">{ev.client}</span>
+                              <span className="opacity-35">·</span>
+                              <span>{ev.time}</span>
+                            </span>
+                          </span>
+                        </motion.div>
+                      );
+                    })}
+                  </AnimatePresence>
+                </div>
+
+                <div className="flex items-center gap-2 px-5 py-[18px] border-t border-black/[0.06]">
+                  <Check className="w-3.5 h-3.5 text-[#2D5016]" strokeWidth={2.5} />
+                  <span className="text-[12px] text-[#131313]/55 font-medium">All systems healthy</span>
+                  <span className="ml-auto text-[11.5px] font-semibold text-[#131313]/55">
+                    <span className="text-[#2D5016] text-[14px] font-bold tabular-nums">{count}</span> tasks today
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* scroll chevron */}
         <a
           href="#stories"
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 w-10 h-10 rounded-full bg-white/70 backdrop-blur flex items-center justify-center text-foreground hover:bg-white transition-colors"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 w-10 h-10 rounded-full bg-white/70 backdrop-blur flex items-center justify-center text-[#131313] hover:bg-white transition-colors shadow-[0_2px_16px_rgba(0,0,0,0.08)]"
           aria-label="Scroll to next section"
         >
           <ChevronDown className="w-4 h-4" />

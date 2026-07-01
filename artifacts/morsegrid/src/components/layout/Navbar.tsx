@@ -13,10 +13,13 @@ const OPEN_DELAY = 80;
 const CLOSE_DELAY = 140;
 
 interface NavbarProps {
+  /** Page has a hero the nav floats over: transparent at the very top, solid on scroll. */
+  overlay?: boolean;
+  /** White nav text (only over a DARK hero). overlay without forceLight = transparent + dark text. */
   forceLight?: boolean;
 }
 
-export function Navbar({ forceLight = false }: NavbarProps) {
+export function Navbar({ overlay = false, forceLight = false }: NavbarProps) {
   const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [rawScrollY, setRawScrollY] = useState(0);
@@ -98,10 +101,11 @@ export function Navbar({ forceLight = false }: NavbarProps) {
   };
 
   const lightMode = forceLight && !scrolled;
-  // Hero pages (forceLight) blend transparently over the hero at the very top,
-  // then solidify on scroll. Non-hero pages are solid from the top — matching
-  // the previous live site's sticky nav behaviour.
-  const solid = scrolled || !forceLight;
+  // Overlay/hero pages blend transparently at the very top and solidify on scroll.
+  // Non-overlay (inner) pages are solid from the top. Matches the old live site:
+  // homepage = transparent + dark text over the light hero; dark-hero pages =
+  // transparent + white text (forceLight).
+  const solid = scrolled || !overlay;
 
   return (
     <>
