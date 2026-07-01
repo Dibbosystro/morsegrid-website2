@@ -1,6 +1,8 @@
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useLayoutEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import type { NavDropdown } from "@/config/nav";
 
 interface MegaMenuProps {
@@ -54,7 +56,19 @@ export function MegaMenu({ open, dropdown, onItemClick, onMouseEnter, onMouseLea
   const groupCount = dropdown.groups.length;
   const isDark = dropdown.featured?.variant === "dark";
 
-  return (
+  // Anchor the panel just below the fixed navbar and centre it in the VIEWPORT
+  // (rendered through a portal so no ancestor transform clips it). Centering on
+  // the trigger pushed wide menus off the left edge on narrower desktop widths.
+  const [top, setTop] = useState(0);
+  useLayoutEffect(() => {
+    if (!open || typeof document === "undefined") return;
+    const header = document.querySelector("header");
+    if (header) setTop(header.getBoundingClientRect().bottom);
+  }, [open]);
+
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <AnimatePresence>
       {open && (
         <motion.div
@@ -62,12 +76,13 @@ export function MegaMenu({ open, dropdown, onItemClick, onMouseEnter, onMouseLea
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 4, scale: 0.99 }}
           transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute left-1/2 top-full pt-2.5 -translate-x-1/2 z-40"
+          style={{ top }}
+          className="fixed left-1/2 -translate-x-1/2 pt-2.5 z-[60]"
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         >
           <div
-            className={`${w} bg-white border border-black/[0.07] rounded-2xl shadow-xl shadow-black/[0.08] overflow-hidden`}
+            className={`${w} max-w-[calc(100vw-1.5rem)] bg-white border border-black/[0.07] rounded-2xl shadow-xl shadow-black/[0.08] overflow-hidden`}
             role="menu"
           >
             {/* Overview banner */}
@@ -184,6 +199,7 @@ export function MegaMenu({ open, dropdown, onItemClick, onMouseEnter, onMouseLea
           </div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }
