@@ -1,254 +1,125 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Mic, Loader2, StopCircle, Sparkles, AlertTriangle } from "lucide-react";
+import { Mic, Loader2, PhoneOff, Sparkles, AlertTriangle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site";
 import { track } from "@/lib/analytics";
+import type { RetellWebClient } from "retell-client-js-sdk";
 
 interface VoiceModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
-type VoiceState = "idle" | "listening" | "processing" | "done" | "error";
+// Published Morsegrid Retell agent. The API key stays server-side in the
+// /api/create-web-call function (RETELL_API_KEY).
+const AGENT_ID = "agent_058504bce8784462547b533058";
 
-const MIN_RECORDING_MS = 400;
-
-function pickMimeType(): string | undefined {
-  if (typeof MediaRecorder === "undefined") return undefined;
-  const candidates = [
-    "audio/webm;codecs=opus",
-    "audio/webm",
-    "audio/mp4;codecs=mp4a.40.2",
-    "audio/mp4",
-    "audio/ogg;codecs=opus",
-    "audio/ogg",
-  ];
-  for (const type of candidates) {
-    try {
-      if (MediaRecorder.isTypeSupported(type)) return type;
-    } catch {
-      // ignore
-    }
-  }
-  return undefined;
-}
-
-async function blobToBase64(blob: Blob): Promise<string> {
-  const buf = await blob.arrayBuffer();
-  const bytes = new Uint8Array(buf);
-  let binary = "";
-  const chunk = 0x8000;
-  for (let i = 0; i < bytes.length; i += chunk) {
-    binary += String.fromCharCode.apply(
-      null,
-      Array.from(bytes.subarray(i, i + chunk)),
-    );
-  }
-  return btoa(binary);
-}
+type CallState = "idle" | "connecting" | "active" | "ended" | "error";
+type Turn = { role: string; content: string };
 
 export function VoiceModal({ open, onOpenChange }: VoiceModalProps) {
-  const [state, setState] = useState<VoiceState>("idle");
-  const [transcript, setTranscript] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [state, setState] = useState<CallState>("idle");
+  const [agentTalking, setAgentTalking] = useState(false);
+  const [turns, setTurns] = useState<Turn[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const streamRef = useRef<MediaStream | null>(null);
-  const chunksRef = useRef<Blob[]>([]);
-  const startedAtRef = useRef<number>(0);
-  const cancelledRef = useRef<boolean>(false);
+  const clientRef = useRef<RetellWebClient | null>(null);
+  const transcriptRef = useRef<HTMLDivElement>(null);
 
-  const cleanupStream = () => {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((t) => t.stop());
-      streamRef.current = null;
-    }
-    mediaRecorderRef.current = null;
-    chunksRef.current = [];
-  };
-
-  const resetAll = () => {
-    cancelledRef.current = true;
-    cleanupStream();
-    setState("idle");
-    setTranscript("");
-    setAnswer("");
-    setErrorMessage("");
-  };
-
-  useEffect(() => {
-    if (open) {
-      cancelledRef.current = false;
-      setState("idle");
-      setTranscript("");
-      setAnswer("");
-      setErrorMessage("");
-    } else {
-      cancelledRef.current = true;
-      cleanupStream();
-    }
-  }, [open]);
-
-  useEffect(() => {
-    return () => {
-      cancelledRef.current = true;
-      cleanupStream();
-    };
-  }, []);
-
-  const sendAudio = async (blob: Blob, mimeType: string) => {
-    try {
-      const base64 = await blobToBase64(blob);
-      const apiBase = (import.meta.env.BASE_URL ?? "/").replace(/\/$/, "");
-      const response = await fetch(`${apiBase}/api/voice/ask`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ audio: base64, mimeType }),
-      });
-
-      if (cancelledRef.current) return;
-
-      if (!response.ok) {
-        let message = "Something went wrong. Please try again.";
-        try {
-          const data = await response.json();
-          if (data && typeof data.error === "string") message = data.error;
-        } catch {
-          // ignore
-        }
-        setErrorMessage(message);
-        setState("error");
-        return;
-      }
-
-      const data = (await response.json()) as { transcript?: string; answer?: string };
-      if (cancelledRef.current) return;
-
-      const transcriptValue = data.transcript ?? "";
-      setTranscript(transcriptValue);
-      setAnswer(data.answer ?? "");
-      setState("done");
-      track("cta_voice_modal_complete", { had_transcript: transcriptValue.trim().length > 0 });
-    } catch (err) {
-      if (cancelledRef.current) return;
-      setErrorMessage(
-        "We couldn't reach the assistant. Check your connection and try again.",
-      );
-      setState("error");
-    }
-  };
-
-  const handleStartListening = async () => {
-    setErrorMessage("");
-    setTranscript("");
-    setAnswer("");
-    cancelledRef.current = false;
-
-    if (typeof navigator === "undefined" || !navigator.mediaDevices?.getUserMedia) {
-      setErrorMessage("Microphone access isn't supported in this browser.");
-      setState("error");
-      return;
-    }
-
-    if (typeof MediaRecorder === "undefined") {
-      setErrorMessage("Audio recording isn't supported in this browser.");
-      setState("error");
-      return;
-    }
-
-    let stream: MediaStream;
-    try {
-      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    } catch (err) {
-      const name = (err as DOMException | undefined)?.name ?? "";
-      if (name === "NotAllowedError" || name === "SecurityError") {
-        setErrorMessage(
-          "Microphone access was blocked. Allow it in your browser settings and try again.",
-        );
-      } else if (name === "NotFoundError") {
-        setErrorMessage("We couldn't find a microphone on this device.");
-      } else {
-        setErrorMessage("We couldn't access your microphone. Please try again.");
-      }
-      setState("error");
-      return;
-    }
-
-    streamRef.current = stream;
-    const mimeType = pickMimeType();
-    let recorder: MediaRecorder;
-    try {
-      recorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
-    } catch (err) {
-      cleanupStream();
-      setErrorMessage("Audio recording isn't supported in this browser.");
-      setState("error");
-      return;
-    }
-
-    mediaRecorderRef.current = recorder;
-    chunksRef.current = [];
-    startedAtRef.current = Date.now();
-
-    recorder.ondataavailable = (event) => {
-      if (event.data && event.data.size > 0) {
-        chunksRef.current.push(event.data);
-      }
-    };
-
-    recorder.onstop = async () => {
-      const recordedMime = recorder.mimeType || mimeType || "audio/webm";
-      const blob = new Blob(chunksRef.current, { type: recordedMime });
-      cleanupStream();
-
-      if (cancelledRef.current) return;
-
-      if (Date.now() - startedAtRef.current < MIN_RECORDING_MS || blob.size === 0) {
-        setErrorMessage("That was a bit too short — try holding the mic on while you ask.");
-        setState("error");
-        return;
-      }
-
-      setState("processing");
-      await sendAudio(blob, recordedMime);
-    };
-
-    recorder.onerror = () => {
-      cleanupStream();
-      if (cancelledRef.current) return;
-      setErrorMessage("The recording stopped unexpectedly. Please try again.");
-      setState("error");
-    };
-
-    try {
-      recorder.start();
-      setState("listening");
-    } catch (err) {
-      cleanupStream();
-      setErrorMessage("We couldn't start recording. Please try again.");
-      setState("error");
-    }
-  };
-
-  const handleStopListening = () => {
-    const recorder = mediaRecorderRef.current;
-    if (recorder && recorder.state === "recording") {
+  const endCall = useCallback(() => {
+    const c = clientRef.current;
+    clientRef.current = null;
+    if (c) {
       try {
-        recorder.stop();
+        c.stopCall();
       } catch {
         // ignore
       }
     }
+    setAgentTalking(false);
+  }, []);
+
+  const resetAll = useCallback(() => {
+    endCall();
+    setState("idle");
+    setTurns([]);
+    setErrorMessage("");
+  }, [endCall]);
+
+  // Tear the call down when the modal closes or the component unmounts.
+  useEffect(() => {
+    if (!open) endCall();
+  }, [open, endCall]);
+  useEffect(() => () => endCall(), [endCall]);
+
+  // Keep the live transcript scrolled to the latest turn.
+  useEffect(() => {
+    const el = transcriptRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [turns]);
+
+  const startCall = async () => {
+    setErrorMessage("");
+    setTurns([]);
+    setState("connecting");
+
+    try {
+      const apiBase = (import.meta.env.BASE_URL ?? "/").replace(/\/$/, "");
+      const res = await fetch(`${apiBase}/api/create-web-call`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ agent_id: AGENT_ID }),
+      });
+      if (!res.ok) throw new Error("create-web-call failed");
+      const data = (await res.json()) as { access_token?: string };
+      if (!data.access_token) throw new Error("no access_token");
+
+      // Lazy-load the SDK (pulls in a WebRTC client) only when a call starts.
+      const { RetellWebClient } = await import("retell-client-js-sdk");
+      const client = new RetellWebClient();
+      clientRef.current = client;
+
+      client.on("call_started", () => setState("active"));
+      client.on("call_ended", () => {
+        clientRef.current = null;
+        setAgentTalking(false);
+        setState((s) => (s === "error" ? s : "ended"));
+      });
+      client.on("agent_start_talking", () => setAgentTalking(true));
+      client.on("agent_stop_talking", () => setAgentTalking(false));
+      client.on("update", (update: { transcript?: Turn[] }) => {
+        if (update && Array.isArray(update.transcript)) setTurns(update.transcript);
+      });
+      client.on("error", (err: unknown) => {
+        console.error("[retell] call error:", err);
+        setErrorMessage("The call ran into a problem. Please try again.");
+        setState("error");
+        try {
+          client.stopCall();
+        } catch {
+          // ignore
+        }
+        clientRef.current = null;
+      });
+
+      await client.startCall({ accessToken: data.access_token });
+      track("cta_voice_modal_open", { location: "modal", provider: "retell" });
+    } catch (err) {
+      console.error(err);
+      setErrorMessage(
+        "We couldn't start the call. Allow microphone access and try again.",
+      );
+      setState("error");
+      clientRef.current = null;
+    }
   };
 
-  const handleAskAnother = () => {
-    setState("idle");
-    setTranscript("");
-    setAnswer("");
-    setErrorMessage("");
+  const handleEnd = () => {
+    endCall();
+    track("cta_voice_modal_complete", { turns: turns.length });
+    setState("ended");
   };
 
   return (
@@ -265,11 +136,12 @@ export function VoiceModal({ open, onOpenChange }: VoiceModalProps) {
             Ask anything <Sparkles className="w-5 h-5 text-primary" />
           </DialogTitle>
           <DialogDescription className="text-muted-foreground">
-            Tap the mic and ask Morsegrid a question. We'll transcribe it and reply with how we'd actually approach it.
+            Have a real voice conversation with the Morsegrid assistant about how we'd
+            approach your operations. Speak naturally, it listens and replies live.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="flex flex-col items-center justify-center py-8 min-h-[200px]">
+        <div className="flex flex-col items-center justify-center py-8 min-h-[220px]">
           <AnimatePresence mode="wait">
             {state === "idle" && (
               <motion.div
@@ -284,108 +156,96 @@ export function VoiceModal({ open, onOpenChange }: VoiceModalProps) {
                   <Mic className="w-10 h-10 text-primary" />
                 </div>
                 <Button
-                  onClick={handleStartListening}
+                  onClick={startCall}
                   className="rounded-full px-8 bg-foreground text-background hover:bg-foreground/90"
-                  data-testid="button-start-speaking"
+                  data-testid="button-start-call"
                 >
-                  Start speaking
+                  Start call
                 </Button>
+                <p className="text-xs text-muted-foreground">Uses your microphone.</p>
               </motion.div>
             )}
 
-            {state === "listening" && (
+            {state === "connecting" && (
               <motion.div
-                key="listening"
+                key="connecting"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="flex flex-col items-center gap-6 w-full"
+                className="flex flex-col items-center gap-4 text-center"
               >
-                <div className="flex items-center gap-2 h-16">
-                  {[1, 2, 3, 4, 5].map((i) => (
+                <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
+                  <Loader2 className="w-8 h-8 text-primary animate-spin" />
+                </div>
+                <p className="text-sm text-muted-foreground">Connecting you to the assistant...</p>
+              </motion.div>
+            )}
+
+            {state === "active" && (
+              <motion.div
+                key="active"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="flex flex-col items-center gap-5 w-full"
+              >
+                <div className="flex items-center gap-1.5 h-14">
+                  {[0, 1, 2, 3, 4].map((i) => (
                     <motion.div
                       key={i}
-                      className="w-2 bg-primary rounded-full"
-                      animate={{
-                        height: ["20%", "100%", "20%"],
-                      }}
-                      transition={{
-                        duration: 1,
-                        repeat: Infinity,
-                        delay: i * 0.1,
-                      }}
+                      className="w-2 rounded-full bg-primary"
+                      animate={{ height: agentTalking ? ["25%", "100%", "25%"] : ["20%", "35%", "20%"] }}
+                      transition={{ duration: agentTalking ? 0.7 : 1.6, repeat: Infinity, delay: i * 0.1 }}
                     />
                   ))}
                 </div>
-                <p className="text-muted-foreground animate-pulse">Listening...</p>
+                <p className="text-sm font-medium text-foreground">
+                  {agentTalking ? "Assistant is speaking..." : "Listening — go ahead"}
+                </p>
+
+                {turns.length > 0 && (
+                  <div
+                    ref={transcriptRef}
+                    className="w-full max-h-40 overflow-y-auto rounded-lg border border-border bg-muted/40 p-3 space-y-2"
+                  >
+                    {turns.slice(-6).map((t, i) => (
+                      <p key={i} className="text-xs leading-relaxed">
+                        <span className={t.role === "agent" ? "font-semibold text-primary" : "font-semibold text-foreground"}>
+                          {t.role === "agent" ? "Assistant" : "You"}:
+                        </span>{" "}
+                        <span className="text-foreground/80">{t.content}</span>
+                      </p>
+                    ))}
+                  </div>
+                )}
+
                 <Button
                   variant="outline"
-                  onClick={handleStopListening}
+                  onClick={handleEnd}
                   className="rounded-full"
-                  data-testid="button-stop-listening"
+                  data-testid="button-end-call"
                 >
-                  <StopCircle className="w-4 h-4 mr-2" /> Stop
+                  <PhoneOff className="w-4 h-4 mr-2" /> End call
                 </Button>
               </motion.div>
             )}
 
-            {state === "processing" && (
+            {state === "ended" && (
               <motion.div
-                key="processing"
+                key="ended"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 className="flex flex-col items-center gap-4 w-full text-center"
               >
-                <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
-                  <Loader2 className="w-8 h-8 text-primary animate-spin" />
-                </div>
-                <div className="space-y-2">
-                  <p className="text-sm text-muted-foreground">Transcribing and thinking...</p>
-                </div>
-              </motion.div>
-            )}
-
-            {state === "done" && (
-              <motion.div
-                key="done"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="flex flex-col gap-6 w-full"
-              >
-                {transcript && (
-                  <div
-                    className="bg-muted/50 p-4 rounded-lg border border-border"
-                    data-testid="text-transcript"
-                  >
-                    <p className="text-sm font-medium italic text-foreground mb-2">You asked:</p>
-                    <p className="text-sm text-foreground">"{transcript}"</p>
-                  </div>
-                )}
-
-                <div className="space-y-3" data-testid="text-answer">
-                  {answer
-                    .split(/\n\n+/)
-                    .filter((p) => p.trim().length > 0)
-                    .map((paragraph, idx) => (
-                      <p key={idx} className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">
-                        {paragraph}
-                      </p>
-                    ))}
-                </div>
-
-                <div className="flex justify-end gap-2 pt-2">
-                  <Button
-                    variant="outline"
-                    onClick={handleAskAnother}
-                    data-testid="button-ask-another"
-                  >
-                    Ask another
+                <p className="text-sm text-foreground">Thanks for the chat.</p>
+                <div className="flex justify-center gap-2 pt-1">
+                  <Button variant="outline" onClick={resetAll} data-testid="button-call-again">
+                    Call again
                   </Button>
                   <Button asChild className="bg-foreground text-background hover:bg-foreground/90 rounded-full">
                     <a href={siteConfig.links.bookCall} target="_blank" rel="noopener noreferrer">
-                      Discuss this
+                      Book a call
                     </a>
                   </Button>
                 </div>
@@ -407,7 +267,7 @@ export function VoiceModal({ open, onOpenChange }: VoiceModalProps) {
                   {errorMessage || "Something went wrong. Please try again."}
                 </p>
                 <Button
-                  onClick={handleAskAnother}
+                  onClick={resetAll}
                   className="rounded-full px-6 bg-foreground text-background hover:bg-foreground/90"
                   data-testid="button-try-again"
                 >
