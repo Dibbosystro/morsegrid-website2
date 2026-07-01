@@ -101,7 +101,12 @@ export function TestimonialCarousel() {
     const container = tabsRef.current;
     if (!container) return;
     const tab = container.children[index] as HTMLElement | undefined;
-    if (tab) tab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    if (!tab) return;
+    // Scroll the tab strip horizontally within its OWN container only.
+    // element.scrollIntoView() here scrolled the whole page down to the carousel
+    // (it sits below the fold), which yanked the homepage down ~6s after load.
+    const target = tab.offsetLeft - container.clientWidth / 2 + tab.clientWidth / 2;
+    container.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
   }
 
   useEffect(() => {
