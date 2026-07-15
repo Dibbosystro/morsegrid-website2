@@ -26,7 +26,7 @@ const founder = {
   image: "/team/maks.png",
 };
 
-const team = [
+const team: { name: string; title: string; image: string; imgPos?: string }[] = [
   {
     name: "Dibbo Das",
     title: "Performance Marketing Manager",
@@ -36,6 +36,7 @@ const team = [
     name: "Arshi Irtiza",
     title: "Sales Development Representative",
     image: "/team/arshi.jpg",
+    imgPos: "object-[center_25%]",
   },
   {
     name: "Faiyaz Hossain",
@@ -123,14 +124,14 @@ export default function Company() {
             <h2 className="text-2xl md:text-3xl font-bold">Team</h2>
             <p className="text-muted-foreground mt-2">The people who build and deliver your systems.</p>
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
             {team.map((member, i) => (
               <FadeIn key={member.name} delay={i * 0.08}>
                 <div className="bg-card border border-border rounded-2xl overflow-hidden h-full flex flex-col">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full aspect-[4/3] object-cover object-top"
+                    className={`w-full aspect-[4/3] object-cover ${member.imgPos ?? "object-top"}`}
                   />
                   <div className="p-5">
                     <div className="font-semibold text-lg">{member.name}</div>
