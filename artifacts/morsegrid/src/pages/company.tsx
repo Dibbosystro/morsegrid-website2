@@ -33,7 +33,7 @@ const team = [
     image: "/team/dibbo.png",
   },
   {
-    name: "Arshi Irtiaz",
+    name: "Arshi Irtiza",
     title: "Sales Development Representative",
     image: "/team/arshi.jpg",
   },
@@ -46,16 +46,6 @@ const team = [
     name: "Z B Nishat",
     title: "GTM Engineer",
     image: "/team/nishat.jpg",
-  },
-  {
-    name: "Albhi Fahad",
-    title: "Head Of Delivery",
-    image: "/team/albhi.jpg",
-  },
-  {
-    name: "Fatema Lele",
-    title: "Marketing Copywriter",
-    image: "/team/fatema.jpg",
   },
 ];
 
