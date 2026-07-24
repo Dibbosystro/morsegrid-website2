@@ -207,10 +207,10 @@ export function Navbar({ overlay = false, forceLight = false }: NavbarProps) {
                 track("cta_voice_modal_open", { location: "nav" });
                 setVoiceModalOpen(true);
               }}
-              className={`flex items-center gap-1.5 text-sm font-medium hover:opacity-80 transition-all duration-[250ms] ease-out px-4 py-1.5 rounded-full border whitespace-nowrap ${
+              className={`flex items-center gap-1.5 text-sm font-medium transition-all duration-[250ms] ease-out px-4 py-1.5 rounded-full border whitespace-nowrap ${
                 lightMode
-                  ? "text-white border-white/35"
-                  : "text-foreground border-black/10"
+                  ? "bg-white/15 text-white border-white/35 hover:bg-white/25"
+                  : "bg-white text-foreground border-black/10 shadow-sm hover:bg-[#efeaff] hover:text-[#5b45d6] hover:border-[#7d6cf0]/40"
               }`}
               aria-label="Ask anything"
               data-testid="button-ask-anything"
@@ -259,7 +259,7 @@ export function Navbar({ overlay = false, forceLight = false }: NavbarProps) {
             exit={{ opacity: 0, y: -20 }}
             id="mobile-nav"
             style={{ paddingTop: (bannerVisible ? BANNER_HEIGHT : 0) + 100 }}
-            className="fixed inset-0 z-40 bg-background px-4 pb-6 flex flex-col md:hidden overflow-y-auto"
+            className="fixed inset-0 z-40 bg-background px-7 pb-10 flex flex-col md:hidden overflow-y-auto"
           >
             <nav className="flex flex-col gap-1">
               {navLinks.map((link) => {
