@@ -117,7 +117,7 @@ export function Navbar({ overlay = false, forceLight = false }: NavbarProps) {
         {/* Inset floating pill — geometry stays constant; only the background
             transitions transparent -> frosted white on scroll, so it blends with
             the hero at the top and becomes a solid sticky bar once you scroll. */}
-        <div className="px-4 sm:px-6 pt-4 sm:pt-6">
+        <div className="px-4 sm:px-6 pt-6 sm:pt-8">
         <motion.div
           initial={false}
           animate={{

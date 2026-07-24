@@ -123,6 +123,29 @@ function Hero() {
             "linear-gradient(140deg,#F2F1F7 0%,#EAE7F3 22%,#E0DBEF 45%,#D3CCE8 70%,#C6BCE2 100%)",
         }}
       >
+        {/* background image (Milad Fakurian, Unsplash) */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 z-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/hero-bg-1920.jpg')" }}
+        />
+        {/* diagonal light scrim: keeps the left copy legible, image shows through on the right */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-[1]"
+          style={{
+            background:
+              "linear-gradient(100deg,rgba(242,241,247,0.95) 0%,rgba(242,241,247,0.72) 34%,rgba(242,241,247,0.22) 58%,rgba(255,255,255,0) 82%)",
+          }}
+        />
+        {/* soft top scrim so the nav bar stays legible over the image */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[150px]"
+          style={{
+            background: "linear-gradient(to bottom,rgba(242,241,247,0.6),rgba(242,241,247,0))",
+          }}
+        />
         {/* soft violet glow, top-right */}
         <div
           aria-hidden="true"
