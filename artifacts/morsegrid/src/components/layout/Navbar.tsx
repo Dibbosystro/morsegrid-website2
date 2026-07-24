@@ -258,9 +258,10 @@ export function Navbar({ overlay = false, forceLight = false }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             id="mobile-nav"
-            className="fixed inset-0 z-40 bg-background pt-16 px-4 pb-6 flex flex-col md:hidden overflow-y-auto"
+            style={{ paddingTop: (bannerVisible ? BANNER_HEIGHT : 0) + 100 }}
+            className="fixed inset-0 z-40 bg-background px-4 pb-6 flex flex-col md:hidden overflow-y-auto"
           >
-            <nav className="flex flex-col gap-1 mt-4">
+            <nav className="flex flex-col gap-1">
               {navLinks.map((link) => {
                 if (!link.dropdown) {
                   return (

@@ -146,6 +146,15 @@ function Hero() {
             background: "linear-gradient(to bottom,rgba(242,241,247,0.6),rgba(242,241,247,0))",
           }}
         />
+        {/* mobile-only light wash: the diagonal scrim is tuned for the desktop two-column split, so on narrow screens we lighten the whole hero to keep the copy readable over the image */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-[1] lg:hidden"
+          style={{
+            background:
+              "linear-gradient(to bottom,rgba(242,241,247,0.82) 0%,rgba(242,241,247,0.62) 42%,rgba(242,241,247,0.4) 72%,rgba(242,241,247,0.18) 100%)",
+          }}
+        />
         {/* soft violet glow, top-right */}
         <div
           aria-hidden="true"
@@ -154,7 +163,7 @@ function Hero() {
         />
         <div className="relative z-[2] grid grid-cols-1 lg:grid-cols-2 items-center min-h-[calc(100dvh-6rem)] gap-6 lg:gap-0">
           {/* LEFT: copy */}
-          <div className="flex flex-col px-6 pt-28 pb-6 md:px-12 lg:pl-20 lg:pr-4 lg:pt-20 lg:pb-10">
+          <div className="flex flex-col px-6 pt-12 pb-6 sm:pt-16 md:px-12 lg:pl-20 lg:pr-4 lg:pt-20 lg:pb-10">
             <FadeIn>
               <span className="inline-flex items-center gap-2 text-[11.5px] font-bold uppercase tracking-[0.1em] text-[#131313]/50 mb-5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#7d6cf0]" />
@@ -167,7 +176,7 @@ function Hero() {
               </h1>
             </FadeIn>
             <FadeIn delay={0.12}>
-              <p className="mt-5 text-[17px] leading-[1.65] text-[#131313]/60 max-w-[470px]">
+              <p className="mt-5 text-[17px] leading-[1.65] text-[#131313]/75 max-w-[470px]">
                 We work with a handful of growing companies a year. Quietly, carefully,
                 and in a way you can hand to your team when we're done.
               </p>
@@ -185,7 +194,7 @@ function Hero() {
                 </a>
                 <a
                   href="#stories"
-                  className="rounded-full px-4 py-3 text-sm font-semibold text-[#131313]/60 hover:text-[#131313] hover:bg-white/40 transition-colors"
+                  className="rounded-full px-4 py-3 text-sm font-semibold text-[#131313]/75 hover:text-[#131313] hover:bg-white/40 transition-colors"
                 >
                   See how it works →
                 </a>
