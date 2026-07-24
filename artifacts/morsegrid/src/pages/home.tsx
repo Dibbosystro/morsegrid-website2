@@ -161,11 +161,11 @@ function Hero() {
           className="pointer-events-none absolute -top-[140px] -right-[90px] w-[540px] h-[540px] z-[1] rounded-full blur-[40px] mix-blend-screen"
           style={{ background: "radial-gradient(circle at center,rgba(125,108,240,0.22),transparent 66%)" }}
         />
-        <div className="relative z-[2] grid grid-cols-1 lg:grid-cols-2 items-start lg:items-center min-h-[calc(100dvh-6rem)] gap-6 lg:gap-0">
-          {/* LEFT: copy — top-aligned on mobile (just clearing the nav) so the hero
-              copy sits high instead of being vertically centered in the tall hero;
-              re-centered against the activity card from lg up */}
-          <div className="flex flex-col px-6 pt-32 pb-6 md:px-12 lg:pl-20 lg:pr-4 lg:pt-20 lg:pb-10">
+        <div className="relative z-[2] grid grid-cols-1 lg:grid-cols-2 items-center min-h-[calc(100dvh-6rem)] gap-6 lg:gap-0">
+          {/* LEFT: copy — vertically centered in the tall hero card so the empty
+              space above (below the nav) and below (above the scroll cue) stays
+              even on mobile; re-centered against the activity card from lg up */}
+          <div className="flex flex-col px-6 py-6 md:px-12 lg:pl-20 lg:pr-4 lg:pt-20 lg:pb-10">
             <FadeIn>
               <span className="inline-flex items-center gap-2 text-[11.5px] font-bold uppercase tracking-[0.1em] text-[#131313]/50 mb-5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#7d6cf0]" />
