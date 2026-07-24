@@ -117,16 +117,16 @@ export function Navbar({ overlay = false, forceLight = false }: NavbarProps) {
         {/* Inset floating pill — geometry stays constant; only the background
             transitions transparent -> frosted white on scroll, so it blends with
             the hero at the top and becomes a solid sticky bar once you scroll. */}
-        <div className="px-4 sm:px-6 pt-2 sm:pt-3">
+        <div className="px-4 sm:px-6 pt-4 sm:pt-6">
         <motion.div
           initial={false}
           animate={{
-            backgroundColor: solid ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0)",
-            borderColor: solid ? "rgba(0,0,0,0.07)" : "rgba(0,0,0,0)",
-            boxShadow: solid ? "0 4px 24px rgba(0,0,0,0.08)" : "0 0 0 rgba(0,0,0,0)",
+            backgroundColor: solid ? "rgba(255,255,255,0.65)" : "rgba(255,255,255,0)",
+            borderColor: solid ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0)",
+            boxShadow: solid ? "0 8px 32px rgba(17,17,17,0.10)" : "0 0 0 rgba(0,0,0,0)",
           }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className={`relative w-full rounded-[22px] border ${solid ? "backdrop-blur-md" : ""}`}
+          className={`relative w-full rounded-[22px] border ${solid ? "backdrop-blur-xl backdrop-saturate-150" : ""}`}
         >
           <div className="flex items-center h-16 w-full px-5 md:px-8 md:grid md:grid-cols-[auto_1fr_auto] md:items-center">
           <Link href="/" className="flex items-center gap-2 group relative z-50 shrink-0">

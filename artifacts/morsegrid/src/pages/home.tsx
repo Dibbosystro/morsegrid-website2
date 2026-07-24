@@ -82,16 +82,16 @@ type HeroEvent = {
 };
 
 const HERO_EVENTS: HeroEvent[] = [
-  { icon: "check", color: "#2D5016", bg: "#EBF5E8", action: "Invoice #1042 sent automatically", client: "Omar City", time: "just now" },
-  { icon: "route", color: "#1a5276", bg: "#EBF5F9", action: "New lead routed to CRM", client: "Charlie Property", time: "1 min ago" },
-  { icon: "film", color: "#6C3483", bg: "#F4ECF7", action: "YouTube video → newsletter draft", client: "Cafe Racer Garage", time: "3 min ago" },
-  { icon: "user", color: "#7B241C", bg: "#FDEDEC", action: "Intake form submitted, practitioner notified", client: "Prana Thrive", time: "5 min ago" },
-  { icon: "check", color: "#2D5016", bg: "#EBF5E8", action: "Order fulfilled, tracking sent", client: "Omar City", time: "7 min ago" },
-  { icon: "doc", color: "#1E8449", bg: "#EAFAF1", action: "Subcontractor contract generated", client: "Charlie Property", time: "9 min ago" },
-  { icon: "send", color: "#1a5276", bg: "#EBF5F9", action: "Follow-up email sent to prospect", client: "22 Workflows", time: "11 min ago" },
-  { icon: "film", color: "#6C3483", bg: "#F4ECF7", action: "Video transcript → social captions", client: "Cafe Racer Garage", time: "13 min ago" },
-  { icon: "check", color: "#2D5016", bg: "#EBF5E8", action: "Billing synced to Xero", client: "Omar City", time: "15 min ago" },
-  { icon: "user", color: "#7B241C", bg: "#FDEDEC", action: "Patient intake thread closed cleanly", client: "Prana Thrive", time: "18 min ago" },
+  { icon: "check", color: "#5b45d6", bg: "#efeaff", action: "Invoice #1042 sent automatically", client: "Omar City", time: "just now" },
+  { icon: "route", color: "#3f57b8", bg: "#e7ecfb", action: "New lead routed to CRM", client: "Charlie Property", time: "1 min ago" },
+  { icon: "film", color: "#6a3f9e", bg: "#f2ecfa", action: "YouTube video → newsletter draft", client: "Cafe Racer Garage", time: "3 min ago" },
+  { icon: "user", color: "#475569", bg: "#eef0f3", action: "Intake form submitted, practitioner notified", client: "Prana Thrive", time: "5 min ago" },
+  { icon: "check", color: "#24618a", bg: "#e6f0fa", action: "Order fulfilled, tracking sent", client: "Omar City", time: "7 min ago" },
+  { icon: "doc", color: "#3f57b8", bg: "#e7ecfb", action: "Subcontractor contract generated", client: "Charlie Property", time: "9 min ago" },
+  { icon: "send", color: "#24618a", bg: "#e6f0fa", action: "Follow-up email sent to prospect", client: "22 Workflows", time: "11 min ago" },
+  { icon: "film", color: "#6a3f9e", bg: "#f2ecfa", action: "Video transcript → social captions", client: "Cafe Racer Garage", time: "13 min ago" },
+  { icon: "check", color: "#5b45d6", bg: "#efeaff", action: "Billing synced to Xero", client: "Omar City", time: "15 min ago" },
+  { icon: "user", color: "#475569", bg: "#eef0f3", action: "Patient intake thread closed cleanly", client: "Prana Thrive", time: "18 min ago" },
 ];
 
 function Hero() {
@@ -120,15 +120,21 @@ function Hero() {
         className="relative rounded-[24px] overflow-hidden min-h-[calc(100dvh-6rem)] shadow-[0_2px_48px_rgba(0,0,0,0.09)]"
         style={{
           background:
-            "linear-gradient(140deg,#EDE8E0 0%,#E4DDD4 18%,#D8D4C8 38%,#D0D8C4 58%,#C8D8B8 80%,#BFD4AC 100%)",
+            "linear-gradient(140deg,#F2F1F7 0%,#EAE7F3 22%,#E0DBEF 45%,#D3CCE8 70%,#C6BCE2 100%)",
         }}
       >
+        {/* soft violet glow, top-right */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-[140px] -right-[90px] w-[540px] h-[540px] z-[1] rounded-full blur-[40px] mix-blend-screen"
+          style={{ background: "radial-gradient(circle at center,rgba(125,108,240,0.22),transparent 66%)" }}
+        />
         <div className="relative z-[2] grid grid-cols-1 lg:grid-cols-2 items-center min-h-[calc(100dvh-6rem)] gap-6 lg:gap-0">
           {/* LEFT: copy */}
           <div className="flex flex-col px-6 pt-28 pb-6 md:px-12 lg:pl-20 lg:pr-4 lg:pt-20 lg:pb-10">
             <FadeIn>
               <span className="inline-flex items-center gap-2 text-[11.5px] font-bold uppercase tracking-[0.1em] text-[#131313]/50 mb-5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2D5016]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#7d6cf0]" />
                 Systems &amp; automation studio
               </span>
             </FadeIn>
@@ -150,7 +156,7 @@ function Hero() {
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => track("cta_book_call_click", { location: "hero" })}
-                  className="rounded-full bg-[#131313] text-white px-6 py-3 text-sm font-medium hover:bg-[#2D5016] transition-colors"
+                  className="rounded-full bg-[#131313] text-white px-6 py-3 text-sm font-medium hover:bg-[#7d6cf0] transition-colors"
                 >
                   Book a call
                 </a>
@@ -177,10 +183,10 @@ function Hero() {
               <div className="w-[420px] max-w-full rounded-[22px] overflow-hidden border border-white/90 bg-white/[0.68] backdrop-blur-xl shadow-[0_8px_48px_rgba(0,0,0,0.10),inset_0_1px_0_rgba(255,255,255,0.6)]">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-black/[0.07]">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse" />
+                    <span className="w-2 h-2 rounded-full bg-[#7d6cf0] animate-pulse" />
                     <span className="text-[12.5px] font-bold text-[#131313] tracking-tight">Live automations</span>
                   </div>
-                  <span className="text-[11px] font-semibold text-[#2D5016] bg-[#EBF5E8] rounded-full px-2.5 py-[3px]">Running</span>
+                  <span className="text-[11px] font-semibold text-[#5b45d6] bg-[#efeaff] rounded-full px-2.5 py-[3px]">Running</span>
                 </div>
 
                 <div className="px-4 pt-3 pb-4 flex flex-col gap-1.5 max-h-[310px] overflow-hidden">
@@ -218,10 +224,10 @@ function Hero() {
                 </div>
 
                 <div className="flex items-center gap-2 px-5 py-[18px] border-t border-black/[0.06]">
-                  <Check className="w-3.5 h-3.5 text-[#2D5016]" strokeWidth={2.5} />
+                  <Check className="w-3.5 h-3.5 text-[#5b45d6]" strokeWidth={2.5} />
                   <span className="text-[12px] text-[#131313]/55 font-medium">All systems healthy</span>
                   <span className="ml-auto text-[11.5px] font-semibold text-[#131313]/55">
-                    <span className="text-[#2D5016] text-[14px] font-bold tabular-nums">{count}</span> tasks today
+                    <span className="text-[#5b45d6] text-[14px] font-bold tabular-nums">{count}</span> tasks today
                   </span>
                 </div>
               </div>
