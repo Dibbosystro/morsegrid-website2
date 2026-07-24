@@ -65,11 +65,11 @@ function OmarCityLogo(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-function CorbyGroupLogo(props: SVGProps<SVGSVGElement>) {
+function CharliePropertyLogo(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg {...baseProps(props)} aria-label="Corby Group">
-      <text x="0" y="22" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="16" fontWeight="600" fill="currentColor" letterSpacing="0.3">
-        Corby Group
+    <svg {...baseProps(props)} aria-label="Charlie Property">
+      <text x="0" y="22" fontFamily="ui-serif, Georgia, serif" fontSize="15" fontWeight="600" fill="currentColor" letterSpacing="0.2">
+        Charlie Property
       </text>
     </svg>
   );
@@ -95,11 +95,21 @@ function TwentyTwoWorkflowsLogo(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-function NexusAdvisorLogo(props: SVGProps<SVGSVGElement>) {
+function ISSAutomotiveLogo(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg {...baseProps(props)} aria-label="Nexus Advisor">
-      <text x="0" y="22" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="16" fontWeight="600" fill="currentColor" letterSpacing="0.2">
-        Nexus Advisor
+    <svg {...baseProps(props)} aria-label="ISS Automotive">
+      <text x="0" y="22" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="15" fontWeight="700" fill="currentColor" letterSpacing="0.3">
+        ISS Automotive
+      </text>
+    </svg>
+  );
+}
+
+function BeyondTheStatesLogo(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...baseProps(props)} aria-label="Beyond The States">
+      <text x="0" y="22" fontFamily="ui-sans-serif, system-ui, sans-serif" fontSize="14" fontWeight="600" fill="currentColor">
+        Beyond The States
       </text>
     </svg>
   );
@@ -109,10 +119,11 @@ export const CUSTOMERS: CustomerBrand[] = [
   { slug: "cafe-racer-garage", name: "Cafe Racer Garage", color: "#1a2418", Logo: CafeRacerLogo },
   { slug: "only-crits", name: "Only Crits", color: "#2d4a8a", Logo: OnlyCritsLogo },
   { slug: "omar-city", name: "Omar City", color: "#5a3a2a", Logo: OmarCityLogo },
-  { slug: "corby-group", name: "Corby Group", color: "#1f3a6e", Logo: CorbyGroupLogo },
+  { slug: "charlie-property", name: "Charlie Property", color: "#3a5a3a", Logo: CharliePropertyLogo },
   { slug: "prana-thrive", name: "Prana Thrive", color: "#c46b1a", Logo: PranaThrivelogo },
   { slug: "22-workflows", name: "22 Workflows", color: "#0f6fff", Logo: TwentyTwoWorkflowsLogo },
-  { slug: "nexus-advisor", name: "Nexus Advisor", color: "#3a5a8a", Logo: NexusAdvisorLogo },
+  { slug: "iss-automotive", name: "ISS Automotive", color: "#8a2a2a", Logo: ISSAutomotiveLogo },
+  { slug: "beyond-the-states", name: "Beyond The States", color: "#2a4a6a", Logo: BeyondTheStatesLogo },
 ];
 
 export type CustomerStory = {

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "wouter";
 import { siteConfig } from "@/config/site";
 import { track } from "@/lib/analytics";
@@ -7,8 +6,6 @@ type FooterLink = { label: string; href: string; external?: boolean };
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
 
   const cols: { title: string; links: FooterLink[] }[] = [
     {
@@ -62,62 +59,9 @@ export function Footer() {
     },
   ];
 
-  function handleSubscribe(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setSubscribed(true);
-  }
-
   return (
     <footer className="bg-[#0d0d0d] text-white pt-16 pb-8">
       <div className="container mx-auto px-6 md:px-10">
-        <div className="mb-14 rounded-3xl bg-white/5 border border-white/10 p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div className="max-w-md">
-            <div className="text-xs font-semibold uppercase tracking-wider text-primary mb-2">
-              Field notes
-            </div>
-            <h3 className="text-xl md:text-2xl font-semibold leading-snug">
-              One short email a month on what we're shipping and learning.
-            </h3>
-          </div>
-          {subscribed ? (
-            <div
-              role="status"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/15 text-primary text-sm font-medium"
-              data-testid="newsletter-thanks"
-            >
-              Thanks — we'll be in touch.
-            </div>
-          ) : (
-            <form
-              onSubmit={handleSubscribe}
-              className="flex flex-col sm:flex-row gap-2 w-full md:w-auto"
-              data-testid="newsletter-form"
-            >
-              <label htmlFor="footer-email" className="sr-only">
-                Work email
-              </label>
-              <input
-                id="footer-email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@company.com"
-                className="rounded-full bg-white/10 border border-white/15 text-white placeholder:text-white/40 px-5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 min-w-[260px]"
-                data-testid="newsletter-email"
-              />
-              <button
-                type="submit"
-                className="rounded-full bg-white text-[#0d0d0d] px-5 py-2.5 text-sm font-semibold hover:bg-white/90 transition-colors"
-                data-testid="newsletter-submit"
-              >
-                Subscribe
-              </button>
-            </form>
-          )}
-        </div>
-
         <div className="grid grid-cols-2 md:grid-cols-6 gap-10 mb-16">
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">

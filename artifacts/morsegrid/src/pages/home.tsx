@@ -10,7 +10,7 @@ import {
   animate,
 } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, ChevronDown, Plus, Gauge, Star, SquareKanban, Check, Route, Film, User, FileText, Send } from "lucide-react";
+import { ArrowRight, ChevronDown, SquareKanban, Check, Route, Film, User, FileText, Send } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { usePageMeta } from "@/hooks/use-page-meta";
 import { siteConfig } from "@/config/site";
@@ -60,14 +60,6 @@ function ResponsiveImage({
 const ACCENT = "text-[#7d6cf0]";
 const ACCENT_BG = "bg-[#7d6cf0]";
 
-function PillBadge({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-black/10 text-xs font-medium text-foreground shadow-sm">
-      <Plus className="w-3 h-3" /> {children}
-    </span>
-  );
-}
-
 /* ---------- 2. Hero ---------- */
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -91,12 +83,12 @@ type HeroEvent = {
 
 const HERO_EVENTS: HeroEvent[] = [
   { icon: "check", color: "#2D5016", bg: "#EBF5E8", action: "Invoice #1042 sent automatically", client: "Omar City", time: "just now" },
-  { icon: "route", color: "#1a5276", bg: "#EBF5F9", action: "New lead routed to CRM", client: "Nexus Advisor", time: "1 min ago" },
+  { icon: "route", color: "#1a5276", bg: "#EBF5F9", action: "New lead routed to CRM", client: "Charlie Property", time: "1 min ago" },
   { icon: "film", color: "#6C3483", bg: "#F4ECF7", action: "YouTube video → newsletter draft", client: "Cafe Racer Garage", time: "3 min ago" },
   { icon: "user", color: "#7B241C", bg: "#FDEDEC", action: "Intake form submitted, practitioner notified", client: "Prana Thrive", time: "5 min ago" },
   { icon: "check", color: "#2D5016", bg: "#EBF5E8", action: "Order fulfilled, tracking sent", client: "Omar City", time: "7 min ago" },
-  { icon: "doc", color: "#1E8449", bg: "#EAFAF1", action: "Subcontractor contract generated", client: "Nexus Advisor", time: "9 min ago" },
-  { icon: "send", color: "#1a5276", bg: "#EBF5F9", action: "Follow-up email sent to prospect", client: "Nexus Advisor", time: "11 min ago" },
+  { icon: "doc", color: "#1E8449", bg: "#EAFAF1", action: "Subcontractor contract generated", client: "Charlie Property", time: "9 min ago" },
+  { icon: "send", color: "#1a5276", bg: "#EBF5F9", action: "Follow-up email sent to prospect", client: "22 Workflows", time: "11 min ago" },
   { icon: "film", color: "#6C3483", bg: "#F4ECF7", action: "Video transcript → social captions", client: "Cafe Racer Garage", time: "13 min ago" },
   { icon: "check", color: "#2D5016", bg: "#EBF5E8", action: "Billing synced to Xero", client: "Omar City", time: "15 min ago" },
   { icon: "user", color: "#7B241C", bg: "#FDEDEC", action: "Patient intake thread closed cleanly", client: "Prana Thrive", time: "18 min ago" },
@@ -255,23 +247,11 @@ function LogoWall() {
   return (
     <section id="stories" className="bg-background pt-24 md:pt-32 pb-16 md:pb-20">
       <div className="container mx-auto px-6 md:px-10">
-        <FadeIn>
-          <PillBadge>Customer stories</PillBadge>
-        </FadeIn>
-        <div className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+        <div className="mt-6 mb-14">
           <FadeIn>
             <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-foreground max-w-2xl leading-tight">
               Powering operations for growing teams across the country.
             </h2>
-          </FadeIn>
-          <FadeIn delay={0.1}>
-            <Link
-              href="/customers"
-              className="inline-flex items-center px-5 py-2.5 rounded-full border border-[#7d6cf0] text-[#7d6cf0] text-sm font-medium hover:bg-[#7d6cf0]/10 transition-colors whitespace-nowrap"
-              data-testid="link-all-stories"
-            >
-              See all customer stories
-            </Link>
           </FadeIn>
         </div>
         <div className="border-t border-black/10 pt-12">
@@ -309,14 +289,11 @@ function AssessmentBand() {
         />
         <div className="relative grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 md:gap-12 items-center">
           <div>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs font-medium">
-              <Gauge className="w-3 h-3 text-[#9d8cf5]" /> Free, ~10-minute assessment
-            </span>
             <h2 className="mt-5 text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
               How systemized<br /> is your team?
             </h2>
             <p className="mt-5 text-white/75 leading-relaxed max-w-lg">
-              Get a personalized Systemization Score across seven categories — plus the three areas where
+              Get a personalized Systemization Score across seven categories, plus the three areas where
               your next 30 days of work will move the needle most.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -393,15 +370,12 @@ function FlagshipClickUp() {
         />
         <div className="relative grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center">
           <div>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs font-medium">
-              <Star className="w-3 h-3 text-[#9d8cf5]" /> Flagship product
-            </span>
             <h2 className="mt-5 text-3xl md:text-5xl font-semibold tracking-tight leading-[1.05] max-w-2xl">
               The Morsegrid <span className={ACCENT}>ClickUp Blueprint</span>.
             </h2>
             <p className="mt-5 text-white/75 leading-relaxed max-w-xl">
               A 90-day, productized ClickUp implementation for agencies and growing service teams. Workspace
-              architecture, dashboards your leadership opens, and adoption coaching — shipped in one Blueprint.
+              architecture, dashboards your leadership opens, and adoption coaching, shipped in one Blueprint.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#7d6cf0] text-white text-sm font-medium group-hover:bg-[#8c7df3] transition-colors">
@@ -426,9 +400,6 @@ function Difference() {
   return (
     <section className="bg-background py-24 md:py-32">
       <div className="container mx-auto px-6 md:px-10">
-        <FadeIn>
-          <PillBadge>The Morsegrid difference</PillBadge>
-        </FadeIn>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
           <FadeIn>
             <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-foreground leading-tight">
@@ -437,7 +408,7 @@ function Difference() {
               that quietly run your business.
             </h2>
             <p className="mt-8 text-lg text-foreground/70 leading-relaxed max-w-md">
-              Define the way your business should run in plain language, then let Morsegrid enforce it across every tool you already use — no more tangled spreadsheets or one-off scripts.
+              Define the way your business should run in plain language, then let Morsegrid enforce it across every tool you already use. No more tangled spreadsheets or one-off scripts.
             </p>
             <a
               href={siteConfig.links.bookCall}
@@ -530,7 +501,7 @@ function ScrollTimeline() {
     {
       kw: "Optimize",
       title: "what's working",
-      body: "Watch every routing decision, every handoff, every exception. Tune thresholds and rules with confidence — and see the lift in CSAT, accuracy, and cycle time.",
+      body: "Watch every routing decision, every handoff, every exception. Tune thresholds and rules with confidence, and see the lift in CSAT, accuracy, and cycle time.",
       mockup: <OptimizeMockup />,
       side: "right" as const,
     },
@@ -550,11 +521,6 @@ function ScrollTimeline() {
         ref={containerRef}
         className="relative max-w-6xl mx-auto rounded-[28px] bg-[#0d0d0d] py-20 md:py-28 px-6 md:px-12 overflow-hidden"
       >
-        <div className="flex justify-center mb-16 md:mb-24">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-white">
-            <Plus className="w-3 h-3" /> Complete, unified platform
-          </span>
-        </div>
 
         <div className="relative">
           {/* Center rail */}
@@ -882,7 +848,7 @@ function EvolvesCard() {
 
 /* ---------- 8. Omnichannel stacked words ---------- */
 const CHANNELS = [
-  { word: "Shopify", caption: "Inventory, orders, and customer events sync the moment they happen — no nightly batch jobs." },
+  { word: "Shopify", caption: "Inventory, orders, and customer events sync the moment they happen, no nightly batch jobs." },
   { word: "HubSpot", caption: "Leads, contacts, and deals stay clean and routed without manual sweeps from your ops team." },
   { word: "Stripe", caption: "Subscriptions, refunds, and reconciliation just flow into the systems your finance team trusts." },
 ];
@@ -899,9 +865,6 @@ function Omnichannel() {
   return (
     <section className="bg-background py-24 md:py-32">
       <div className="container mx-auto px-6 md:px-10">
-        <FadeIn>
-          <PillBadge>Built where you already work</PillBadge>
-        </FadeIn>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
           <div>
             <FadeIn>
