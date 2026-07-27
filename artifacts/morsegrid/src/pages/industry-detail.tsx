@@ -1,17 +1,22 @@
 import { useState } from "react";
 import { Link, useRoute } from "wouter";
-import { ArrowRight, ChevronLeft, ChevronRight, Play, Quote } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { usePageMeta, buildBreadcrumbJsonLd } from "@/hooks/use-page-meta";
 import { FadeIn } from "@/components/ui/fade-in";
 import { IndustryHeroIllustration } from "@/components/industry-hero-illustration";
-import { VideoLightbox } from "@/components/ui/video-lightbox";
 import { siteConfig } from "@/config/site";
-import { getIndustryBySlug, industries, type Industry } from "@/data/industries";
+import {
+  approvedMetrics,
+  getIndustryBySlug,
+  hasApprovedTestimonial,
+  listedIndustries,
+  type Industry,
+} from "@/data/industries";
 import { track } from "@/lib/analytics";
 import NotFound from "@/pages/not-found";
 
-function Hero({ industry, onWatchVideo }: { industry: Industry; onWatchVideo: () => void }) {
+function Hero({ industry }: { industry: Industry }) {
   return (
     <section className="relative pt-40 md:pt-48 pb-16 md:pb-24 px-6">
       <div className="max-w-4xl mx-auto text-center">
@@ -61,19 +66,16 @@ function Hero({ industry, onWatchVideo }: { industry: Industry; onWatchVideo: ()
             >
               Get a demo
             </a>
-            <button
-              type="button"
-              onClick={() => {
-                track("cta_industry_watch_video", { industry: industry.slug });
-                onWatchVideo();
-              }}
+            <Link
+              href="/customers"
+              onClick={() => track("cta_industry_customer_stories", { industry: industry.slug })}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border bg-white text-sm font-medium hover:bg-black/5 transition-colors"
               style={{ color: industry.accent, borderColor: `${industry.accent}55` }}
-              aria-label={`Watch customer stories from ${industry.name} teams`}
-              data-testid="link-hero-watch"
+              aria-label={`Read customer stories from ${industry.name} teams`}
+              data-testid="link-hero-customer-stories"
             >
-              <Play className="w-3.5 h-3.5" aria-hidden="true" /> Watch customer stories
-            </button>
+              Customer stories
+            </Link>
           </div>
         </FadeIn>
       </div>
@@ -93,6 +95,7 @@ function Hero({ industry, onWatchVideo }: { industry: Industry; onWatchVideo: ()
 function TestimonialBlock({ industry }: { industry: Industry }) {
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
+  if (!hasApprovedTestimonial(industry)) return null;
   const avatars = industry.testimonial.avatars;
   const total = avatars.length;
 
@@ -223,6 +226,9 @@ function UseCaseGrid({ industry }: { industry: Industry }) {
 }
 
 function MetricsStrip({ industry }: { industry: Industry }) {
+  const metrics = approvedMetrics(industry);
+  if (metrics.length === 0) return null;
+
   return (
     <section className="py-16 md:py-20 bg-background">
       <div className="container mx-auto px-6 md:px-10">
@@ -232,7 +238,7 @@ function MetricsStrip({ industry }: { industry: Industry }) {
             backgroundImage: `linear-gradient(120deg, ${industry.gradientFrom}, ${industry.gradientTo})`,
           }}
         >
-          {industry.metrics.map((m, i) => (
+          {metrics.map((m, i) => (
             <FadeIn key={i} delay={i * 0.08}>
               <div>
                 <div className="text-5xl md:text-6xl font-semibold tracking-tight text-white">
@@ -277,7 +283,7 @@ function LogoWall({ industry }: { industry: Industry }) {
 }
 
 function OtherIndustries({ industry }: { industry: Industry }) {
-  const others = industries.filter((i) => i.slug !== industry.slug);
+  const others = listedIndustries.filter((i) => i.slug !== industry.slug);
 
   return (
     <section className="py-16 md:py-20 bg-background border-t border-black/5">
@@ -374,7 +380,6 @@ export default function IndustryDetail() {
   const [, params] = useRoute("/industries/:slug");
   const slug = params?.slug ?? "";
   const industry = getIndustryBySlug(slug);
-  const [videoOpen, setVideoOpen] = useState(false);
 
   usePageMeta({
     title: industry?.meta.title ?? "Industries",
@@ -398,20 +403,13 @@ export default function IndustryDetail() {
 
   return (
     <div className="flex flex-col">
-      <Hero industry={industry} onWatchVideo={() => setVideoOpen(true)} />
+      <Hero industry={industry} />
       <TestimonialBlock industry={industry} />
       <UseCaseGrid industry={industry} />
       <MetricsStrip industry={industry} />
       <LogoWall industry={industry} />
       <OtherIndustries industry={industry} />
       <ClosingCta industry={industry} />
-      <VideoLightbox
-        open={videoOpen}
-        onOpenChange={setVideoOpen}
-        videoUrl={industry.videoUrl}
-        title={`${industry.name} customer story video`}
-        description={industry.hero.subhead}
-      />
     </div>
   );
 }

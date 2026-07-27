@@ -30,6 +30,11 @@ export type Industry = {
   slug: string;
   name: string;
   shortName: string;
+  /**
+   * Set false to keep the page reachable at its URL but drop it from the
+   * industries index and the nav, while we focus on e-commerce and health.
+   */
+  listed?: boolean;
   accent: string;
   accentSoft: string;
   gradientFrom: string;
@@ -74,10 +79,10 @@ export const industries: Industry[] = [
     slug: "ecommerce",
     name: "E-commerce",
     shortName: "e-commerce",
-    accent: "#2d5016",
-    accentSoft: "#e6eedd",
-    gradientFrom: "#2d5016",
-    gradientTo: "#6a9a40",
+    accent: "#5b45d6",
+    accentSoft: "#efeaff",
+    gradientFrom: "#5b45d6",
+    gradientTo: "#9d8cf5",
     pillLabel: "E-commerce",
     hero: {
       headline: "Replace manual ops with",
@@ -97,7 +102,7 @@ export const industries: Industry[] = [
       company: "Client name pending approval",
       companyStyle: "font-medium",
       avatars: [
-        { initials: "?", color: "#2d5016" },
+        { initials: "?", color: "#5b45d6" },
       ],
       headlineStat: "—",
       statCaption: "Metric pending client approval",
@@ -221,6 +226,7 @@ export const industries: Industry[] = [
   {
     slug: "professional-services",
     name: "Professional Services",
+    listed: false,
     shortName: "professional services",
     accent: "#1f3a6e",
     accentSoft: "#dce4f5",
@@ -294,6 +300,7 @@ export const industries: Industry[] = [
   {
     slug: "technology",
     name: "Technology & AI",
+    listed: false,
     shortName: "technology",
     accent: "#0f6fff",
     accentSoft: "#dce8ff",
@@ -366,6 +373,22 @@ export const industries: Industry[] = [
     },
   },
 ];
+
+/** The industries we actively show: index page, nav, and any roll-ups. */
+export const listedIndustries: Industry[] = industries.filter((i) => i.listed !== false);
+
+/**
+ * Testimonials and metrics ship as placeholders until a client signs off in
+ * writing. Until then the page must render nothing rather than show the
+ * scaffolding ("Pending", "—") to visitors.
+ */
+export function hasApprovedTestimonial(i: Industry): boolean {
+  return i.testimonial.author.trim() !== "Pending";
+}
+
+export function approvedMetrics(i: Industry): IndustryMetric[] {
+  return i.metrics.filter((m) => m.value.trim() !== "" && m.value.trim() !== "—");
+}
 
 export function getIndustryBySlug(slug: string): Industry | undefined {
   return industries.find((i) => i.slug === slug);

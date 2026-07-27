@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { usePageMeta } from "@/hooks/use-page-meta";
 import { useHashScroll } from "@/hooks/use-hash-scroll";
 import { FadeIn } from "@/components/ui/fade-in";
-import { industries } from "@/data/industries";
+import { listedIndustries } from "@/data/industries";
 
 export default function Industries() {
   usePageMeta({
@@ -28,7 +28,7 @@ export default function Industries() {
         </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {industries.map((ind, idx) => (
+          {listedIndustries.map((ind, idx) => (
             <FadeIn key={ind.slug} delay={idx * 0.05}>
               <Link
                 href={`/industries/${ind.slug}`}
