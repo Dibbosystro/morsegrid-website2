@@ -3,6 +3,7 @@ import { useHashScroll } from "@/hooks/use-hash-scroll";
 import { FadeIn } from "@/components/ui/fade-in";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/button";
+import ProfileCard from "@/components/ui/profile-card";
 import { Building2, Lock, MapPin } from "lucide-react";
 
 const securityPoints = [
@@ -20,23 +21,36 @@ const securityPoints = [
   },
 ];
 
-const founder = {
-  name: "Maksudur Rahman",
-  title: "Founder, Head of AI Solutions",
-  image: "/team/maks.png",
+/**
+ * One roster, everyone side by side. Titles follow the audit doc.
+ *
+ * `handle` and `linkedin` are optional: leave them off and that card renders
+ * name and title only. Add both and the card grows its bottom bar with a
+ * LinkedIn button. Do not invent handles, they show publicly.
+ */
+type TeamMember = {
+  name: string;
+  title: string;
+  image: string;
+  handle?: string;
+  linkedin?: string;
 };
 
-const team: { name: string; title: string; image: string; imgPos?: string }[] = [
+const team: TeamMember[] = [
+  {
+    name: "Maksudur Rahman",
+    title: "Founder",
+    image: "/team/maks.png",
+  },
   {
     name: "Dibbo Das",
-    title: "Performance Marketing Manager",
+    title: "Head of AI Solutions",
     image: "/team/dibbo.png",
   },
   {
     name: "Arshi Irtiza",
-    title: "Sales Development Representative",
+    title: "CRM Operations",
     image: "/team/arshi.jpg",
-    imgPos: "object-[center_25%]",
   },
   {
     name: "Faiyaz Hossain",
@@ -45,7 +59,7 @@ const team: { name: string; title: string; image: string; imgPos?: string }[] = 
   },
   {
     name: "Z B Nishat",
-    title: "GTM Engineer",
+    title: "Business Development Associate",
     image: "/team/nishat.jpg",
   },
 ];
@@ -53,7 +67,7 @@ const team: { name: string; title: string; image: string; imgPos?: string }[] = 
 export default function Company() {
   usePageMeta({
     title: "Company",
-    description: "About Morsegrid — who we are, how we work, and how to reach us.",
+    description: "About Morsegrid: who we are, how we work, and how to reach us.",
     path: "/company",
   });
   useHashScroll();
@@ -62,24 +76,18 @@ export default function Company() {
     <div className="flex flex-col pb-24">
       <div className="container mx-auto px-4 md:px-8 pt-40 pb-20 space-y-24">
 
-        {/* Hero: two-column layout */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-          <FadeIn>
-            <img
-              src={founder.image}
-              alt={founder.name}
-              className="w-full aspect-[4/5] object-cover object-top rounded-3xl"
-            />
-          </FadeIn>
-          <FadeIn delay={0.15} className="flex flex-col justify-center">
+        {/* Hero: no founder portrait here, everyone appears together in Team below */}
+        <section className="max-w-3xl">
+          <FadeIn className="flex flex-col justify-center">
             <span className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">About</span>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
-              I'm Maksudur Rahman. People call me Maks.
+              We build the systems your business runs on.
             </h1>
             <div className="space-y-5 text-lg text-muted-foreground leading-relaxed mb-8">
               <p>
-                Morsegrid was built to fix a problem Maks saw repeatedly: growing businesses drowning in manual work
-                that should have been automated months ago. Every week of delay is revenue lost. We fix the bottleneck.
+                Morsegrid was built to fix a problem we kept running into: growing businesses drowning in manual
+                work that should have been automated months ago. Every week of delay is revenue lost. We fix the
+                bottleneck.
               </p>
             </div>
             <div>
@@ -124,20 +132,25 @@ export default function Company() {
             <h2 className="text-2xl md:text-3xl font-bold">Team</h2>
             <p className="text-muted-foreground mt-2">The people who build and deliver your systems.</p>
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
             {team.map((member, i) => (
-              <FadeIn key={member.name} delay={i * 0.08}>
-                <div className="bg-card border border-border rounded-2xl overflow-hidden h-full flex flex-col">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className={`w-full aspect-[4/3] object-cover ${member.imgPos ?? "object-top"}`}
-                  />
-                  <div className="p-5">
-                    <div className="font-semibold text-lg">{member.name}</div>
-                    <div className="text-sm text-primary mt-1">{member.title}</div>
-                  </div>
-                </div>
+              <FadeIn key={member.name} delay={i * 0.08} className="flex justify-center">
+                <ProfileCard
+                  name={member.name}
+                  title={member.title}
+                  avatarUrl={member.image}
+                  handle={member.handle}
+                  status="Morsegrid"
+                  contactText="LinkedIn"
+                  showUserInfo={Boolean(member.handle && member.linkedin)}
+                  onContactClick={() =>
+                    member.linkedin && window.open(member.linkedin, "_blank", "noopener,noreferrer")
+                  }
+                  enableTilt
+                  enableMobileTilt={false}
+                  behindGlowEnabled
+                  className="w-full max-w-[300px]"
+                />
               </FadeIn>
             ))}
           </div>
@@ -185,7 +198,7 @@ export default function Company() {
                   <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-2">Location</div>
                   <div className="text-lg flex items-start gap-2">
                     <MapPin className="w-4 h-4 mt-1 shrink-0 text-muted-foreground" />
-                    <span>Remote-first.<br />Incorporated in Wyoming, US.</span>
+                    <span>United States.<br />Remote-first, incorporated in Wyoming.</span>
                   </div>
                 </div>
                 <div className="md:ml-auto">
