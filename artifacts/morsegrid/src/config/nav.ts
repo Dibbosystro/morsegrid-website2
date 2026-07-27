@@ -12,9 +12,6 @@ import {
   Lightbulb,
   ShoppingBag,
   HeartPulse,
-  BookOpen,
-  GraduationCap,
-  Library,
   Building2,
   Users,
   Lock,
@@ -22,7 +19,6 @@ import {
   FileText,
   Sparkles,
   ClipboardCheck,
-  SquareKanban,
 } from "lucide-react";
 
 export type NavSubItem = {
@@ -38,7 +34,7 @@ export type NavGroup = {
 };
 
 export type NavFeatured = {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description: string;
   href: string;
@@ -100,8 +96,8 @@ export const navLinks: NavLink[] = [
       ],
       featured: {
         eyebrow: "Flagship service",
-        title: "ClickUp Implementation",
-        description: "The Morsegrid Blueprint, end-to-end ClickUp setup for teams that want to scale.",
+        title: "Ecommerce Implementation",
+        description: "The Morsegrid Blueprint, end-to-end operations for brands that want to scale.",
         href: "/products/clickup",
         variant: "dark",
       },
@@ -146,10 +142,7 @@ export const navLinks: NavLink[] = [
         {
           heading: "Learn",
           items: [
-            { label: "Resources Hub", subtitle: "Playbooks and guides", href: "/resources", icon: BookOpen },
             { label: "Free assessment", subtitle: "Score your operations", href: "/assessment", icon: ClipboardCheck },
-            { label: "University", subtitle: "Hands-on courses", href: "/resources#university", icon: GraduationCap },
-            { label: "Glossary", subtitle: "Terms, defined", href: "/resources#glossary", icon: Library },
           ],
         },
         {
@@ -161,7 +154,6 @@ export const navLinks: NavLink[] = [
         },
       ],
       featured: {
-        eyebrow: "Fall '26 Release",
         title: "Proactive Agents",
         description: "Agents that reach out before customers do, with the right context on the right channel.",
         href: "/proactive-agents",

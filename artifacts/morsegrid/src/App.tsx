@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -88,11 +88,48 @@ function AnimatedRoutes() {
   );
 }
 
+/**
+ * Wouter keeps the window scroll offset across navigations, so following a nav
+ * link from halfway down a page drops you halfway down the next one. Reset to
+ * the top on every route change, and honour #anchor targets once the lazy route
+ * has actually mounted (retry briefly, since the chunk loads asynchronously).
+ */
+function ScrollToTop() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    const id = window.location.hash.slice(1);
+
+    if (!id) {
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    let frame = 0;
+    let tries = 0;
+    const seek = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ block: "start" });
+      } else if (tries++ < 60) {
+        frame = requestAnimationFrame(seek);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    };
+    frame = requestAnimationFrame(seek);
+    return () => cancelAnimationFrame(frame);
+  }, [location]);
+
+  return null;
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+          <ScrollToTop />
           <Layout>
             <AnimatedRoutes />
           </Layout>

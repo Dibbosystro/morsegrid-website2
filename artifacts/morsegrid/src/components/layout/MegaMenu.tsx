@@ -179,9 +179,11 @@ export function MegaMenu({ open, dropdown, onItemClick, onMouseEnter, onMouseLea
                     }}
                   />
                   <div className="relative p-5 flex flex-col">
-                    <div className="text-[10px] font-semibold uppercase tracking-widest text-white/55 mb-2.5">
-                      {dropdown.featured.eyebrow}
-                    </div>
+                    {dropdown.featured.eyebrow && (
+                      <div className="text-[10px] font-semibold uppercase tracking-widest text-white/55 mb-2.5">
+                        {dropdown.featured.eyebrow}
+                      </div>
+                    )}
                     <div className="text-[15px] font-semibold text-white leading-snug mb-2">
                       {dropdown.featured.title}
                     </div>
