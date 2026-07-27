@@ -19,6 +19,20 @@ import { MagneticButton } from "@/components/ui/magnetic-button";
 import { CUSTOMERS } from "@/data/customers";
 import { track } from "@/lib/analytics";
 import { TestimonialCarousel } from "@/components/ui/testimonial-carousel";
+import Grainient from "@/components/ui/grainient";
+
+/**
+ * Hero background switch, preview only. Add ?bg=grainient to the URL for the
+ * animated React Bits shader, anything else keeps the Fakurian photo. Pick one
+ * and delete the other before this goes to production.
+ */
+function useGrainientBackground() {
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    setOn(new URLSearchParams(window.location.search).get("bg") === "grainient");
+  }, []);
+  return on;
+}
 
 type ResponsiveImageProps = {
   name: string;
@@ -96,6 +110,7 @@ const HERO_EVENTS: HeroEvent[] = [
 
 function Hero() {
   const reduce = useReducedMotion();
+  const grainient = useGrainientBackground();
   const [feed, setFeed] = useState(() =>
     HERO_EVENTS.slice(0, 5).map((ev, i) => ({ ...ev, key: i })),
   );
@@ -127,8 +142,37 @@ function Hero() {
         <div
           aria-hidden="true"
           className="absolute inset-0 z-0 bg-cover bg-center saturate-[0.82]"
-          style={{ backgroundImage: "url('/images/hero-bg-1920.jpg')" }}
-        />
+          style={
+            grainient ? undefined : { backgroundImage: "url('/images/hero-bg-1920.jpg')" }
+          }
+        >
+          {grainient && (
+            <Grainient
+              color1="#8e6ae0"
+              color2="#b29ae8"
+              color3="#655bc0"
+              timeSpeed={0.65}
+              colorBalance={-0.05}
+              warpStrength={1.85}
+              warpFrequency={8.6}
+              warpSpeed={1.6}
+              warpAmplitude={30}
+              blendAngle={-113}
+              blendSoftness={0.52}
+              rotationAmount={500}
+              noiseScale={2}
+              grainAmount={0}
+              grainScale={2}
+              grainAnimated={false}
+              contrast={1.5}
+              gamma={1}
+              saturation={1}
+              centerX={-0.28}
+              centerY={0.13}
+              zoom={0.6}
+            />
+          )}
+        </div>
         {/* diagonal light scrim: keeps the left copy legible, image shows through on the right */}
         <div
           aria-hidden="true"

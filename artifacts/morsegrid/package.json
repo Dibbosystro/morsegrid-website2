@@ -33,6 +33,7 @@
     "clsx": "catalog:",
     "framer-motion": "catalog:",
     "lucide-react": "catalog:",
+    "ogl": "^1.0.11",
     "react": "catalog:",
     "react-dom": "catalog:",
     "sharp": "^0.34.5",
