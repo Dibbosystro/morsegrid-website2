@@ -4,7 +4,6 @@ import { ArrowRight, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { usePageMeta, buildBreadcrumbJsonLd } from "@/hooks/use-page-meta";
 import { FadeIn } from "@/components/ui/fade-in";
-import { IndustryHeroIllustration } from "@/components/industry-hero-illustration";
 import { siteConfig } from "@/config/site";
 import {
   approvedMetrics,
@@ -79,15 +78,6 @@ function Hero({ industry }: { industry: Industry }) {
           </div>
         </FadeIn>
       </div>
-      <FadeIn delay={0.2}>
-        <div
-          className="mt-14 md:mt-20 mx-auto w-full max-w-md md:max-w-xl"
-          role="img"
-          aria-label={industry.hero.illustration.alt}
-        >
-          <IndustryHeroIllustration industry={industry} />
-        </div>
-      </FadeIn>
     </section>
   );
 }
