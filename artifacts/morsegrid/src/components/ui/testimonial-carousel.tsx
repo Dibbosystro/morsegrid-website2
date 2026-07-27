@@ -15,58 +15,59 @@ type Entry = {
   readHref: string;
 };
 
+/**
+ * Real clients only. Quote, name, title and stat stay empty until that client
+ * approves wording in writing; the panel hides whatever is still blank rather
+ * than putting invented words or numbers under a real company's name.
+ */
 const ENTRIES: Entry[] = [
   {
     id: 0,
-    company: "Bloom & Co",
-    logoText: "Bloom",
-    logoColor: "#4ade80",
-    quote:
-      "Morsegrid cut our order-to-fulfilment lag from two days to under four hours. The team mapped our entire Shopify + Airtable stack in one week and handed us something we actually understand.",
-    name: "Sofia Andersson",
-    title: "Head of Operations, Bloom & Co",
-    stat: "11×",
-    statLabel: "faster order processing",
-    readHref: "#",
+    company: "Cafe Racer Garage",
+    logoText: "Cafe Racer Garage",
+    logoColor: "#5b45d6",
+    quote: "",
+    name: "",
+    title: "",
+    stat: "",
+    statLabel: "",
+    readHref: "/customers",
   },
   {
     id: 1,
-    company: "Vantage Health",
-    logoText: "Vantage",
-    logoColor: "#818cf8",
-    quote:
-      "We were drowning in manual intake forms and follow-up emails. Morsegrid automated the whole patient journey — every step is documented and our coordinators have their time back.",
-    name: "Dr. James Okafor",
-    title: "Clinical Operations Lead, Vantage Health",
-    stat: "70%",
-    statLabel: "reduction in admin overhead",
-    readHref: "#",
+    company: "Only Crits",
+    logoText: "Only Crits",
+    logoColor: "#7d6cf0",
+    quote: "",
+    name: "",
+    title: "",
+    stat: "",
+    statLabel: "",
+    readHref: "/customers",
   },
   {
     id: 2,
-    company: "Meridian Advisory",
-    logoText: "Meridian",
-    logoColor: "#f59e0b",
-    quote:
-      "Our CRM was a graveyard of stale leads. After Morsegrid wired up our HubSpot workflows, pipeline visibility went from a weekly guess to real-time and our close rate jumped.",
-    name: "Rachel Kim",
-    title: "Director of Revenue, Meridian Advisory",
-    stat: "2.4×",
-    statLabel: "increase in pipeline close rate",
-    readHref: "#",
+    company: "Prana Thrive",
+    logoText: "Prana Thrive",
+    logoColor: "#9d8cf5",
+    quote: "",
+    name: "",
+    title: "",
+    stat: "",
+    statLabel: "",
+    readHref: "/customers",
   },
   {
     id: 3,
-    company: "Stackline",
-    logoText: "Stackline",
-    logoColor: "#38bdf8",
-    quote:
-      "We hired Morsegrid expecting a few automations. What we got was a fully documented operations playbook. Every workflow runs without us — and we can edit any step ourselves.",
-    name: "Tom Brewer",
-    title: "CEO, Stackline",
-    stat: "1M",
-    statLabel: "events processed each month",
-    readHref: "#",
+    company: "22 Workflows",
+    logoText: "22 Workflows",
+    logoColor: "#6a3f9e",
+    quote: "",
+    name: "",
+    title: "",
+    stat: "",
+    statLabel: "",
+    readHref: "/customers",
   },
 ];
 
@@ -180,7 +181,7 @@ export function TestimonialCarousel() {
             transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
             className="grid grid-cols-1 md:grid-cols-[1fr_auto_280px] gap-8 md:gap-0"
           >
-            {/* Left — quote + attribution */}
+            {/* Left — quote + attribution, shown only once approved */}
             <div className="flex flex-col justify-between gap-6 pr-0 md:pr-12">
               <div>
                 <svg
@@ -196,24 +197,26 @@ export function TestimonialCarousel() {
                 </svg>
 
                 <blockquote className="text-lg md:text-xl font-medium text-foreground/80 leading-relaxed">
-                  {entry.quote}
+                  {entry.quote || `${entry.company} runs its operations on Morsegrid.`}
                 </blockquote>
               </div>
 
-              <div className="flex items-center gap-3">
-                <div
-                  className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center text-white text-sm font-bold"
-                  style={{ backgroundColor: entry.logoColor }}
-                  aria-hidden
-                >
-                  {entry.name.charAt(0)}
+              {entry.name && (
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center text-white text-sm font-bold"
+                    style={{ backgroundColor: entry.logoColor }}
+                    aria-hidden
+                  >
+                    {entry.name.charAt(0)}
+                  </div>
+                  <p className="text-sm text-foreground/55 leading-snug">
+                    <span className="font-medium text-foreground/80">{entry.name}</span>
+                    <br />
+                    {entry.title}
+                  </p>
                 </div>
-                <p className="text-sm text-foreground/55 leading-snug">
-                  <span className="font-medium text-foreground/80">{entry.name}</span>
-                  <br />
-                  {entry.title}
-                </p>
-              </div>
+              )}
             </div>
 
             {/* Vertical divider (desktop only) */}
@@ -221,20 +224,24 @@ export function TestimonialCarousel() {
 
             {/* Right — stat + read story */}
             <div className="flex flex-col justify-center gap-3 pl-0 md:pl-8">
-              <p
-                className="text-6xl md:text-7xl font-extrabold leading-none tracking-tight"
-                style={{ color: "#7d6cf0" }}
-              >
-                {entry.stat}
-              </p>
-              <p className="text-sm text-foreground/55 max-w-[180px] leading-snug">
-                {entry.statLabel}
-              </p>
+              {entry.stat && (
+                <>
+                  <p
+                    className="text-6xl md:text-7xl font-extrabold leading-none tracking-tight"
+                    style={{ color: "#7d6cf0" }}
+                  >
+                    {entry.stat}
+                  </p>
+                  <p className="text-sm text-foreground/55 max-w-[180px] leading-snug">
+                    {entry.statLabel}
+                  </p>
+                </>
+              )}
               <a
                 href={entry.readHref}
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors mt-1 group"
               >
-                Read story
+                See our customers
                 <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
               </a>
             </div>
