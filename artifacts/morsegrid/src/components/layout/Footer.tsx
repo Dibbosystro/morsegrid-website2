@@ -12,7 +12,6 @@ export function Footer() {
       title: "Product",
       links: [
         { label: "Overview", href: "/products" },
-        { label: "Pricing", href: "/pricing" },
         { label: "Integrations", href: "/integrations" },
         { label: "Changelog", href: "/changelog" },
         { label: "Operational Playbooks", href: "/products" },

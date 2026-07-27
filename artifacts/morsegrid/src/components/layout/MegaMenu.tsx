@@ -166,7 +166,7 @@ export function MegaMenu({ open, dropdown, onItemClick, onMouseEnter, onMouseLea
                   className="w-[210px] shrink-0 flex flex-col justify-end overflow-hidden relative group border-l border-black/[0.06] min-h-[200px]"
                   style={
                     isDark
-                      ? { background: "linear-gradient(160deg, #1b3410 0%, #2e5218 60%, #1f3f13 100%)" }
+                      ? { background: "linear-gradient(160deg, #241f4b 0%, #5b45d6 60%, #2a2540 100%)" }
                       : { background: "linear-gradient(155deg, hsl(var(--primary) / 0.93) 0%, hsl(var(--primary) / 0.72) 100%)" }
                   }
                 >

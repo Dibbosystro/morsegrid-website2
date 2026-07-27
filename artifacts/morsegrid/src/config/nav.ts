@@ -1,6 +1,5 @@
 import type { LucideIcon } from "lucide-react";
 import {
-  LayoutGrid,
   Mic,
   MessageSquare,
   Mail,
@@ -69,12 +68,6 @@ export const navLinks: NavLink[] = [
     href: "/products",
     dropdown: {
       width: "xl",
-      overview: {
-        label: "Product overview",
-        subtitle: "See how the full Morsegrid platform fits together",
-        href: "/products",
-        icon: LayoutGrid,
-      },
       topGroup: {
         heading: "Channels",
         items: [
@@ -109,8 +102,8 @@ export const navLinks: NavLink[] = [
       ],
       featured: {
         eyebrow: "Flagship service",
-        title: "ClickUp Implementation",
-        description: "The Morsegrid Blueprint — end-to-end ClickUp setup for agencies that want to scale.",
+        title: "Ecommerce Implementation",
+        description: "The Morsegrid Blueprint, end-to-end ecommerce operations for brands that want to scale.",
         href: "/products/clickup",
         variant: "dark",
       },

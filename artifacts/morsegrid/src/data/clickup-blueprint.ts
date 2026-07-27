@@ -255,11 +255,11 @@ export const tiers: Tier[] = [
   {
     name: "Foundations",
     tagline: "For teams under 25 people, one or two service lines.",
-    price: "From $24,000",
-    priceNote: "Fixed fee, 60–90 days",
+    price: "From $1,999",
+    priceNote: "Fixed fee, 60 to 90 days",
     bestFor: "Small agencies and services teams replacing spreadsheets and a half-built workspace.",
     includes: [
-      "Discover, Design, Build, Adopt — full methodology",
+      "Discover, Design, Build, Adopt: full methodology",
       "Workspace architecture for up to 2 service lines",
       "Capacity & profitability dashboards",
       "Up to 4 native integrations",
@@ -268,8 +268,8 @@ export const tiers: Tier[] = [
   },
   {
     name: "Growth",
-    tagline: "For teams of 25–75 people running multiple service lines.",
-    price: "From $48,000",
+    tagline: "For teams of 25 to 75 people running multiple service lines.",
+    price: "From $3,999",
     priceNote: "Fixed fee, 90 days",
     bestFor: "Growing agencies that need a workspace their leadership trusts and their PMs can scale.",
     includes: [
