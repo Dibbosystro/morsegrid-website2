@@ -103,8 +103,9 @@ export default function Company() {
     <div className="flex flex-col pb-24">
       <div className="container mx-auto px-4 md:px-8 pt-40 pb-20 space-y-24">
 
-        {/* Hero: no founder portrait here, everyone appears together in Team below */}
-        <section className="max-w-3xl">
+        {/* Hero. Carries the #about anchor: this page IS the about page, and a
+            second "About" heading further down read as a duplicate. */}
+        <section id="about" className="max-w-3xl scroll-mt-32">
           <FadeIn className="flex flex-col justify-center">
             <span className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">About</span>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
@@ -127,37 +128,11 @@ export default function Company() {
           </FadeIn>
         </section>
 
-        {/* Philosophy */}
-        <section id="about" className="scroll-mt-32">
-          <FadeIn className="mb-10 flex items-start gap-4">
-            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
-              <Building2 className="w-6 h-6 text-primary" />
-            </div>
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">About</h2>
-              <p className="text-muted-foreground mt-2">A small, focused team that builds systems, not slide decks.</p>
-            </div>
-          </FadeIn>
-          <FadeIn delay={0.1} className="max-w-2xl">
-            <h3 className="text-xl font-semibold mb-4">Our philosophy</h3>
-            <div className="space-y-6 text-foreground leading-relaxed">
-              <p>
-                Software should serve the business, not the other way around. Most teams adapt their processes to
-                fit their tools. We bend the tools to fit your ideal process.
-              </p>
-              <p>
-                When you work with us, you work with the people actually building the systems. No account managers,
-                no juniors learning on your dime.
-              </p>
-            </div>
-          </FadeIn>
-        </section>
-
-        {/* Team */}
+        {/* Team, straight after the headline */}
         <section>
           <FadeIn className="mb-10">
             <h2 className="text-2xl md:text-3xl font-bold">Team</h2>
-            <p className="text-muted-foreground mt-2">The people who build and deliver your systems.</p>
+            <p className="text-muted-foreground mt-2">A small, focused team that builds systems, not slide decks.</p>
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
             {team.map((member, i) => (
@@ -183,6 +158,31 @@ export default function Company() {
               </FadeIn>
             ))}
           </div>
+        </section>
+
+        {/* Philosophy, after the team */}
+        <section>
+          <FadeIn className="mb-10 flex items-start gap-4">
+            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
+              <Building2 className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold">Our philosophy</h2>
+              <p className="text-muted-foreground mt-2">How we think about the work.</p>
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.1} className="max-w-2xl">
+            <div className="space-y-6 text-foreground leading-relaxed">
+              <p>
+                Software should serve the business, not the other way around. Most teams adapt their processes to
+                fit their tools. We bend the tools to fit your ideal process.
+              </p>
+              <p>
+                When you work with us, you work with the people actually building the systems. No account managers,
+                no juniors learning on your dime.
+              </p>
+            </div>
+          </FadeIn>
         </section>
 
         {/* Security */}
