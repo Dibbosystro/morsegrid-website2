@@ -11,9 +11,7 @@ import {
   Eye,
   Lightbulb,
   ShoppingBag,
-  Cpu,
   HeartPulse,
-  Briefcase,
   BookOpen,
   GraduationCap,
   Library,
@@ -102,8 +100,8 @@ export const navLinks: NavLink[] = [
       ],
       featured: {
         eyebrow: "Flagship service",
-        title: "Ecommerce Implementation",
-        description: "The Morsegrid Blueprint, end-to-end ecommerce operations for brands that want to scale.",
+        title: "ClickUp Implementation",
+        description: "The Morsegrid Blueprint, end-to-end ClickUp setup for teams that want to scale.",
         href: "/products/clickup",
         variant: "dark",
       },
@@ -119,8 +117,6 @@ export const navLinks: NavLink[] = [
           items: [
             { label: "E-commerce", subtitle: "Connected ops that scale", href: "/industries/ecommerce", icon: ShoppingBag },
             { label: "Health & wellness", subtitle: "People-first operations", href: "/industries/health-wellness", icon: HeartPulse },
-            { label: "Professional services", subtitle: "Delivery without the chaos", href: "/industries/professional-services", icon: Briefcase },
-            { label: "Technology", subtitle: "Systems that grow with you", href: "/industries/technology", icon: Cpu },
           ],
         },
       ],
@@ -167,7 +163,7 @@ export const navLinks: NavLink[] = [
       featured: {
         eyebrow: "Fall '26 Release",
         title: "Proactive Agents",
-        description: "Agents that reach out before customers do — right context, right channel.",
+        description: "Agents that reach out before customers do, with the right context on the right channel.",
         href: "/proactive-agents",
         variant: "green",
       },
