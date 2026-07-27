@@ -33,8 +33,7 @@ type TeamMember = {
   title: string;
   image: string;
   handle: string;
-  /** Real profile URL. Until one exists the button falls back to booking a call. */
-  linkedin?: string;
+  linkedin: string;
   /**
    * Framing normalisation. The four cutouts were shot at different distances,
    * so head width ranged 55 to 74 against a 62 target. Scale brings every face
@@ -50,38 +49,45 @@ const team: TeamMember[] = [
     title: "Founder",
     image: "/team/maksudur-cutout.png",
     handle: "maksudur",
+    linkedin: "https://www.linkedin.com/in/maksudurrahman22/",
     avatarScale: 1.09,
-    avatarShiftY: "9.2%",
+    avatarShiftY: "9.0%",
   },
   {
     name: "Dibbo Das",
     title: "Head of AI Solutions",
     image: "/team/dibbo-cutout.png",
     handle: "dibbo",
+    linkedin: "https://www.linkedin.com/in/dibbodasavi/",
     avatarScale: 0.84,
-    avatarShiftY: "-12.3%",
+    avatarShiftY: "-12.6%",
   },
   {
     name: "Arshi Irtiza",
     title: "CRM Operations",
     image: "/team/arshi-cutout.png",
     handle: "arshi",
+    linkedin: "https://www.linkedin.com/in/arshi-irtiza/",
     avatarScale: 0.95,
-    avatarShiftY: "-6.6%",
+    avatarShiftY: "-6.2%",
   },
   {
     name: "Faiyaz Hossain",
     title: "Full Stack Developer",
     image: "/team/faiyaz-cutout.png",
     handle: "faiyaz",
+    linkedin: "https://www.linkedin.com/in/faiyaz-hossain-031491218/",
     avatarScale: 1.13,
-    avatarShiftY: "13.4%",
+    avatarShiftY: "13.2%",
   },
   {
     name: "Z B Nishat",
     title: "Business Development Associate",
-    image: "/team/nishat.jpg",
+    image: "/team/nishat-cutout.png",
     handle: "nishat",
+    linkedin: "https://www.linkedin.com/in/z-b-nishat/",
+    avatarScale: 1.09,
+    avatarShiftY: "3.6%",
   },
 ];
 
@@ -167,11 +173,7 @@ export default function Company() {
                   contactText="Contact Me"
                   showUserInfo
                   onContactClick={() =>
-                    window.open(
-                      member.linkedin ?? siteConfig.links.bookCall,
-                      "_blank",
-                      "noopener,noreferrer",
-                    )
+                    window.open(member.linkedin, "_blank", "noopener,noreferrer")
                   }
                   enableTilt
                   enableMobileTilt={false}
