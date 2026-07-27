@@ -39,7 +39,7 @@ import {
   guaranteePoints,
   faqs,
 } from "@/data/clickup-blueprint";
-import { caseStudies } from "@/data/case-studies";
+import Grainient from "@/components/ui/grainient";
 
 const ACCENT = "#7d6cf0";
 
@@ -81,25 +81,46 @@ export default function ClickUpPage() {
 
 function Hero() {
   return (
-    <section className="relative pt-40 pb-24 md:pt-48 md:pb-32 overflow-hidden bg-gradient-to-br from-[#1f1c3a] via-[#241f4b] to-[#0f1a3a] text-white">
+    <section className="relative pt-32 pb-16 md:pt-36 md:pb-20 overflow-hidden bg-[#1f1c3a] text-white">
+      {/* Animated mesh gradient, same shader as the landing hero, tuned darker
+          so the white copy on top keeps its contrast. Replaces the flat
+          three-stop linear gradient. */}
+      <div aria-hidden className="absolute inset-0 z-0">
+        <Grainient
+          color1="#4634a8"
+          color2="#7d6cf0"
+          color3="#1b1836"
+          timeSpeed={0.8}
+          colorBalance={-0.05}
+          warpStrength={1.85}
+          warpFrequency={8.6}
+          warpSpeed={2.1}
+          warpAmplitude={30}
+          blendAngle={-113}
+          blendSoftness={0.52}
+          rotationAmount={500}
+          noiseScale={2}
+          grainAmount={0}
+          grainScale={2}
+          grainAnimated={false}
+          contrast={1.5}
+          gamma={1}
+          saturation={1}
+          centerX={-0.28}
+          centerY={0.13}
+          zoom={0.6}
+        />
+      </div>
       <div
         aria-hidden
-        className="absolute -right-24 -top-24 w-[520px] h-[520px] rounded-full pointer-events-none opacity-50"
+        className="pointer-events-none absolute inset-0 z-[1]"
         style={{
-          background: `radial-gradient(circle at center, ${ACCENT}99, transparent 65%)`,
-          filter: "blur(20px)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="absolute -left-32 bottom-0 w-[420px] h-[420px] rounded-full pointer-events-none opacity-40"
-        style={{
-          background: `radial-gradient(circle at center, ${ACCENT}66, transparent 65%)`,
-          filter: "blur(28px)",
+          background:
+            "linear-gradient(100deg,rgba(20,17,40,0.86) 0%,rgba(20,17,40,0.62) 42%,rgba(20,17,40,0.28) 72%,rgba(20,17,40,0.1) 100%)",
         }}
       />
       <div className="container relative mx-auto px-4 md:px-8">
-        <div className="flex items-center gap-2 text-sm text-white/60 mb-8">
+        <div className="flex items-center gap-2 text-sm text-white/60 mb-6">
           <Link href="/products" className="hover:text-white transition-colors" data-testid="link-breadcrumb-products-clickup">
             Product
           </Link>
@@ -113,19 +134,19 @@ function Hero() {
         </FadeIn>
         <FadeIn delay={0.05}>
           <h1
-            className="mt-6 text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.04] max-w-4xl"
+            className="mt-5 text-3xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05] max-w-3xl"
             data-testid="text-clickup-hero-title"
           >
             {heroTitle}
           </h1>
         </FadeIn>
         <FadeIn delay={0.1}>
-          <p className="mt-6 text-lg md:text-xl text-white/75 leading-relaxed max-w-2xl">
+          <p className="mt-5 text-base md:text-lg text-white/75 leading-relaxed max-w-2xl">
             {heroSubtitle}
           </p>
         </FadeIn>
         <FadeIn delay={0.15}>
-          <div className="mt-10 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
               href={siteConfig.links.bookCall}
               target="_blank"
@@ -314,9 +335,6 @@ function Deliverables() {
 }
 
 function Proof() {
-  const featured = caseStudies
-    .filter((c) => ["vertex-solutions", "scaling-ecommerce-fulfillment"].includes(c.slug))
-    .slice(0, 2);
   return (
     <section className="bg-background py-24 md:py-32 border-b border-border/40">
       <div className="container mx-auto px-4 md:px-8">
@@ -346,39 +364,11 @@ function Proof() {
           ))}
         </div>
 
-        {featured.length > 0 && (
-          <div className="mt-12">
-            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-5">
-              Featured case studies
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {featured.map((cs) => (
-                <Link
-                  key={cs.slug}
-                  href={`/case-studies/${cs.slug}`}
-                  className="group p-6 rounded-2xl border border-border bg-card shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col"
-                  data-testid={`link-clickup-proof-${cs.slug}`}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="text-sm font-semibold">{cs.customer}</div>
-                    <div className="text-xs text-muted-foreground">{cs.industry}</div>
-                  </div>
-                  <blockquote className="text-foreground/85 leading-relaxed italic mb-5">
-                    &ldquo;{cs.quote.text}&rdquo;
-                  </blockquote>
-                  <div className="mt-auto">
-                    <div className="text-sm font-medium">{cs.quote.attribution}</div>
-                    <div className="text-xs text-muted-foreground">{cs.quote.role}</div>
-                    <div className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#7d6cf0]">
-                      Read the case study
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
+        {/* The featured case-study rail used to pull Vertex Solutions and
+            Northwind Apparel from case-studies.ts. Both are fabricated
+            companies with fabricated people, flagged in the audit doc, so the
+            rail is removed rather than re-pointed. Restore it once real,
+            client-approved case studies exist. */}
       </div>
     </section>
   );

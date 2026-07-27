@@ -232,15 +232,15 @@ export type Vignette = {
 
 export const vignettes: Vignette[] = [
   {
-    customer: "A 60-person digital agency",
-    context: "Composite example based on three recent engagements",
+    customer: "Charlie Property",
+    context: "Engagement detail pending client sign-off",
     body: "Five service lines, three regions, and a workspace that nobody trusted. We rebuilt it around their delivery model, wired Harvest and HubSpot, and stood up a profitability dashboard that finally agreed with finance. Adoption hit 92% by the 30-day audit.",
     stat: "92%",
     statLabel: "Workspace adoption at the 30-day audit",
   },
   {
-    customer: "A 40-person professional-services firm",
-    context: "Composite example based on two recent engagements",
+    customer: "22 Workflows",
+    context: "Engagement detail pending client sign-off",
     body: "Capacity was tracked in a single shared spreadsheet that was always two days out of date. The Blueprint replaced it with a live capacity view per role and per week. PMs stopped over-staffing, utilization climbed 14 points in the first quarter.",
     stat: "+14pts",
     statLabel: "Utilization lift in the first quarter post-Blueprint",
