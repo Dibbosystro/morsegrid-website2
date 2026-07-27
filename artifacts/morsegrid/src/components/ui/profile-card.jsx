@@ -18,6 +18,10 @@ const adjust = (v, fMin, fMax, tMin, tMax) => round(tMin + ((tMax - tMin) * (v -
 
 const ProfileCardComponent = ({
   avatarUrl,
+  // Per-portrait framing so faces sit at a matching zoom across the grid.
+  avatarScale = 1,
+  avatarShiftY = '0%',
+  avatarShiftX = '0%',
   innerGradient,
   behindGlowEnabled = true,
   behindGlowColor,
@@ -314,6 +318,11 @@ const ProfileCardComponent = ({
                 src={avatarUrl}
                 alt={`${name || 'User'} avatar`}
                 loading="lazy"
+                style={{
+                  '--avatar-scale': avatarScale,
+                  '--avatar-shift-y': avatarShiftY,
+                  '--avatar-shift-x': avatarShiftX
+                }}
                 onError={e => {
                   const t = e.target;
                   t.style.display = 'none';

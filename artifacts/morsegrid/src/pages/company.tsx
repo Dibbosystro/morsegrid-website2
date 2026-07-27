@@ -32,35 +32,56 @@ type TeamMember = {
   name: string;
   title: string;
   image: string;
-  handle?: string;
+  handle: string;
+  /** Real profile URL. Until one exists the button falls back to booking a call. */
   linkedin?: string;
+  /**
+   * Framing normalisation. The four cutouts were shot at different distances,
+   * so head width ranged 55 to 74 against a 62 target. Scale brings every face
+   * to the same zoom; shiftY puts the top of every head at the same height.
+   */
+  avatarScale?: number;
+  avatarShiftY?: string;
 };
 
 const team: TeamMember[] = [
   {
     name: "Maksudur Rahman",
     title: "Founder",
-    image: "/team/maks.png",
+    image: "/team/maksudur-cutout.png",
+    handle: "maksudur",
+    avatarScale: 1.09,
+    avatarShiftY: "9.2%",
   },
   {
     name: "Dibbo Das",
     title: "Head of AI Solutions",
-    image: "/team/dibbo.png",
+    image: "/team/dibbo-cutout.png",
+    handle: "dibbo",
+    avatarScale: 0.84,
+    avatarShiftY: "-12.3%",
   },
   {
     name: "Arshi Irtiza",
     title: "CRM Operations",
-    image: "/team/arshi.jpg",
+    image: "/team/arshi-cutout.png",
+    handle: "arshi",
+    avatarScale: 0.95,
+    avatarShiftY: "-6.6%",
   },
   {
     name: "Faiyaz Hossain",
     title: "Full Stack Developer",
-    image: "/team/faiyaz.jpg",
+    image: "/team/faiyaz-cutout.png",
+    handle: "faiyaz",
+    avatarScale: 1.13,
+    avatarShiftY: "13.4%",
   },
   {
     name: "Z B Nishat",
     title: "Business Development Associate",
     image: "/team/nishat.jpg",
+    handle: "nishat",
   },
 ];
 
@@ -139,12 +160,18 @@ export default function Company() {
                   name={member.name}
                   title={member.title}
                   avatarUrl={member.image}
+                  avatarScale={member.avatarScale}
+                  avatarShiftY={member.avatarShiftY}
                   handle={member.handle}
                   status="Morsegrid"
-                  contactText="LinkedIn"
-                  showUserInfo={Boolean(member.handle && member.linkedin)}
+                  contactText="Contact Me"
+                  showUserInfo
                   onContactClick={() =>
-                    member.linkedin && window.open(member.linkedin, "_blank", "noopener,noreferrer")
+                    window.open(
+                      member.linkedin ?? siteConfig.links.bookCall,
+                      "_blank",
+                      "noopener,noreferrer",
+                    )
                   }
                   enableTilt
                   enableMobileTilt={false}
