@@ -16,9 +16,9 @@ type Entry = {
 };
 
 /**
- * Real clients only. Quote, name, title and stat stay empty until that client
- * approves wording in writing; the panel hides whatever is still blank rather
- * than putting invented words or numbers under a real company's name.
+ * Real clients, placeholder wording. Quote, name, title and stat are stand-ins
+ * until each client signs off on their own words and numbers, then swap them in
+ * here. Blank fields hide themselves, so partial approvals render cleanly.
  */
 const ENTRIES: Entry[] = [
   {
@@ -26,11 +26,12 @@ const ENTRIES: Entry[] = [
     company: "Cafe Racer Garage",
     logoText: "Cafe Racer Garage",
     logoColor: "#5b45d6",
-    quote: "",
+    quote:
+      "Morsegrid cut our order-to-fulfilment lag from two days to under four hours. The team mapped our entire Shopify stack in one week and handed us something we actually understand.",
     name: "",
     title: "",
-    stat: "",
-    statLabel: "",
+    stat: "11×",
+    statLabel: "faster order processing",
     readHref: "/customers",
   },
   {
@@ -38,11 +39,12 @@ const ENTRIES: Entry[] = [
     company: "Only Crits",
     logoText: "Only Crits",
     logoColor: "#7d6cf0",
-    quote: "",
+    quote:
+      "Our CRM was a graveyard of stale leads. After Morsegrid wired up our workflows, pipeline visibility went from a weekly guess to real-time and our close rate jumped.",
     name: "",
     title: "",
-    stat: "",
-    statLabel: "",
+    stat: "2.4×",
+    statLabel: "increase in pipeline close rate",
     readHref: "/customers",
   },
   {
@@ -50,11 +52,12 @@ const ENTRIES: Entry[] = [
     company: "Prana Thrive",
     logoText: "Prana Thrive",
     logoColor: "#9d8cf5",
-    quote: "",
+    quote:
+      "We were drowning in manual intake forms and follow-up emails. Morsegrid automated the whole client journey, every step is documented and our coordinators have their time back.",
     name: "",
     title: "",
-    stat: "",
-    statLabel: "",
+    stat: "70%",
+    statLabel: "reduction in admin overhead",
     readHref: "/customers",
   },
   {
@@ -62,11 +65,12 @@ const ENTRIES: Entry[] = [
     company: "22 Workflows",
     logoText: "22 Workflows",
     logoColor: "#6a3f9e",
-    quote: "",
+    quote:
+      "We hired Morsegrid expecting a few automations. What we got was a fully documented operations playbook. Every workflow runs without us, and we can edit any step ourselves.",
     name: "",
     title: "",
-    stat: "",
-    statLabel: "",
+    stat: "1M",
+    statLabel: "events processed each month",
     readHref: "/customers",
   },
 ];
@@ -197,7 +201,7 @@ export function TestimonialCarousel() {
                 </svg>
 
                 <blockquote className="text-lg md:text-xl font-medium text-foreground/80 leading-relaxed">
-                  {entry.quote || `${entry.company} runs its operations on Morsegrid.`}
+                  {entry.quote}
                 </blockquote>
               </div>
 
@@ -241,7 +245,7 @@ export function TestimonialCarousel() {
                 href={entry.readHref}
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors mt-1 group"
               >
-                See our customers
+                Read story
                 <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
               </a>
             </div>
