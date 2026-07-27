@@ -116,10 +116,12 @@ function Hero() {
         className="pointer-events-none absolute inset-0 z-[1]"
         style={{
           background:
-            "linear-gradient(100deg,rgba(20,17,40,0.86) 0%,rgba(20,17,40,0.62) 42%,rgba(20,17,40,0.28) 72%,rgba(20,17,40,0.1) 100%)",
+            "linear-gradient(100deg,rgba(17,14,34,0.92) 0%,rgba(17,14,34,0.82) 45%,rgba(17,14,34,0.6) 72%,rgba(17,14,34,0.42) 100%)",
         }}
       />
-      <div className="container relative mx-auto px-4 md:px-8">
+      {/* z-[2] matters: the scrim above sits at z-[1] and would otherwise paint
+          over this copy, which is what made the headline unreadable. */}
+      <div className="container relative z-[2] mx-auto px-4 md:px-8">
         <div className="flex items-center gap-2 text-sm text-white/60 mb-6">
           <Link href="/products" className="hover:text-white transition-colors" data-testid="link-breadcrumb-products-clickup">
             Product
@@ -166,7 +168,7 @@ function Hero() {
           </div>
         </FadeIn>
         <FadeIn delay={0.2}>
-          <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm text-white/55">
+          <div className="mt-10 mb-14 flex flex-wrap gap-x-8 gap-y-3 text-sm text-white/70">
             <span>90-day fixed engagement</span>
             <span>·</span>
             <span>Productized methodology</span>
@@ -175,6 +177,14 @@ function Hero() {
           </div>
         </FadeIn>
       </div>
+      <a
+        href="#methodology"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[3] w-10 h-10 rounded-full bg-white/85 backdrop-blur flex items-center justify-center text-[#1f1c3a] hover:bg-white transition-colors shadow-[0_2px_16px_rgba(0,0,0,0.18)]"
+        aria-label="Scroll to the methodology"
+        data-testid="link-clickup-hero-scroll"
+      >
+        <ChevronDown className="w-4 h-4" />
+      </a>
     </section>
   );
 }
