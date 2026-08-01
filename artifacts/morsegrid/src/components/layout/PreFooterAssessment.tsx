@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 
 export function PreFooterAssessment() {
   return (
-    <section className="bg-[#0d0d0d] px-6 md:px-10 pt-16 pb-4">
-      <div className="max-w-6xl mx-auto relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#1a1733] via-[#1e1a42] to-[#0f1530] border border-white/10 px-8 py-12 md:px-14 md:py-16">
+    <section className="bg-[#0d0d0d] px-4 sm:px-6 md:px-10 pt-12 sm:pt-16 pb-4">
+      <div className="max-w-6xl mx-auto relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#1a1733] via-[#1e1a42] to-[#0f1530] border border-white/10 px-5 py-10 sm:px-8 sm:py-12 md:px-14 md:py-16">
         <div
           aria-hidden
           className="pointer-events-none absolute -left-32 -top-32 w-[500px] h-[500px] rounded-full opacity-40"
@@ -31,11 +31,11 @@ export function PreFooterAssessment() {
               <Gauge className="w-3 h-3 text-[#9d8cf5]" />
               Free Assessment
             </span>
-            <h2 className="mt-5 text-3xl md:text-5xl font-semibold tracking-tight leading-[1.1] text-white">
+            <h2 className="mt-5 text-[1.75rem] sm:text-3xl md:text-5xl font-semibold tracking-tight leading-[1.15] text-white">
               How systemized<br className="hidden sm:block" /> is your team?
             </h2>
             <p className="mt-4 text-white/65 leading-relaxed max-w-md text-sm md:text-base">
-              Get a personalized Systemization Score across seven categories — plus the three highest-leverage areas for your next 30 days.
+              Get a personalized Systemization Score across seven categories, plus the three highest-leverage areas for your next 30 days.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Button
@@ -50,8 +50,8 @@ export function PreFooterAssessment() {
             </div>
           </div>
 
-          <div aria-hidden className="flex-shrink-0 flex items-center justify-center md:justify-end">
-            <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-sm">
+          <div aria-hidden className="flex-shrink-0 flex items-center justify-center md:justify-end self-center">
+            <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-sm">
               <svg width="160" height="160" viewBox="0 0 160 160">
                 <circle
                   cx="80"

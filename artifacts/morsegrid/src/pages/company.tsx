@@ -101,17 +101,17 @@ export default function Company() {
 
   return (
     <div className="flex flex-col pb-24">
-      <div className="container mx-auto px-4 md:px-8 pt-40 pb-20 space-y-24">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-20 space-y-16 md:space-y-24">
 
         {/* Hero. Carries the #about anchor: this page IS the about page, and a
             second "About" heading further down read as a duplicate. */}
         <section id="about" className="max-w-3xl scroll-mt-32">
           <FadeIn className="flex flex-col justify-center">
             <span className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">About</span>
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
+            <h1 className="text-[1.85rem] leading-tight sm:text-4xl md:text-5xl font-bold tracking-tight mb-5 md:mb-6">
               We build the systems your business runs on.
             </h1>
-            <div className="space-y-5 text-lg text-muted-foreground leading-relaxed mb-8">
+            <div className="space-y-5 text-base sm:text-lg text-muted-foreground leading-relaxed mb-8">
               <p>
                 Morsegrid was built to fix a problem we kept running into: growing businesses drowning in manual
                 work that should have been automated months ago. Every week of delay is revenue lost. We fix the
@@ -119,7 +119,7 @@ export default function Company() {
               </p>
             </div>
             <div>
-              <Button asChild className="rounded-full px-8 bg-foreground text-background hover:bg-foreground/90">
+              <Button asChild className="rounded-full px-8 w-full sm:w-auto min-h-11 bg-foreground text-background hover:bg-foreground/90">
                 <a href={siteConfig.links.bookCall} target="_blank" rel="noreferrer">
                   Find a time to talk →
                 </a>
@@ -134,9 +134,9 @@ export default function Company() {
             <h2 className="text-2xl md:text-3xl font-bold">Team</h2>
             <p className="text-muted-foreground mt-2">A small, focused team that builds systems, not slide decks.</p>
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
             {team.map((member, i) => (
-              <FadeIn key={member.name} delay={i * 0.08} className="flex justify-center">
+              <FadeIn key={member.name} delay={i * 0.08} className="flex justify-center w-full">
                 <ProfileCard
                   name={member.name}
                   title={member.title}
@@ -153,7 +153,7 @@ export default function Company() {
                   enableTilt
                   enableMobileTilt={false}
                   behindGlowEnabled
-                  className="w-full max-w-[300px]"
+                  className="w-full max-w-[340px] sm:max-w-[300px]"
                 />
               </FadeIn>
             ))}
@@ -211,7 +211,7 @@ export default function Company() {
         {/* Contact — bottom of page */}
         <section id="contact" className="scroll-mt-32">
           <FadeIn>
-            <div className="bg-muted/30 p-8 md:p-12 rounded-3xl border border-border">
+            <div className="bg-muted/30 p-6 sm:p-8 md:p-12 rounded-3xl border border-border">
               <h2 className="text-2xl md:text-3xl font-bold mb-8">Contact</h2>
               <div className="flex flex-col md:flex-row md:items-end gap-8 md:gap-16">
                 <div>
@@ -230,8 +230,8 @@ export default function Company() {
                     <span>United States.<br />Remote-first, incorporated in Wyoming.</span>
                   </div>
                 </div>
-                <div className="md:ml-auto">
-                  <Button asChild className="rounded-full px-8 bg-foreground text-background hover:bg-foreground/90">
+                <div className="md:ml-auto w-full md:w-auto">
+                  <Button asChild className="rounded-full px-8 w-full md:w-auto min-h-11 bg-foreground text-background hover:bg-foreground/90">
                     <a href={siteConfig.links.bookCall} target="_blank" rel="noreferrer">
                       Book an introduction
                     </a>
