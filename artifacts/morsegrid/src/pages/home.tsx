@@ -192,12 +192,6 @@ function Hero() {
               space above (below the nav) and below (above the scroll cue) stays
               even on mobile; re-centered against the activity card from lg up */}
           <div className="flex flex-col px-6 py-6 md:px-12 lg:pl-20 lg:pr-4 lg:pt-20 lg:pb-10">
-            <FadeIn>
-              <span className="inline-flex items-center gap-2 text-[11.5px] font-bold uppercase tracking-[0.1em] text-[#131313]/50 mb-5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#7d6cf0]" />
-                Systems &amp; automation studio
-              </span>
-            </FadeIn>
             <FadeIn delay={0.05}>
               <h1 className="font-extrabold tracking-[-0.038em] leading-[1.03] text-[#131313] text-[clamp(2.25rem,4.5vw,5rem)] text-balance">
                 A small studio that<br />builds the systems<br />your business runs on.
