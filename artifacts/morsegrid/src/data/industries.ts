@@ -226,7 +226,6 @@ export const industries: Industry[] = [
   {
     slug: "professional-services",
     name: "Professional Services",
-    listed: false,
     shortName: "professional services",
     accent: "#1f3a6e",
     accentSoft: "#dce4f5",
@@ -238,7 +237,7 @@ export const industries: Industry[] = [
       accentPhrase: "systems",
       headlineSuffix: "not manual follow-up",
       subhead:
-        "We build the internal systems that keep your client work moving — from first contact to final invoice — without the back-and-forth that slows everything down.",
+        "We build the internal systems that keep your client work moving, from first contact to final invoice, without the back-and-forth that slows everything down.",
       illustration: {
         kind: "retail",
         alt: "Illustration showing connected professional services operations",
@@ -284,7 +283,8 @@ export const industries: Industry[] = [
       { value: "—", label: "Faster invoice turnaround" },
     ],
     logos: [
-      { name: "Corby Group", style: "font-medium" },
+      { name: "Charlie Property", style: "font-medium" },
+      { name: "Beyond The States", style: "font-medium" },
     ],
     closingCta: {
       title: "Deliver more without hiring more.",
@@ -300,7 +300,6 @@ export const industries: Industry[] = [
   {
     slug: "technology",
     name: "Technology & AI",
-    listed: false,
     shortName: "technology",
     accent: "#0f6fff",
     accentSoft: "#dce8ff",
@@ -334,7 +333,7 @@ export const industries: Industry[] = [
       {
         title: "Client delivery systems",
         description:
-          "Standardise how you onboard, deliver, and report for clients — so every engagement runs the same high-quality playbook.",
+          "Standardise how you onboard, deliver, and report for clients so every engagement runs the same high-quality playbook.",
       },
       {
         title: "Internal operations",
@@ -349,7 +348,7 @@ export const industries: Industry[] = [
       {
         title: "Lead and pipeline automation",
         description:
-          "Qualify, route, and follow up with inbound leads without manual effort — so no opportunity goes cold while your team is heads-down.",
+          "Qualify, route, and follow up with inbound leads without manual effort so no opportunity goes cold while your team is heads-down.",
       },
     ],
     metrics: [
@@ -359,7 +358,6 @@ export const industries: Industry[] = [
     ],
     logos: [
       { name: "22 Workflows", style: "font-medium" },
-      { name: "Nexus Advisor", style: "font-medium" },
     ],
     closingCta: {
       title: "Build the system behind your service.",

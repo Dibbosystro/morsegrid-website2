@@ -41,8 +41,9 @@ function ResponsiveImage({
   const srcSet = (ext: string) =>
     widths.map((w) => `/images/${name}-${w}.${ext} ${w}w`).join(", ");
   const fallbackWidth = widths[Math.min(1, widths.length - 1)];
+  // picture must size itself; otherwise object-cover on the img cannot fill a grid cell.
   return (
-    <picture>
+    <picture className="block w-full h-full">
       <source type="image/avif" srcSet={srcSet("avif")} sizes={sizes} />
       <source type="image/webp" srcSet={srcSet("webp")} sizes={sizes} />
       <img
@@ -52,7 +53,7 @@ function ResponsiveImage({
         alt={alt}
         loading={loading}
         decoding="async"
-        className={className}
+        className={className ?? "w-full h-full object-cover"}
       />
     </picture>
   );
@@ -586,8 +587,44 @@ function ScrollTimeline() {
         ref={containerRef}
         className="relative max-w-6xl mx-auto rounded-[28px] bg-[#0d0d0d] py-20 md:py-28 px-6 md:px-12 overflow-hidden"
       >
+        {/* Animated mesh behind the Build / Optimize / Scale timeline */}
+        <div aria-hidden className="absolute inset-0 z-0 pointer-events-none">
+          <Grainient
+            color1="#1c1838"
+            color2="#3d3278"
+            color3="#08080c"
+            timeSpeed={1.15}
+            colorBalance={-0.18}
+            warpStrength={1.85}
+            warpFrequency={7.8}
+            warpSpeed={2.4}
+            warpAmplitude={36}
+            blendAngle={-105}
+            blendSoftness={0.55}
+            rotationAmount={520}
+            noiseScale={2.1}
+            grainAmount={0.08}
+            grainScale={2}
+            grainAnimated={true}
+            contrast={1.25}
+            gamma={1}
+            saturation={0.85}
+            centerX={0}
+            centerY={0}
+            zoom={0.8}
+          />
+        </div>
+        {/* Light scrim so the mesh motion stays readable without washing the section bright. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-[1]"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 40%, rgba(8,8,12,0.25) 0%, rgba(8,8,12,0.62) 55%, rgba(8,8,12,0.88) 100%)",
+          }}
+        />
 
-        <div className="relative">
+        <div className="relative z-[2]">
           {/* Center rail */}
           <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px bg-white/10 hidden md:block" />
 
@@ -789,44 +826,47 @@ function OptimizeMockup() {
 function ScaleMockup() {
   const bars = [22, 30, 38, 44, 52, 61, 73, 88];
   return (
-    <div className="relative h-72 flex items-center justify-center" style={{ perspective: "1200px" }}>
-      {/* Back tile - blurred */}
+    <div className="relative h-80 w-full flex items-center justify-center overflow-visible" style={{ perspective: "1200px" }}>
+      {/* Stack stays centered; shallow depth so left/right space around the front card stays even. */}
       <div
-        className="absolute bg-[#1a1a1a] border border-white/10 rounded-2xl w-48 h-56 p-3 opacity-50"
+        className="absolute rounded-2xl w-52 h-[17.5rem] opacity-40"
         style={{
-          transform: "translateX(-44px) translateY(14px) rotateY(-26deg) rotateX(8deg)",
-          filter: "blur(6px)",
-          background: "linear-gradient(160deg, #1a1a1a, #251f3a)",
+          transform: "translateX(-18px) translateY(10px) rotateY(-12deg) rotateX(4deg)",
+          filter: "blur(5px)",
+          background: "linear-gradient(160deg, #141414, #1c1830)",
+          border: "1px solid rgba(255,255,255,0.08)",
           zIndex: 0,
         }}
       />
-      {/* Middle tile - softly blurred */}
       <div
-        className="absolute bg-[#1a1a1a] border border-white/15 rounded-2xl w-48 h-56 p-3 opacity-75"
+        className="absolute rounded-2xl w-52 h-[17.5rem] opacity-65"
         style={{
-          transform: "translateX(-22px) translateY(7px) rotateY(-22deg) rotateX(6deg)",
-          filter: "blur(2.5px)",
-          background: "linear-gradient(160deg, #1a1a1a, #2a2540)",
+          transform: "translateX(-9px) translateY(5px) rotateY(-8deg) rotateX(3deg)",
+          filter: "blur(2px)",
+          background: "linear-gradient(160deg, #161616, #1f1a35)",
+          border: "1px solid rgba(255,255,255,0.1)",
           zIndex: 1,
         }}
       />
-      {/* Front tile - real bar chart */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6 }}
-        className="relative bg-[#1a1a1a] border border-white/15 rounded-2xl w-48 h-56 p-4"
+        className="relative flex flex-col justify-between w-52 h-[17.5rem] rounded-2xl p-5"
         style={{
-          transform: "rotateY(-18deg) rotateX(4deg)",
-          background: "linear-gradient(160deg, #1a1a1a, #2a2540)",
+          transform: "rotateY(-6deg) rotateX(2deg)",
+          background: "linear-gradient(160deg, #17141f, #1e1a32)",
+          border: "1px solid rgba(255,255,255,0.14)",
           zIndex: 2,
-          boxShadow: "0 24px 50px -10px rgba(125,108,240,0.4)",
+          boxShadow: "0 24px 50px -12px rgba(125,108,240,0.35)",
         }}
       >
-        <div className="text-[10px] text-white/60 uppercase tracking-wider mb-1">Volume</div>
-        <div className="text-lg font-semibold text-white mb-3 tabular-nums">12,840</div>
-        <svg viewBox="0 0 100 70" className="w-full h-32" preserveAspectRatio="none">
+        <div>
+          <div className="text-[10px] text-white/60 uppercase tracking-wider">Volume</div>
+          <div className="mt-2 text-lg font-semibold text-white tabular-nums leading-none">12,840</div>
+        </div>
+        <svg viewBox="0 0 100 70" className="w-full h-[6.5rem] shrink-0" preserveAspectRatio="none">
           {bars.map((h, i) => {
             const x = (i / bars.length) * 100 + 1;
             const w = 100 / bars.length - 2;
@@ -849,12 +889,18 @@ function ScaleMockup() {
             );
           })}
         </svg>
-        <div className="mt-2 flex items-center gap-1 text-[10px] text-[#9d8cf5]">
+        <div className="flex items-center gap-1 text-[10px] leading-none text-[#9d8cf5] shrink-0">
           <span className="font-semibold">+34%</span>
           <span className="text-white/50">vs. prior 8 weeks</span>
         </div>
       </motion.div>
-      <div className="absolute -bottom-4 inset-x-12 h-28 rounded-full blur-3xl opacity-60 bg-[#7d6cf0] pointer-events-none" />
+      <motion.div
+        aria-hidden
+        className="absolute left-1/2 -translate-x-1/2 -bottom-4 w-44 h-28 rounded-full blur-3xl pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(125,108,240,0.55) 0%, rgba(125,108,240,0.15) 55%, transparent 75%)" }}
+        animate={{ opacity: [0.35, 0.7, 0.35], scale: [0.95, 1.06, 0.95] }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+      />
     </div>
   );
 }
@@ -869,16 +915,18 @@ function EvolvesCard() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="grid grid-cols-12 grid-rows-6 gap-3 h-72 md:h-80">
-            <div className="col-span-7 row-span-3 rounded-xl overflow-hidden">
-              <ResponsiveImage name="collage-1" widths={[480, 720, 1080]} sizes="(min-width: 768px) 360px, 60vw" className="w-full h-full object-cover" />
+            <div className="col-span-7 row-span-3 rounded-xl overflow-hidden min-h-0">
+              <ResponsiveImage name="collage-1" widths={[480, 720, 1080]} sizes="(min-width: 768px) 360px, 60vw" className="w-full h-full object-cover" alt="" />
             </div>
-            <div className="col-span-5 row-span-4 rounded-xl overflow-hidden">
-              <ResponsiveImage name="collage-2" widths={[480, 720, 1080]} sizes="(min-width: 768px) 260px, 40vw" className="w-full h-full object-cover" />
+            <div className="col-span-5 row-span-4 rounded-xl overflow-hidden min-h-0">
+              <ResponsiveImage name="collage-2" widths={[480, 720, 1080]} sizes="(min-width: 768px) 260px, 40vw" className="w-full h-full object-cover" alt="" />
             </div>
-            <div className="col-span-7 row-span-3 rounded-xl overflow-hidden">
-              <ResponsiveImage name="collage-3" widths={[480, 720, 1080]} sizes="(min-width: 768px) 360px, 60vw" className="w-full h-full object-cover" />
+            <div className="col-span-7 row-span-3 rounded-xl overflow-hidden min-h-0">
+              <ResponsiveImage name="collage-3" widths={[480, 720, 1080]} sizes="(min-width: 768px) 360px, 60vw" className="w-full h-full object-cover" alt="" />
             </div>
-            <div className="col-span-5 row-span-2 rounded-xl bg-white/5 border border-white/10" />
+            <div className="col-span-5 row-span-2 rounded-xl overflow-hidden min-h-0">
+              <ResponsiveImage name="omnichannel" widths={[640, 960, 1440]} sizes="(min-width: 768px) 260px, 40vw" className="w-full h-full object-cover" alt="" />
+            </div>
           </div>
           <div>
             <h3 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">

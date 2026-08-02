@@ -12,6 +12,8 @@ import {
   Lightbulb,
   ShoppingBag,
   HeartPulse,
+  Briefcase,
+  Cpu,
   Building2,
   Users,
   Lock,
@@ -113,6 +115,8 @@ export const navLinks: NavLink[] = [
           items: [
             { label: "E-commerce", subtitle: "Connected ops that scale", href: "/industries/ecommerce", icon: ShoppingBag },
             { label: "Health & wellness", subtitle: "People-first operations", href: "/industries/health-wellness", icon: HeartPulse },
+            { label: "Professional services", subtitle: "Client delivery systems", href: "/industries/professional-services", icon: Briefcase },
+            { label: "Technology & AI", subtitle: "Scale without overhead", href: "/industries/technology", icon: Cpu },
           ],
         },
       ],

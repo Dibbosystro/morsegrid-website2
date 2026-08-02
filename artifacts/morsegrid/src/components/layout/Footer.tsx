@@ -23,6 +23,8 @@ export function Footer() {
       links: [
         { label: "E-commerce", href: "/industries/ecommerce" },
         { label: "Health & Wellness", href: "/industries/health-wellness" },
+        { label: "Professional Services", href: "/industries/professional-services" },
+        { label: "Technology & AI", href: "/industries/technology" },
       ],
     },
     {
